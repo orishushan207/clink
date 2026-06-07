@@ -3,7 +3,13 @@ import OpenAI from "openai";
 import { toFile } from "openai/uploads";
 import { supabaseAdmin } from "@/lib/supabase/server";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+let openai: OpenAI | null = null;
+function getOpenAI() {
+  if (!openai) {
+    openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  }
+  return openai;
+}
 
 const STYLE_PROMPTS: Record<string, string> = {
   disney: "Transform the person in this photo into a Disney Pixar 3D animated character. Keep their facial features and expression but render them in Disney Pixar animation style with warm lighting and vibrant colors.",
@@ -66,7 +72,7 @@ export async function POST(req: NextRequest) {
 
     const imageFile = await toFile(file, "image.png", { type: "image/png" });
 
-    const response = await openai.images.edit({
+    const response = await getOpenAI().images.edit({
       model: "gpt-image-1",
       image: imageFile,
       prompt,
