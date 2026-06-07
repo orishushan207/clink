@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import CreateEventForm from "@/components/CreateEventForm";
@@ -30,6 +30,14 @@ interface LicenseInfo {
 const DEV_KEY = "clink2025";
 
 export default function CreatePage() {
+  return (
+    <Suspense fallback={null}>
+      <CreatePageInner />
+    </Suspense>
+  );
+}
+
+function CreatePageInner() {
   const [success, setSuccess] = useState<SuccessData | null>(null);
   const [license, setLicense] = useState<LicenseInfo | null>(null);
   const [licenseEmail, setLicenseEmail] = useState("");
