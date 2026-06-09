@@ -302,10 +302,7 @@ export default function CheckoutPage() {
                 className={cn(
                   "relative rounded-3xl text-right transition-all duration-300 overflow-hidden",
                   isPremium ? "sm:-mt-3 sm:pb-3" : "",
-                  isSelected ? "scale-[1.02] ring-2 ring-offset-2 ring-offset-party-bg" : "hover:scale-[1.01]",
-                  isPremium && isSelected ? "ring-yellow-400" : "",
-                  isVip && isSelected ? "ring-purple-500" : "",
-                  isLite && isSelected ? "ring-white/30" : "",
+                  isSelected ? "scale-[1.02]" : "hover:scale-[1.01]",
                 )}
               >
                 {/* Background gradient per tier */}
@@ -327,7 +324,7 @@ export default function CheckoutPage() {
                 {/* Badge ribbon */}
                 {plan.badge && (
                   <div className={cn(
-                    "absolute top-4 left-0 px-3 py-1 text-[10px] font-black tracking-wide rounded-r-full",
+                    "absolute top-4 right-0 px-3 py-1 text-[10px] font-black tracking-wide rounded-l-full",
                     isPremium ? "bg-yellow-400 text-black" : "bg-purple-600 text-white"
                   )}>
                     {plan.badge}
