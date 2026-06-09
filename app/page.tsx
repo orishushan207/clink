@@ -394,7 +394,7 @@ export default function LandingPage() {
 
             {/* Visual mockup */}
             <div className="flex justify-center">
-              <div className="relative w-52 h-40 sm:w-64 sm:h-48 rounded-2xl overflow-hidden border border-party-gold/30 shadow-2xl shadow-amber-500/20 bg-black flex flex-col items-center justify-center gap-3">
+              <div className="relative w-52 h-52 sm:w-64 sm:h-60 rounded-2xl overflow-hidden border border-party-gold/30 shadow-2xl shadow-amber-500/20 bg-black flex flex-col items-center justify-center gap-3">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
                   <span className="text-white text-sm font-bold">Live Wall 🔴</span>
