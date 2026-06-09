@@ -170,6 +170,7 @@ export default function CheckoutPage() {
     full_name: "", email: "", phone: "",
     card_number: "", card_expiry: "", card_cvv: "",
   });
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
 
   const set = (key: string, value: string) => {
@@ -530,9 +531,46 @@ export default function CheckoutPage() {
             </div>
           </div>
 
+          {/* Terms checkbox */}
+          <label className="flex items-start gap-3 cursor-pointer group">
+            <div
+              onClick={() => setAgreedToTerms(v => !v)}
+              className={cn(
+                "mt-0.5 w-5 h-5 rounded-md border-2 flex-shrink-0 flex items-center justify-center transition-all",
+                agreedToTerms
+                  ? "bg-party-gold border-party-gold"
+                  : "border-gray-500 group-hover:border-gray-300"
+              )}
+            >
+              {agreedToTerms && <Check className="h-3 w-3 text-white" />}
+            </div>
+            <span className="text-sm text-gray-300 leading-snug" onClick={() => setAgreedToTerms(v => !v)}>
+              קראתי ואני מאשר/ת את{" "}
+              <a
+                href="/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={e => e.stopPropagation()}
+                className="text-party-gold underline hover:text-yellow-300 transition-colors"
+              >
+                תנאי השימוש
+              </a>
+              {" "}ו
+              <a
+                href="/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={e => e.stopPropagation()}
+                className="text-party-gold underline hover:text-yellow-300 transition-colors"
+              >
+                מדיניות הפרטיות
+              </a>
+            </span>
+          </label>
+
           {/* Submit */}
-          <button type="submit" disabled={loading}
-            className="w-full flex items-center justify-center gap-3 btn-gold disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-lg py-4 rounded-2xl shadow-lg shadow-party-gold/30 transition-all active:scale-95">
+          <button type="submit" disabled={loading || !agreedToTerms}
+            className="w-full flex items-center justify-center gap-3 btn-gold disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold text-lg py-4 rounded-2xl shadow-lg shadow-party-gold/30 transition-all active:scale-95">
             {loading ? (
               <>
                 <span className="h-5 w-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -552,12 +590,6 @@ export default function CheckoutPage() {
           <p className="text-center text-gray-600 text-xs flex items-center justify-center gap-1">
             <Lock className="h-3 w-3" />
             תשלום מאובטח · הפרטים שלך מוצפנים ומוגנים
-          </p>
-          <p className="text-center text-gray-700 text-xs">
-            בלחיצה על כפתור התשלום אתה מאשר את{" "}
-            <a href="/terms" className="underline hover:text-gray-500 transition-colors">תנאי השימוש</a>
-            {" "}ו
-            <a href="/privacy" className="underline hover:text-gray-500 transition-colors">מדיניות הפרטיות</a>
           </p>
         </form>
       </div>
