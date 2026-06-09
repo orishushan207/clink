@@ -287,80 +287,148 @@ export default function CheckoutPage() {
         </div>
 
         {/* Plan cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-          {plans.map((plan) => (
-            <button
-              key={plan.id}
-              type="button"
-              onClick={() => setSelectedPlan(plan.id)}
-              className={cn(
-                "relative rounded-2xl border-2 p-5 text-right transition-all duration-200 text-sm",
-                plan.borderClass,
-                plan.glowClass,
-                selectedPlan === plan.id
-                  ? "bg-white/5 scale-[1.02]"
-                  : "bg-party-surface hover:bg-white/3"
-              )}
-            >
-              {/* Badge */}
-              {plan.badge && (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8 items-start">
+          {plans.map((plan) => {
+            const isSelected = selectedPlan === plan.id;
+            const isLite = plan.id === "lite";
+            const isPremium = plan.id === "spark";
+            const isVip = plan.id === "crown";
+
+            return (
+              <button
+                key={plan.id}
+                type="button"
+                onClick={() => setSelectedPlan(plan.id)}
+                className={cn(
+                  "relative rounded-3xl text-right transition-all duration-300 overflow-hidden",
+                  isPremium ? "sm:-mt-3 sm:pb-3" : "",
+                  isSelected ? "scale-[1.02] ring-2 ring-offset-2 ring-offset-party-bg" : "hover:scale-[1.01]",
+                  isPremium && isSelected ? "ring-yellow-400" : "",
+                  isVip && isSelected ? "ring-purple-500" : "",
+                  isLite && isSelected ? "ring-white/30" : "",
+                )}
+              >
+                {/* Background gradient per tier */}
                 <div className={cn(
-                  "absolute -top-3 right-1/2 translate-x-1/2 px-3 py-1 rounded-full text-[11px] font-black whitespace-nowrap",
-                  plan.recommended
-                    ? "bg-yellow-400 text-black"
-                    : "bg-purple-600 text-white"
-                )}>
-                  {plan.badge}
+                  "absolute inset-0",
+                  isLite   ? "bg-gradient-to-br from-[#1a1a2e] to-[#16213e]" : "",
+                  isPremium ? "bg-gradient-to-br from-[#2a1f00] via-[#1f1800] to-[#0d0d0d]" : "",
+                  isVip    ? "bg-gradient-to-br from-[#1a0a2e] via-[#150820] to-[#0d0d0d]" : "",
+                )} />
+
+                {/* Shimmering top border */}
+                <div className={cn(
+                  "absolute top-0 inset-x-0 h-[2px]",
+                  isLite    ? "bg-gradient-to-r from-transparent via-white/20 to-transparent" : "",
+                  isPremium ? "bg-gradient-to-r from-transparent via-yellow-400 to-transparent" : "",
+                  isVip     ? "bg-gradient-to-r from-transparent via-purple-400 to-transparent" : "",
+                )} />
+
+                {/* Badge ribbon */}
+                {plan.badge && (
+                  <div className={cn(
+                    "absolute top-4 left-0 px-3 py-1 text-[10px] font-black tracking-wide rounded-r-full",
+                    isPremium ? "bg-yellow-400 text-black" : "bg-purple-600 text-white"
+                  )}>
+                    {plan.badge}
+                  </div>
+                )}
+
+                <div className="relative p-6 pt-8">
+                  {/* Selected dot */}
+                  <div className={cn(
+                    "absolute top-4 left-4 w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all",
+                    isSelected
+                      ? isPremium ? "border-yellow-400 bg-yellow-400"
+                        : isVip ? "border-purple-400 bg-purple-400"
+                        : "border-white/50 bg-white/20"
+                      : "border-gray-700"
+                  )}>
+                    {isSelected && <Check className="h-2.5 w-2.5 text-black" />}
+                  </div>
+
+                  {/* Emoji + name */}
+                  <div className="mb-4">
+                    <div className={cn(
+                      "text-3xl mb-2 w-12 h-12 rounded-2xl flex items-center justify-center",
+                      isLite    ? "bg-white/5" : "",
+                      isPremium ? "bg-yellow-400/15" : "",
+                      isVip     ? "bg-purple-500/15" : "",
+                    )}>{plan.emoji}</div>
+                    <h3 className={cn(
+                      "font-black text-xl mb-1",
+                      isPremium ? "text-yellow-300" : isVip ? "text-purple-300" : "text-white"
+                    )}>{plan.name}</h3>
+                    <p className="text-gray-500 text-[11px] leading-snug">{plan.tagline}</p>
+                  </div>
+
+                  {/* Price */}
+                  <div className={cn(
+                    "mb-5 pb-5 border-b",
+                    isPremium ? "border-yellow-400/20" : isVip ? "border-purple-500/20" : "border-white/8"
+                  )}>
+                    <div className="flex items-end gap-1">
+                      <span className={cn(
+                        "text-4xl font-black",
+                        isPremium ? "text-yellow-300" : isVip ? "text-purple-300" : "text-white"
+                      )}>{plan.price.toLocaleString()}</span>
+                      <span className="text-gray-400 text-sm mb-1.5">₪{mode === "subscription" ? "/חודש" : ""}</span>
+                    </div>
+                    {mode === "onetime" && (
+                      <p className="text-gray-600 text-[10px] mt-0.5">לאירוע · 3 ימי גישה</p>
+                    )}
+                  </div>
+
+                  {/* Features */}
+                  <ul className="space-y-2.5 mb-4">
+                    {plan.features.map((f) => (
+                      <li key={f} className="flex items-start gap-2 text-xs text-gray-300 text-right">
+                        <div className={cn(
+                          "mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0",
+                          isPremium ? "bg-yellow-400/20" : isVip ? "bg-purple-500/20" : "bg-white/10"
+                        )}>
+                          <Check className={cn(
+                            "h-2.5 w-2.5",
+                            isPremium ? "text-yellow-400" : isVip ? "text-purple-400" : "text-gray-400"
+                          )} />
+                        </div>
+                        {f}
+                      </li>
+                    ))}
+                    {plan.excluded.map((f) => (
+                      <li key={f} className="flex items-start gap-2 text-xs text-gray-700 text-right">
+                        <div className="mt-0.5 w-4 h-4 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0">
+                          <X className="h-2.5 w-2.5 text-gray-700" />
+                        </div>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Bonus */}
+                  {plan.bonus && (
+                    <div className="bg-purple-500/10 border border-purple-500/25 rounded-2xl px-4 py-3">
+                      <p className="text-purple-300 text-[11px] font-semibold leading-relaxed">{plan.bonus}</p>
+                    </div>
+                  )}
+
+                  {/* CTA line */}
+                  <div className={cn(
+                    "mt-5 w-full py-2.5 rounded-xl text-xs font-bold text-center transition-all",
+                    isSelected
+                      ? isPremium ? "bg-yellow-400 text-black"
+                        : isVip ? "bg-purple-600 text-white"
+                        : "bg-white/15 text-white"
+                      : isPremium ? "bg-yellow-400/10 text-yellow-400 border border-yellow-400/30"
+                        : isVip ? "bg-purple-500/10 text-purple-400 border border-purple-500/30"
+                        : "bg-white/5 text-gray-400 border border-white/10"
+                  )}>
+                    {isSelected ? "✓ נבחר" : "בחרו מסלול זה"}
+                  </div>
                 </div>
-              )}
-
-              {/* Selected indicator */}
-              <div className={cn(
-                "absolute top-3 left-3 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all",
-                selectedPlan === plan.id
-                  ? "border-party-gold bg-party-gold"
-                  : "border-gray-600"
-              )}>
-                {selectedPlan === plan.id && <Check className="h-3 w-3 text-white" />}
-              </div>
-
-              {/* Plan header */}
-              <div className="mb-3 mt-1">
-                <div className="text-2xl mb-1">{plan.emoji}</div>
-                <h3 className="text-white font-black text-lg">{plan.name}</h3>
-                <p className="text-gray-500 text-xs leading-snug mt-0.5">{plan.tagline}</p>
-              </div>
-
-              {/* Price */}
-              <div className="mb-4">
-                <span className="text-3xl font-black gradient-text">{plan.price.toLocaleString()}</span>
-                <span className="text-gray-400 text-sm mr-1">₪{mode === "subscription" ? " / חודש" : ""}</span>
-              </div>
-
-              {/* Features */}
-              <ul className="space-y-1.5 mb-3">
-                {plan.features.slice(0, 5).map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-xs text-gray-300">
-                    <Check className="h-3 w-3 text-emerald-400 flex-shrink-0" />
-                    {f}
-                  </li>
-                ))}
-                {plan.excluded.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-xs text-gray-600">
-                    <X className="h-3 w-3 text-gray-700 flex-shrink-0" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Bonus */}
-              {plan.bonus && (
-                <div className="mt-3 bg-purple-500/10 border border-purple-500/20 rounded-xl px-3 py-2">
-                  <p className="text-purple-300 text-[11px] font-semibold leading-snug">{plan.bonus}</p>
-                </div>
-              )}
-            </button>
-          ))}
+              </button>
+            );
+          })}
         </div>
 
         {/* Selected plan summary */}
