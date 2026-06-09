@@ -891,7 +891,8 @@ export default function AdminDashboardPage() {
           </div>
         )}
 
-        {/* Clink פסיפס — collapsible section */}
+        {/* Clink פסיפס — collapsible section (Spark / Crown only) */}
+        {event.mosaic_enabled ? (
         <div className="bg-party-surface border border-party-border rounded-2xl overflow-hidden">
           <button
             onClick={() => setMosaicOpen(v => !v)}
@@ -923,6 +924,20 @@ export default function AdminDashboardPage() {
               <MosaicCreator media={media.filter(m => m.status === "approved")} eventId={event.id} adminToken={adminToken} />
           </div>
         </div>
+        ) : (
+        <div className="bg-party-surface border border-party-border rounded-2xl p-4 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">🎨</span>
+            <div>
+              <p className="text-sm font-semibold text-white">Clink פסיפס</p>
+              <p className="text-xs text-gray-500 mt-0.5">לא כלול במסלול הנוכחי</p>
+            </div>
+          </div>
+          <a href="/checkout" className="text-xs text-yellow-400 border border-yellow-400/30 bg-yellow-400/10 px-3 py-1.5 rounded-xl hover:bg-yellow-400/20 transition-all font-semibold whitespace-nowrap">
+            שדרג ל-Spark ↗
+          </a>
+        </div>
+        )}
 
         {/* Clip Creator */}
         <ClipCreator media={media} eventName={event.name} />

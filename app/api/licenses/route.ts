@@ -4,9 +4,12 @@ import { supabaseAdmin } from "@/lib/supabase/server";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { email, type, days_access, events_per_month, ai_images_limit } = body;
+    const { email, type, days_access, events_per_month, ai_images_limit, plan_tier } = body;
 
     if (!email || !type) return NextResponse.json({ error: "missing fields" }, { status: 400 });
+
+    // mosaic_enabled: Spark and Crown include Clink פסיפס; Lite does not
+    const mosaic_enabled = plan_tier === "spark" || plan_tier === "crown";
 
     const record: Record<string, unknown> = {
       email: email.trim().toLowerCase(),
@@ -14,6 +17,7 @@ export async function POST(req: NextRequest) {
       is_active: true,
       // null = no AI, -1 = unlimited, N = quota per event
       ai_images_limit: ai_images_limit ?? null,
+      mosaic_enabled,
     };
 
     if (type === "onetime") {

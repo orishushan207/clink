@@ -8,15 +8,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
-  // Verify admin token
+  // Verify admin token + mosaic plan
   const { data: event } = await supabaseAdmin
     .from("events")
-    .select("id, admin_token")
+    .select("id, admin_token, mosaic_enabled")
     .eq("id", eventId)
     .single();
 
   if (!event || event.admin_token !== adminToken) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  if (!event.mosaic_enabled) {
+    return NextResponse.json({ error: "Clink פסיפס לא כלול במסלול שלך — שדרג ל-Spark או Crown" }, { status: 403 });
   }
 
   // Convert base64 data URL to Buffer

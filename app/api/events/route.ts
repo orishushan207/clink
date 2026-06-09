@@ -37,6 +37,17 @@ export async function POST(req: NextRequest) {
     const daysAccess = Math.max(2, Math.round((extBody.guest_lock_hours ?? 48) / 24));
     const expiresAt = new Date(Date.now() + daysAccess * 24 * 60 * 60 * 1000).toISOString();
 
+    // Fetch license plan permissions
+    let mosaic_enabled = false;
+    if (extBody.license_id) {
+      const { data: lic } = await supabaseAdmin
+        .from("licenses")
+        .select("mosaic_enabled")
+        .eq("id", extBody.license_id)
+        .single();
+      mosaic_enabled = lic?.mosaic_enabled ?? false;
+    }
+
     const { data, error } = await supabaseAdmin
       .from("events")
       .insert({
@@ -58,6 +69,7 @@ export async function POST(req: NextRequest) {
         vendor_token: extBody.vendor_token?.trim() || null,
         license_id: extBody.license_id || null,
         expires_at: expiresAt,
+        mosaic_enabled,
       })
       .select()
       .single();

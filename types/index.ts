@@ -23,6 +23,7 @@ export interface Event {
   guest_lock_hours: number;
   created_at: string;
   mosaic_url?: string | null;
+  mosaic_enabled?: boolean | null;
 }
 
 // Public event — no admin_token exposed to guests
