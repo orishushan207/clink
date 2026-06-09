@@ -27,7 +27,7 @@ export default function LandingPage() {
           <div className="flex flex-col items-center mb-10 gap-2">
             <PicMeLogo size={80} textSize="text-3xl" />
             <p className="text-yellow-300 text-xs font-semibold tracking-wide text-center whitespace-nowrap mt-3">
-              גלריה שיתופית · Live Wall · Clink Mosaic · צ׳אט · ארכיון לנצח
+              גלריה שיתופית · Live Wall · Clink פסיפס · צ׳אט · ארכיון לנצח
             </p>
           </div>
 
@@ -65,7 +65,7 @@ export default function LandingPage() {
                 {[
                   "כל אורח מצלם — אתם מקבלים את כל הרגעים",
                   "Live Wall — גלריה חיה שכולם רואים ביחד בזמן אמת",
-                  "Clink Mosaic — כל התמונות שלכם יוצרות יצירת אמנות אחת",
+                  "Clink פסיפס — כל התמונות שלכם יוצרות יצירת אמנות אחת",
                   "צ׳אט קבוצתי ופרטי בין כל האורחים",
                   "התראות על לייק, תגובה והודעה — ברגע",
                   "זיכרון אחד משותף לכל המוזמנים",
@@ -187,7 +187,7 @@ export default function LandingPage() {
                 "צ׳אט קבוצתי ופרטי בין כל האורחים",
                 "התראות בזמן אמת על לייק, תגובה והודעה",
                 "Live Wall — מצגת חיה שרצה על המסך באולם",
-                "Clink Mosaic — כל תמונות האורחים מרכיבות תמונה אחת מרהיבה",
+                "Clink פסיפס — כל תמונות האורחים מרכיבות תמונה אחת מרהיבה",
                 "חזרתם הביתה? ממשיכים לשתף ולצ׳וטט עם כל האורחים",
                 "גלריה שנשמרת לצמיתות, להורדה בכל עת",
               ].map(t => (
@@ -272,7 +272,7 @@ export default function LandingPage() {
             { icon: Tv2,      color: "text-cyan-400",   bg: "bg-cyan-500/10",   title: "Live Wall",          desc: "מצגת חיה — כל תמונה וסרטון מוקרנים לכולם בזמן אמת" },
             { icon: Film,     color: "text-yellow-400", bg: "bg-party-gold-light/10", title: "יצירת קליפ",         desc: "קליפ מהאירוע מכל התמונות והסרטונים שעלו" },
             { icon: Heart,    color: "text-rose-400",   bg: "bg-rose-500/10",   title: "לייקים ותגובות",     desc: "האורחים מגיבים ומלייקים — כולם מרגישים חלק" },
-            { icon: Grid3x3,  color: "text-purple-400", bg: "bg-purple-500/10", title: "Clink Mosaic",       desc: "כל תמונות האורחים מרכיבות יחד תמונה אחת מרהיבה" },
+            { icon: Grid3x3,  color: "text-purple-400", bg: "bg-purple-500/10", title: "Clink פסיפס",       desc: "כל תמונות האורחים מרכיבות יחד תמונה אחת מרהיבה" },
             { icon: Trophy,   color: "text-emerald-400",bg: "bg-emerald-500/10",title: "לוח מובילים",        desc: "מי צילם הכי הרבה? מי קיבל הכי הרבה לייקים?" },
             { icon: Download, color: "text-blue-400",   bg: "bg-blue-500/10",   title: "הורדת ZIP",          desc: "כל המדיה בקובץ אחד מסודר" },
             { icon: Users,    color: "text-orange-400", bg: "bg-orange-500/10", title: "לכל אירוע",          desc: "חתונות, מסיבות, בר/בת מצווה ועוד" },
@@ -300,7 +300,7 @@ export default function LandingPage() {
             <div>
               <div className="inline-flex items-center gap-2 bg-purple-500/15 border border-purple-500/30 rounded-full px-3 py-1 mb-4">
                 <Grid3x3 className="h-3.5 w-3.5 text-purple-400" />
-                <span className="text-purple-300 text-sm font-bold">Clink Mosaic</span>
+                <span className="text-purple-300 text-sm font-bold">Clink פסיפס</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight mb-3">
                 <span className="text-purple-300">יצירת אמנות</span> מהאירוע שלכם

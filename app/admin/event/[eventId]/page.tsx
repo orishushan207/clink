@@ -891,7 +891,7 @@ export default function AdminDashboardPage() {
           </div>
         )}
 
-        {/* Clink Mosaic — collapsible section */}
+        {/* Clink פסיפס — collapsible section */}
         <div className="bg-party-surface border border-party-border rounded-2xl overflow-hidden">
           <button
             onClick={() => setMosaicOpen(v => !v)}
@@ -899,7 +899,7 @@ export default function AdminDashboardPage() {
           >
             <div className="flex items-center gap-2">
               <Grid3x3 className="h-4 w-4 text-purple-400" />
-              <span className="text-sm font-semibold text-white">🎨 Clink Mosaic</span>
+              <span className="text-sm font-semibold text-white">🎨 Clink פסיפס</span>
               <span className="text-xs text-gray-500 bg-party-surface2 px-2 py-0.5 rounded-full border border-party-border">
                 {media.filter(m => m.status === "approved" && m.media_type !== "video").length} תמונות
               </span>
@@ -915,7 +915,7 @@ export default function AdminDashboardPage() {
                 className="flex items-center justify-between w-full bg-purple-500/10 border border-purple-500/30 hover:bg-purple-500/20 hover:border-purple-500/50 rounded-xl p-3 transition-all group"
               >
                 <div>
-                  <p className="text-white font-bold text-sm">📺 הקרן Clink Mosaic</p>
+                  <p className="text-white font-bold text-sm">📺 הקרן Clink פסיפס</p>
                   <p className="text-gray-500 text-xs mt-0.5">פתח בטאב חדש — מתאים להקרנה על מסך גדול</p>
                 </div>
                 <span className="text-purple-400 text-xs font-medium group-hover:translate-x-[-2px] transition-transform">פתח ←</span>

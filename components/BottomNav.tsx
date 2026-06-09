@@ -180,7 +180,7 @@ export default function BottomNav({
               >
                 <Grid3x3 className="h-4 w-4 text-purple-400 flex-shrink-0" />
                 <div>
-                  <p className="text-white text-xs font-semibold">Clink Mosaic 🎨</p>
+                  <p className="text-white text-xs font-semibold">Clink פסיפס 🎨</p>
                   <p className="text-gray-500 text-[10px]">פסיפס האירוע</p>
                 </div>
               </Link>

@@ -221,7 +221,7 @@ export default function MosaicWall({ event, isAdmin, adminToken }: MosaicWallPro
         <div className="flex items-center gap-3 mb-2">
           <Grid3x3 className="h-8 w-8 text-purple-400" />
           <div>
-            <h1 className="text-white text-2xl font-black">Clink Mosaic</h1>
+            <h1 className="text-white text-2xl font-black">Clink פסיפס</h1>
             <p className="text-gray-500 text-sm">{event.name}</p>
           </div>
         </div>
@@ -326,14 +326,14 @@ export default function MosaicWall({ event, isAdmin, adminToken }: MosaicWallPro
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={resultUrl}
-        alt="Clink Mosaic"
+        alt="Clink פסיפס"
         className="w-full h-full object-contain"
       />
 
       {/* Event name watermark */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
         <Grid3x3 className="h-4 w-4 text-purple-400" />
-        <span className="text-white/70 text-sm font-semibold">Clink Mosaic · {event.name}</span>
+        <span className="text-white/70 text-sm font-semibold">Clink פסיפס · {event.name}</span>
       </div>
 
       {/* Controls overlay — appears on mouse move */}

@@ -45,7 +45,7 @@ function savings(price: number, original: number) {
 const FEATURES = [
   "גלריה שיתופית חיה",
   "Live Wall למסך האולם 🔴",
-  "Clink Mosaic — כל התמונות הופכות ליצירת אמנות 🎨",
+  "Clink פסיפס — כל התמונות הופכות ליצירת אמנות 🎨",
   "יצירת קליפ אוטומטי",
   "לייקים ותגובות",
   "לוח מובילים",

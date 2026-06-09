@@ -210,7 +210,7 @@ export default function MosaicCreator({ media, eventId, adminToken }: MosaicCrea
   return (
     <div className="space-y-5" dir="rtl">
       <div className="bg-party-surface border border-party-border rounded-2xl p-4 space-y-1">
-        <h3 className="text-white font-bold text-base">🎨 Clink Mosaic</h3>
+        <h3 className="text-white font-bold text-base">🎨 Clink פסיפס</h3>
         <p className="text-gray-400 text-sm">
           בחר תמונת יעד (למשל: הזוג) ו-{imageMedia.length} תמונות האורחים יסדרו את עצמן כפסיפס שיוצר אותה.
         </p>
