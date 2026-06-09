@@ -26,9 +26,14 @@ export default function LandingPage() {
           {/* Logo */}
           <div className="flex flex-col items-center mb-10 gap-2">
             <PicMeLogo size={80} textSize="text-3xl" />
-            <p className="text-yellow-300 text-xs font-semibold tracking-wide text-center whitespace-nowrap mt-3">
-              גלריה שיתופית · Live Wall · Clink פסיפס · צ׳אט · ארכיון לנצח
-            </p>
+            <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 mt-3">
+              {["גלריה שיתופית", "Live Wall", "Clink פסיפס", "צ׳אט", "ארכיון לנצח"].map((item, i, arr) => (
+                <span key={item} className="flex items-center gap-2">
+                  <span className="text-yellow-300 text-xs font-semibold tracking-wide">{item}</span>
+                  {i < arr.length - 1 && <span className="text-yellow-300/40 text-xs">·</span>}
+                </span>
+              ))}
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
