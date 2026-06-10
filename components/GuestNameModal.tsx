@@ -19,7 +19,7 @@ interface GuestNameModalProps {
   eventName: string;
   eventSlug?: string;
   onClose?: () => void;
-  onSubmit: (nickname: string, avatar: string | null) => Promise<void>;
+  onSubmit: (nickname: string, avatar: string | null, pin?: string) => Promise<void>;
 }
 
 export default function GuestNameModal({
@@ -36,6 +36,9 @@ export default function GuestNameModal({
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [pin, setPin] = useState("");
+  const [pinRequired, setPinRequired] = useState(false);
+  const [showPin, setShowPin] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Admin login state
@@ -136,12 +139,24 @@ export default function GuestNameModal({
       return;
     }
 
+    if (pin && !/^\d{4}$/.test(pin)) {
+      setError("הקוד האישי חייב להיות 4 ספרות");
+      return;
+    }
+
     setError("");
     setLoading(true);
     try {
-      await onSubmit(trimmed, photoUrl || selectedEmoji);
+      await onSubmit(trimmed, photoUrl || selectedEmoji, pin || undefined);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "שגיאה בכניסה לאירוע");
+      const code = (err as { code?: string })?.code;
+      if (code === "pin_required" || code === "pin_invalid") {
+        setPinRequired(true);
+        setShowPin(true);
+        setError(err instanceof Error ? err.message : "נדרש קוד אישי");
+      } else {
+        setError(err instanceof Error ? err.message : "שגיאה בכניסה לאירוע");
+      }
     } finally {
       setLoading(false);
     }
@@ -167,12 +182,51 @@ export default function GuestNameModal({
           onChange={(e) => {
             setNickname(e.target.value);
             setError("");
+            setPinRequired(false);
           }}
           onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-          error={error}
+          error={pinRequired ? undefined : error}
           maxLength={30}
           autoFocus
         />
+
+        {/* PIN input — protects nickname from being used by someone else */}
+        <div>
+          {!showPin ? (
+            <button
+              type="button"
+              onClick={() => setShowPin(true)}
+              className="flex items-center gap-2 text-xs text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              <Shield className="h-3.5 w-3.5" />
+              הוסף קוד אישי (מומלץ — מונע שימוש בכינוי שלך ממכשיר אחר)
+            </button>
+          ) : (
+            <>
+              <Input
+                label="קוד אישי (4 ספרות, לא חובה)"
+                placeholder="••••"
+                value={pin}
+                onChange={(e) => {
+                  const v = e.target.value.replace(/\D/g, "").slice(0, 4);
+                  setPin(v);
+                  setError("");
+                  setPinRequired(false);
+                }}
+                onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+                inputMode="numeric"
+                maxLength={4}
+                dir="ltr"
+                error={pinRequired ? error : undefined}
+              />
+              <p className="text-xs text-gray-500 mt-1.5">
+                {pinRequired
+                  ? "הזן את הקוד האישי ששמרת בכניסה הקודמת"
+                  : "אם תגדיר קוד, רק מי שיודע אותו יוכל להיכנס בשם הכינוי הזה ממכשיר אחר"}
+              </p>
+            </>
+          )}
+        </div>
 
         {/* Profile photo upload */}
         <div>

@@ -3,6 +3,7 @@ import { supabaseAdmin } from "@/lib/supabase/server";
 import { generateId } from "@/lib/utils";
 import { isRateLimited, getClientIp } from "@/lib/rateLimit";
 import { profanityError } from "@/lib/profanity";
+import { hashPin, verifyPin } from "@/lib/pin";
 
 // GET /api/guests?eventId=xxx — list all guests for an event
 export async function GET(req: NextRequest) {
@@ -21,7 +22,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { event_id, nickname, avatar, device_token } = await req.json();
+    const { event_id, nickname, avatar, device_token, pin } = await req.json();
 
     if (!event_id || !nickname || nickname.trim().length < 2) {
       return NextResponse.json({ error: "שדות חסרים או לא תקינים" }, { status: 400 });
@@ -29,6 +30,12 @@ export async function POST(req: NextRequest) {
 
     if (nickname.trim().length > 30) {
       return NextResponse.json({ error: "הכינוי ארוך מדי" }, { status: 400 });
+    }
+
+    if (pin !== undefined && pin !== null && pin !== "") {
+      if (typeof pin !== "string" || !/^\d{4}$/.test(pin)) {
+        return NextResponse.json({ error: "הקוד האישי חייב להיות 4 ספרות" }, { status: 400 });
+      }
     }
 
     const trimmedNickname = nickname.trim();
@@ -65,7 +72,7 @@ export async function POST(req: NextRequest) {
     // Check if nickname already exists in this event
     const { data: existingRows } = await supabaseAdmin
       .from("guests")
-      .select("id, nickname, avatar, device_token")
+      .select("id, nickname, avatar, device_token, pin_hash")
       .eq("event_id", event_id)
       .eq("nickname", trimmedNickname)
       .limit(1);
@@ -78,28 +85,60 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "כינוי זה שמור ואינו זמין" }, { status: 400 });
       }
 
-      // Same token → reconnect as-is
-      if (existing.device_token && existing.device_token === device_token) {
-        return NextResponse.json({ guest: existing, reconnected: true });
+      const sameDevice = existing.device_token && existing.device_token === device_token;
+
+      if (!sameDevice) {
+        // Reconnecting from a different/unknown device.
+        if (existing.pin_hash) {
+          // This nickname is PIN-protected — require a matching PIN.
+          if (!pin) {
+            return NextResponse.json(
+              { error: "הכינוי הזה מוגן בקוד אישי. הזן את הקוד כדי להתחבר ממכשיר זה", code: "pin_required" },
+              { status: 401 }
+            );
+          }
+          if (!verifyPin(pin, existing.pin_hash)) {
+            return NextResponse.json(
+              { error: "קוד אישי שגוי", code: "pin_invalid" },
+              { status: 401 }
+            );
+          }
+        }
       }
 
-      // Different or missing token → update it and allow reconnect
-      // (covers cleared localStorage, new browser, Safari storage expiry, etc.)
+      // Build update — refresh device_token, and set/keep pin_hash
+      const updateFields: Record<string, unknown> = {
+        device_token: device_token || existing.device_token,
+      };
+      if (!existing.pin_hash && pin) {
+        // Legacy guest with no PIN set yet — let them set one now.
+        updateFields.pin_hash = hashPin(pin);
+      }
+
       const { data: updated } = await supabaseAdmin
         .from("guests")
-        .update({ device_token: device_token || existing.device_token })
+        .update(updateFields)
         .eq("id", existing.id)
-        .select()
+        .select("id, event_id, nickname, avatar, blocked, created_at")
         .single();
-      return NextResponse.json({ guest: updated ?? existing, reconnected: true });
+
+      const result = updated ?? existing;
+      return NextResponse.json({ guest: result, reconnected: true });
     }
 
     // Create new guest
     const id = generateId();
     const { data, error } = await supabaseAdmin
       .from("guests")
-      .insert({ id, event_id, nickname: trimmedNickname, avatar: avatar || null, device_token: device_token || null })
-      .select()
+      .insert({
+        id,
+        event_id,
+        nickname: trimmedNickname,
+        avatar: avatar || null,
+        device_token: device_token || null,
+        pin_hash: pin ? hashPin(pin) : null,
+      })
+      .select("id, event_id, nickname, avatar, blocked, created_at")
       .single();
 
     if (error) {

@@ -77,7 +77,7 @@ export default function EventEntryPage() {
     init();
   }, [slug, router]);
 
-  const handleGuestSubmit = async (nickname: string, avatar: string | null) => {
+  const handleGuestSubmit = async (nickname: string, avatar: string | null, pin?: string) => {
     if (!event) return;
 
     const deviceTokenKey = `partydrop_device_token`;
@@ -98,12 +98,15 @@ export default function EventEntryPage() {
         nickname,
         avatar,
         device_token: deviceToken,
+        pin,
       }),
     });
 
     if (!res.ok) {
       const err = await res.json();
-      throw new Error(err.error || "שגיאה בכניסה לאירוע");
+      const e = new Error(err.error || "שגיאה בכניסה לאירוע") as Error & { code?: string };
+      if (err.code) e.code = err.code;
+      throw e;
     }
 
     const { guest, reconnected } = await res.json();

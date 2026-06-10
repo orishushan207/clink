@@ -637,13 +637,18 @@ export default function GalleryPage() {
           eventName={event.name}
           eventSlug={slug}
           onClose={() => setShowGuestModal(false)}
-          onSubmit={async (nickname, avatar) => {
+          onSubmit={async (nickname, avatar, pin) => {
             const res = await fetch("/api/guests", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ event_id: event.id, nickname, avatar }),
+              body: JSON.stringify({ event_id: event.id, nickname, avatar, pin }),
             });
-            if (!res.ok) { const { error } = await res.json(); throw new Error(error); }
+            if (!res.ok) {
+              const { error, code } = await res.json();
+              const e = new Error(error) as Error & { code?: string };
+              if (code) e.code = code;
+              throw e;
+            }
             const { guest } = await res.json();
             if (typeof window !== "undefined") {
               localStorage.setItem(`partydrop_guest_${slug}`, JSON.stringify({ guestId: guest.id, nickname: guest.nickname, avatar: guest.avatar }));
