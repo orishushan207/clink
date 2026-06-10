@@ -19,10 +19,12 @@ async function deleteStorageFolder(bucket: string, prefix: string) {
  * Protected by CRON_SECRET environment variable.
  */
 export async function GET(req: NextRequest) {
-  // Validate Vercel Cron secret
+  // Validate Vercel Cron secret — fail CLOSED: if CRON_SECRET isn't
+  // configured, refuse all requests rather than letting anyone trigger
+  // mass deletion of events.
   const authHeader = req.headers.get("authorization");
   const cronSecret = process.env.CRON_SECRET;
-  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
