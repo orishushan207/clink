@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { getEventById, getEventStats, type EventStats } from "@/lib/events";
 import { getAllMediaForAdmin } from "@/lib/media";
 import { getReportsForEvent } from "@/lib/reports";
@@ -866,8 +867,12 @@ export default function AdminDashboardPage() {
                   )}
                   dir="rtl"
                 >
-                  <div className="text-2xl w-9 h-9 flex items-center justify-center flex-shrink-0">
-                    {guest.avatar ?? "👤"}
+                  <div className="text-2xl w-9 h-9 flex items-center justify-center flex-shrink-0 rounded-full overflow-hidden">
+                    {guest.avatar?.startsWith("http") ? (
+                      <Image src={guest.avatar} alt="" width={36} height={36} className="w-full h-full object-cover" />
+                    ) : (
+                      guest.avatar ?? "👤"
+                    )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-white truncate">
