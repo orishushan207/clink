@@ -101,11 +101,11 @@ export default function LikeButton({
       {/* Likers modal */}
       {showLikers && (
         <div
-          className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-[60] flex items-end justify-center bg-black/60 backdrop-blur-sm"
           onClick={() => setShowLikers(false)}
         >
           <div
-            className="w-full max-w-md bg-[#1a1a2e] border border-white/10 rounded-t-3xl p-6 pb-10 max-h-[60vh] overflow-y-auto"
+            className="w-full max-w-md bg-[#1a1a2e] border border-white/10 rounded-t-3xl p-6 pb-10 max-h-[60vh] overflow-y-auto safe-bottom"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
