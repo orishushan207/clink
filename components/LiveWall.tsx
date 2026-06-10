@@ -439,7 +439,18 @@ export default function LiveWall({ event, isAdmin = false }: LiveWallProps) {
                   <Image src={item.file_url} alt="" width={400} height={400} className="w-full h-auto" />
                 )}
                 <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-3">
-                  <p className="text-white text-xs font-semibold drop-shadow">{item.guest?.avatar} {item.guest?.nickname}</p>
+                  <p className="text-white text-xs font-semibold drop-shadow flex items-center gap-1">
+                    {item.guest?.avatar && (
+                      item.guest.avatar.startsWith("http") ? (
+                        <span className="w-4 h-4 rounded-full overflow-hidden flex-shrink-0 inline-block">
+                          <Image src={item.guest.avatar} alt="" width={16} height={16} className="w-full h-full object-cover" />
+                        </span>
+                      ) : (
+                        <span>{item.guest.avatar}</span>
+                      )
+                    )}
+                    <span className="truncate">{item.guest?.nickname}</span>
+                  </p>
                   {item.caption && (
                     <p className="text-gray-200 text-xs mt-0.5 line-clamp-2 drop-shadow">{item.caption}</p>
                   )}

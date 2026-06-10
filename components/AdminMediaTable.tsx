@@ -302,8 +302,17 @@ export default function AdminMediaTable({
 
               {/* Info */}
               <div className="p-2">
-                <p className="text-xs text-gray-300 truncate">
-                  {item.guest?.avatar} {item.guest?.nickname}
+                <p className="text-xs text-gray-300 truncate flex items-center gap-1">
+                  {item.guest?.avatar && (
+                    item.guest.avatar.startsWith("http") ? (
+                      <span className="w-4 h-4 rounded-full overflow-hidden flex-shrink-0 inline-block">
+                        <Image src={item.guest.avatar} alt="" width={16} height={16} className="w-full h-full object-cover" />
+                      </span>
+                    ) : (
+                      <span>{item.guest.avatar}</span>
+                    )
+                  )}
+                  <span className="truncate">{item.guest?.nickname}</span>
                 </p>
                 <p className="text-xs text-gray-600">
                   {formatRelative(item.created_at)}
