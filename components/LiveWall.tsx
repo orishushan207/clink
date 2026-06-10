@@ -489,9 +489,9 @@ export default function LiveWall({ event, isAdmin = false }: LiveWallProps) {
             <button
               onClick={() => { setMode("grid"); setShowSettings(false); setPaused(false); }}
               className="p-2 rounded-xl bg-white/10 hover:bg-white/20 transition-colors"
-              title="חזרה לגריד"
+              title="סגור"
             >
-              <ArrowRight className="h-5 w-5" />
+              <X className="h-5 w-5" />
             </button>
 
             <div className="flex items-center gap-1.5">
