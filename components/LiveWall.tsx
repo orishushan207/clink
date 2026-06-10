@@ -481,18 +481,21 @@ export default function LiveWall({ event, isAdmin = false }: LiveWallProps) {
             </div>
           )}
 
+          {/* Close button — always visible regardless of controls auto-hide */}
+          <button
+            onClick={() => { setMode("grid"); setShowSettings(false); setPaused(false); }}
+            className="absolute top-3 right-4 z-30 p-2 rounded-xl bg-black/40 hover:bg-white/20 transition-colors"
+            title="סגור"
+          >
+            <X className="h-5 w-5" />
+          </button>
+
           {/* Slideshow top controls bar */}
           <div className={cn(
             "absolute top-0 inset-x-0 z-20 flex items-center justify-between px-4 py-3 bg-gradient-to-b from-black/70 to-transparent transition-opacity duration-300",
             controlsVisible ? "opacity-100" : "opacity-0 pointer-events-none"
           )}>
-            <button
-              onClick={() => { setMode("grid"); setShowSettings(false); setPaused(false); }}
-              className="p-2 rounded-xl bg-white/10 hover:bg-white/20 transition-colors"
-              title="סגור"
-            >
-              <X className="h-5 w-5" />
-            </button>
+            <div className="w-9" />
 
             <div className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
