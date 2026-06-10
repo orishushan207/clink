@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg: #07070f;
-  --surface: #0d0d1e;
-  --surface2: #13132b;
-  --border: rgba(201, 162, 39, 0.2);
-  --gold: #c9a227;
-  --gold-light: #e8c040;
-  --gold-dark: #a07a1a;
-  --btn-gradient: linear-gradient(to right, #f0d060 0%, #c9a227 100%);
+  --bg: #1f1219;
+  --surface: #2b1922;
+  --surface2: #37212c;
+  --border: rgba(224, 184, 168, 0.18);
+  --gold: #d9a98e;
+  --gold-light: #f0cdb8;
+  --gold-dark: #b9826a;
+  --btn-gradient: linear-gradient(to right, #f0cdb8 0%, #d9a98e 100%);
 }
 
 html {
@@ -28,6 +28,11 @@ body {
   overscroll-behavior: none;
 }
 
+/* Elegant serif headings — wedding-style typography */
+h1, h2, h3 {
+  font-family: 'Playfair Display', 'Heebo', serif;
+}
+
 /* Remove default blue tap highlight on mobile */
 * {
   -webkit-tap-highlight-color: transparent;
@@ -41,7 +46,7 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(201, 162, 39, 0.3);
+  background: rgba(217, 169, 142, 0.3);
   border-radius: 10px;
 }
 
@@ -66,7 +71,7 @@ video {
 
 /* Gold gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #e8c040, #c9a227);
+  background: linear-gradient(135deg, #f0cdb8, #d9a98e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -91,9 +96,9 @@ video {
 
 /* Glass card effect */
 .glass-card {
-  background: rgba(13, 13, 30, 0.8);
+  background: rgba(43, 25, 34, 0.8);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(201, 162, 39, 0.15);
+  border: 1px solid rgba(224, 184, 168, 0.15);
 }
 
 /* Safe area for mobile (notch, home indicator) */

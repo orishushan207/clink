@@ -293,7 +293,7 @@ export default function AppDemo() {
                 className="h-1 rounded-full transition-all duration-300"
                 style={{
                   width: s === step ? 20 : 6,
-                  background: s === step ? "#c9a227" : "rgba(255,255,255,0.15)",
+                  background: s === step ? "#d9a98e" : "rgba(255,255,255,0.15)",
                 }}
               />
             ))}

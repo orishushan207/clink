@@ -44,7 +44,7 @@ export async function sendEventCreatedEmail({
 <head><meta charset="UTF-8" /></head>
 <body style="margin:0;padding:0;background:#0d0d1a;font-family:sans-serif;color:#e2e8f0;direction:rtl;">
   <div style="max-width:520px;margin:40px auto;background:#1a1a2e;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);">
-    <div style="background:linear-gradient(to right,#f0d060,#c9a227);padding:32px;text-align:center;">
+    <div style="background:linear-gradient(to right,#f0cdb8,#d9a98e);padding:32px;text-align:center;">
       <h1 style="margin:0;font-size:28px;color:#fff;letter-spacing:-0.5px;">🎉 Clink</h1>
       <p style="margin:8px 0 0;color:rgba(255,255,255,0.85);font-size:14px;">האירוע שלך נוצר בהצלחה</p>
     </div>
@@ -63,7 +63,7 @@ export async function sendEventCreatedEmail({
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;">
-        <a href="${adminUrl}" style="display:block;background:linear-gradient(to right,#f0d060,#c9a227);color:#fff;text-decoration:none;padding:14px 24px;border-radius:12px;text-align:center;font-weight:600;font-size:15px;">
+        <a href="${adminUrl}" style="display:block;background:linear-gradient(to right,#f0cdb8,#d9a98e);color:#fff;text-decoration:none;padding:14px 24px;border-radius:12px;text-align:center;font-weight:600;font-size:15px;">
           כניסה לפאנל הניהול →
         </a>
         <a href="${eventUrl}" style="display:block;background:rgba(255,255,255,0.06);color:#e2e8f0;text-decoration:none;padding:14px 24px;border-radius:12px;text-align:center;font-size:14px;border:1px solid rgba(255,255,255,0.1);">

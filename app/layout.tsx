@@ -26,7 +26,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#07070f",
+  themeColor: "#1f1219",
 };
 
 export default function RootLayout({
@@ -50,16 +50,16 @@ export default function RootLayout({
           position="top-center"
           toastOptions={{
             style: {
-              background: "#13132b",
+              background: "#37212c",
               color: "#fff",
-              border: "1px solid rgba(201, 162, 39, 0.3)",
+              border: "1px solid rgba(224, 184, 168, 0.3)",
               fontFamily: "Heebo, sans-serif",
               direction: "rtl",
               borderRadius: "16px",
               fontSize: "14px",
             },
             success: {
-              iconTheme: { primary: "#c9a227", secondary: "#fff" },
+              iconTheme: { primary: "#d9a98e", secondary: "#fff" },
             },
             error: {
               iconTheme: { primary: "#ef4444", secondary: "#fff" },

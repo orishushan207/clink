@@ -8,7 +8,7 @@ interface CheerZLogoProps {
   textSize?: string; // kept for API compatibility
 }
 
-const GOLD = "#c9a227";
+const GOLD = "#d9a98e";
 const WHITE = "white";
 
 /** Camera-only icon — used when showText={false} */
