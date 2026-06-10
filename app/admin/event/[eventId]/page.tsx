@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { getEventById, getEventStats, type EventStats } from "@/lib/events";
+import { getEventStats, type EventStats } from "@/lib/events";
 import { getAllMediaForAdmin } from "@/lib/media";
 import { getReportsForEvent } from "@/lib/reports";
 import { getGuestsByEvent } from "@/lib/guests";
@@ -178,13 +178,13 @@ export default function AdminDashboardPage() {
     setLoading(true);
 
     try {
-      const ev = await getEventById(eventId);
-      if (!ev) {
+      const evRes = await fetch(`/api/admin/events/${eventId}?token=${encodeURIComponent(adminToken)}`);
+      if (!evRes.ok) {
         setTokenValid(false);
         return;
       }
-
-      if (ev.admin_token !== adminToken) {
+      const { event: ev } = await evRes.json();
+      if (!ev || ev.admin_token !== adminToken) {
         setTokenValid(false);
         return;
       }

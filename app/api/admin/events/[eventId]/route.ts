@@ -25,6 +25,40 @@ async function validateToken(
   return data.admin_token === token;
 }
 
+// GET — fetch full event (incl. admin_token) for the admin panel.
+// Requires the admin_token as a query param so it can be validated server-side
+// with the service-role key (the anon key must never be allowed to read
+// admin_token / admin_password directly from the events table).
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ eventId: string }> }
+) {
+  try {
+    const { eventId } = await params;
+    const token = req.nextUrl.searchParams.get("token") || "";
+
+    const isValid = await validateToken(eventId, token);
+    if (!isValid) {
+      return NextResponse.json({ error: "אין הרשאה" }, { status: 403 });
+    }
+
+    const { data, error } = await supabaseAdmin
+      .from("events")
+      .select("*")
+      .eq("id", eventId)
+      .single();
+
+    if (error || !data) {
+      return NextResponse.json({ error: "Event not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ event: data });
+  } catch (err) {
+    console.error("GET admin event error:", err);
+    return NextResponse.json({ error: "שגיאת שרת" }, { status: 500 });
+  }
+}
+
 // PATCH — update event settings (close/reopen uploads, toggle settings)
 export async function PATCH(
   req: NextRequest,
