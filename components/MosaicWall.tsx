@@ -354,16 +354,18 @@ export default function MosaicWall({ event, isAdmin, adminToken }: MosaicWallPro
         <span className="text-white/70 text-sm font-semibold">Clink פסיפס · {event.name}</span>
       </div>
 
+      {/* Download button — always visible, regardless of controls auto-hide */}
+      <button
+        onClick={(e) => { e.stopPropagation(); handleDownload(); }}
+        className="absolute top-4 right-4 z-10 flex items-center gap-1.5 bg-black/70 backdrop-blur-sm border border-white/10 hover:border-purple-500/40 text-white text-xs font-medium px-3 py-2 rounded-xl transition-all"
+      >
+        <Download className="h-3.5 w-3.5" />
+        הורדה
+      </button>
+
       {/* Controls overlay — appears on mouse move */}
       {showControls && (
-        <div className="absolute top-4 right-4 flex items-center gap-2 animate-fade-in">
-          <button
-            onClick={(e) => { e.stopPropagation(); handleDownload(); }}
-            className="flex items-center gap-1.5 bg-black/70 backdrop-blur-sm border border-white/10 hover:border-purple-500/40 text-white text-xs font-medium px-3 py-2 rounded-xl transition-all"
-          >
-            <Download className="h-3.5 w-3.5" />
-            הורדה
-          </button>
+        <div className="absolute top-4 right-28 flex items-center gap-2 animate-fade-in">
           <button
             onClick={(e) => { e.stopPropagation(); loadMedia().then(generate); }}
             disabled={generating}
