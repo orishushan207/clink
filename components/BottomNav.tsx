@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import { uploadMedia } from "@/lib/media";
 import { getEventUrl } from "@/lib/utils";
 import QRCodeDisplay from "@/components/QRCodeDisplay";
+import CopyLinkButton from "@/components/CopyLinkButton";
 import NotificationBell from "@/components/NotificationBell";
 import toast from "react-hot-toast";
 import type { Media, PublicEvent } from "@/types";
@@ -396,6 +397,7 @@ export default function BottomNav({
             <p className="text-gray-400 text-xs text-center">תן לחבר לסרוק את הברקוד ולהצטרף לClink</p>
             <QRCodeDisplay url={getEventUrl(event.slug)} eventName={event.name} size={200} />
             <p className="text-gray-500 text-xs text-center break-all">{getEventUrl(event.slug)}</p>
+            <CopyLinkButton url={getEventUrl(event.slug)} />
           </div>
         </div>
       )}
