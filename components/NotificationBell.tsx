@@ -148,14 +148,77 @@ export default function NotificationBell({ guestId, eventId, isAdmin, onOpenChat
         )}
       </button>
 
-      {open && (
+      {open && compact && (
         <div
-          className={cn(
-            "z-[60] bg-party-surface border border-party-border rounded-2xl shadow-2xl overflow-hidden",
-            compact
-              ? "fixed bottom-20 right-3 left-3 w-auto"
-              : "absolute left-0 top-full mt-2 w-80"
-          )}
+          className="fixed inset-0 z-[70] flex items-end justify-center bg-black/60 backdrop-blur-sm"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="w-full max-w-lg bg-party-surface border border-party-border rounded-t-3xl shadow-2xl overflow-hidden mb-[64px] safe-bottom"
+            onClick={(e) => e.stopPropagation()}
+            dir="rtl"
+          >
+            <div className="flex items-center justify-between px-4 py-3 border-b border-party-border">
+              <h3 className="text-sm font-bold text-white">התראות</h3>
+              <div className="flex items-center gap-2">
+                {unread > 0 && (
+                  <button onClick={markAllRead} className="text-xs text-yellow-400 hover:text-yellow-300 transition-colors">
+                    סמן הכל כנקרא
+                  </button>
+                )}
+                <button onClick={() => setOpen(false)} className="p-1 rounded-lg hover:bg-white/10 text-gray-500 transition-colors">
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            </div>
+
+            <div className="max-h-[60vh] overflow-y-auto">
+              {notifs.length === 0 ? (
+                <div className="text-center py-10 text-gray-600 text-sm">אין התראות עדיין</div>
+              ) : (
+                notifs.map(n => (
+                  <div
+                    key={n.id}
+                    onClick={() => handleNotifClick(n)}
+                    className={cn(
+                      "flex items-start gap-3 px-4 py-3 border-b border-party-border/50 transition-colors",
+                      !n.read_at ? "bg-party-gold/5" : "hover:bg-white/3",
+                      n.type === "message" && onOpenChat ? "cursor-pointer hover:bg-party-gold/10" : ""
+                    )}
+                  >
+                    <div className="relative">
+                      <AvatarEl name={n.actor_name} avatar={n.actor_avatar} />
+                      <div className="absolute -bottom-0.5 -right-0.5 bg-party-surface rounded-full p-0.5">
+                        {typeIcon[n.type]}
+                      </div>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-white leading-snug">{n.content}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">{timeAgo(n.created_at)}</p>
+                    </div>
+                    {n.media?.file_url && (n.type === "like" || n.type === "comment") && (
+                      <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 border border-white/10">
+                        {n.media.media_type === "video" ? (
+                          <div className="w-full h-full bg-white/10 flex items-center justify-center text-lg">🎬</div>
+                        ) : (
+                          <Image src={n.media.file_url} alt="" width={40} height={40} className="w-full h-full object-cover" />
+                        )}
+                      </div>
+                    )}
+                    {!n.read_at && (
+                      <div className="w-2 h-2 bg-party-gold-light rounded-full flex-shrink-0 mt-1.5" />
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {open && !compact && (
+        <div
+          className="z-[60] bg-party-surface border border-party-border rounded-2xl shadow-2xl overflow-hidden absolute left-0 top-full mt-2 w-80"
           dir="rtl"
         >
           <div className="flex items-center justify-between px-4 py-3 border-b border-party-border">
