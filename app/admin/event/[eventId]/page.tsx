@@ -43,6 +43,7 @@ import {
   Lock,
   Users,
   Globe,
+  X,
 } from "lucide-react";
 import { getEventUrl, formatDate, getAdminSessionKey } from "@/lib/utils";
 import { uploadCoverImage } from "@/lib/media";
@@ -78,6 +79,7 @@ export default function AdminDashboardPage() {
   const [savingPassword, setSavingPassword] = useState(false);
   const [downloading, setDownloading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState<{ done: number; total: number } | null>(null);
+  const cancelDownloadRef = useRef(false);
   const [editingName, setEditingName] = useState(false);
   const [newName, setNewName] = useState("");
   const [savingName, setSavingName] = useState(false);
@@ -423,7 +425,9 @@ export default function AdminDashboardPage() {
   const handleDownloadZip = async () => {
     const approved = media.filter((m) => m.status === "approved");
     if (approved.length === 0) { toast.error("אין מדיה להורדה"); return; }
+    if (!confirm(`להוריד ${approved.length} תמונות וסרטונים כקובץ ZIP אחד?`)) return;
 
+    cancelDownloadRef.current = false;
     setDownloading(true);
     setDownloadProgress({ done: 0, total: approved.length });
     const toastId = toast.loading(`מכין ZIP — 0/${approved.length}`);
@@ -431,8 +435,10 @@ export default function AdminDashboardPage() {
     try {
       const JSZip = (await import("jszip")).default;
       const zip = new JSZip();
+      let cancelled = false;
 
       for (let i = 0; i < approved.length; i++) {
+        if (cancelDownloadRef.current) { cancelled = true; break; }
         const item = approved[i];
         const ext = item.file_url.split(".").pop()?.split("?")[0]
           ?? (item.media_type === "video" ? "mp4" : "jpg");
@@ -447,6 +453,11 @@ export default function AdminDashboardPage() {
 
         setDownloadProgress({ done: i + 1, total: approved.length });
         toast.loading(`מוריד ${i + 1}/${approved.length}...`, { id: toastId });
+      }
+
+      if (cancelled) {
+        toast("ההורדה בוטלה", { id: toastId, icon: "🚫" });
+        return;
       }
 
       const zipBlob = await zip.generateAsync({ type: "blob", compression: "DEFLATE", compressionOptions: { level: 6 } });
@@ -952,14 +963,19 @@ export default function AdminDashboardPage() {
               </p>
             </div>
             <button
-              onClick={handleDownloadZip}
-              disabled={downloading || media.filter(m => m.status === "approved").length === 0}
-              className="flex items-center gap-2 px-4 py-2.5 btn-gold disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-party-gold/20"
+              onClick={downloading ? () => { cancelDownloadRef.current = true; } : handleDownloadZip}
+              disabled={!downloading && media.filter(m => m.status === "approved").length === 0}
+              className={cn(
+                "flex items-center gap-2 px-4 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed text-sm font-semibold rounded-xl transition-all",
+                downloading
+                  ? "bg-red-500/10 border border-red-500/30 hover:bg-red-500/20 text-red-300"
+                  : "btn-gold text-white shadow-lg shadow-party-gold/20"
+              )}
             >
               {downloading ? (
                 <>
-                  <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  {downloadProgress ? `${downloadProgress.done}/${downloadProgress.total}` : "..."}
+                  <X className="h-4 w-4" />
+                  ביטול ({downloadProgress ? `${downloadProgress.done}/${downloadProgress.total}` : "..."})
                 </>
               ) : (
                 <>

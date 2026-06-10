@@ -57,6 +57,7 @@ export default function GalleryPage() {
   // Download all
   const [downloadingAll, setDownloadingAll] = useState(false);
   const [downloadAllProgress, setDownloadAllProgress] = useState<{ done: number; total: number } | null>(null);
+  const cancelDownloadRef = useRef(false);
 
   // Prevent hydration mismatch: localStorage is only available client-side.
   // Both server and client start with mounted=false → render <FullPageSpinner>,
@@ -365,13 +366,17 @@ export default function GalleryPage() {
 
   const handleDownloadAll = async () => {
     if (media.length === 0) { toast.error("אין מדיה להורדה"); return; }
+    if (!confirm(`להוריד ${media.length} תמונות וסרטונים כקובץ ZIP אחד?`)) return;
+    cancelDownloadRef.current = false;
     setDownloadingAll(true);
     setDownloadAllProgress({ done: 0, total: media.length });
     const toastId = toast.loading(`מכין ZIP — 0/${media.length}`);
     try {
       const JSZip = (await import("jszip")).default;
       const zip = new JSZip();
+      let cancelled = false;
       for (let i = 0; i < media.length; i++) {
+        if (cancelDownloadRef.current) { cancelled = true; break; }
         const item = media[i];
         const ext = item.file_url.split(".").pop()?.split("?")[0] ?? (item.media_type === "video" ? "mp4" : "jpg");
         const nickname = (item.guest?.nickname || "guest").replace(/[^a-zA-Z0-9֐-׿_-]/g, "_");
@@ -382,6 +387,10 @@ export default function GalleryPage() {
         } catch { /* skip */ }
         setDownloadAllProgress({ done: i + 1, total: media.length });
         toast.loading(`מוריד ${i + 1}/${media.length}...`, { id: toastId });
+      }
+      if (cancelled) {
+        toast("ההורדה בוטלה", { id: toastId, icon: "🚫" });
+        return;
       }
       const zipBlob = await zip.generateAsync({ type: "blob", compression: "DEFLATE", compressionOptions: { level: 6 } });
       const url = URL.createObjectURL(zipBlob);
@@ -577,12 +586,16 @@ export default function GalleryPage() {
         {!isPrivate && media.length > 0 && (
           <div className="space-y-2">
             <button
-              onClick={handleDownloadAll}
-              disabled={downloadingAll}
-              className="w-full flex items-center justify-center gap-2 py-2.5 bg-party-surface border border-party-border hover:border-party-gold/40 hover:bg-party-gold/5 disabled:opacity-50 text-gray-300 hover:text-white text-sm font-medium rounded-2xl transition-all"
+              onClick={downloadingAll ? () => { cancelDownloadRef.current = true; } : handleDownloadAll}
+              className={cn(
+                "w-full flex items-center justify-center gap-2 py-2.5 border text-sm font-medium rounded-2xl transition-all",
+                downloadingAll
+                  ? "bg-red-500/10 border-red-500/30 hover:bg-red-500/20 text-red-300"
+                  : "bg-party-surface border-party-border hover:border-party-gold/40 hover:bg-party-gold/5 text-gray-300 hover:text-white"
+              )}
             >
               {downloadingAll ? (
-                <><span className="h-4 w-4 border-2 border-gray-400/30 border-t-gray-400 rounded-full animate-spin" />{downloadAllProgress ? `${downloadAllProgress.done}/${downloadAllProgress.total}` : "..."}</>
+                <><X className="h-4 w-4" />ביטול הורדה ({downloadAllProgress ? `${downloadAllProgress.done}/${downloadAllProgress.total}` : "..."})</>
               ) : (
                 <><Download className="h-4 w-4" />הורד את כל התמונות והסרטונים ({media.length})</>
               )}
