@@ -287,7 +287,7 @@ export default function CheckoutPage() {
         </div>
 
         {/* Plan cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8 items-start">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8 items-stretch">
           {plans.map((plan) => {
             const isSelected = selectedPlan === plan.id;
             const isLite = plan.id === "lite";
@@ -300,8 +300,7 @@ export default function CheckoutPage() {
                 type="button"
                 onClick={() => setSelectedPlan(plan.id)}
                 className={cn(
-                  "relative rounded-3xl text-right transition-all duration-300 overflow-hidden",
-                  isPremium ? "sm:-mt-3 sm:pb-3" : "",
+                  "relative rounded-3xl text-right transition-all duration-300 overflow-hidden h-full flex flex-col",
                   isSelected ? "scale-[1.02]" : "hover:scale-[1.01]",
                 )}
               >
@@ -331,7 +330,7 @@ export default function CheckoutPage() {
                   </div>
                 )}
 
-                <div className="relative p-6 pt-8">
+                <div className="relative p-6 pt-8 flex flex-col flex-1">
                   {/* Selected dot */}
                   <div className={cn(
                     "absolute top-4 left-4 w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all",
@@ -377,7 +376,7 @@ export default function CheckoutPage() {
                   </div>
 
                   {/* Features */}
-                  <ul className="space-y-2.5 mb-4">
+                  <ul className="space-y-2.5 mb-4 flex-1">
                     {plan.features.map((f) => (
                       <li key={f} className="flex items-start gap-2 text-xs text-gray-300 text-right">
                         <div className={cn(
