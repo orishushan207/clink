@@ -33,7 +33,7 @@ export async function createGuest(
 export async function getGuestsByEvent(eventId: string): Promise<Guest[]> {
   const { data, error } = await supabase
     .from("guests")
-    .select("*")
+    .select("id, event_id, nickname, avatar, blocked, created_at")
     .eq("event_id", eventId)
     .order("created_at", { ascending: false });
 
