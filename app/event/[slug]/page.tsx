@@ -169,34 +169,50 @@ export default function EventEntryPage() {
         )}
 
         <div className="relative z-10 max-w-lg mx-auto px-6 py-16 flex flex-col items-center text-center min-h-screen justify-center">
-          {event.cover_image_url && (
-            <div className="w-32 h-32 rounded-3xl overflow-hidden border-2 border-party-gold/30 shadow-2xl mb-6">
-              <Image
-                src={event.cover_image_url}
-                alt={event.name}
-                width={128}
-                height={128}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
+          {/* Invitation card */}
+          <div className="w-full glass-card rounded-[2rem] px-6 py-10 sm:px-10 sm:py-12 flex flex-col items-center animate-float-in">
+            {event.cover_image_url && (
+              <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-party-gold/40 shadow-2xl mb-6 ring-4 ring-party-gold/10">
+                <Image
+                  src={event.cover_image_url}
+                  alt={event.name}
+                  width={128}
+                  height={128}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
 
-          <h1 className="text-3xl font-black text-white mb-2 leading-tight">
-            {event.name}
-          </h1>
-
-          {event.event_date && (
-            <div className="flex items-center gap-1.5 text-gray-400 text-sm mb-3">
-              <Calendar className="h-3.5 w-3.5" />
-              <span>{formatDate(event.event_date)}</span>
-            </div>
-          )}
-
-          {event.description && (
-            <p className="text-gray-400 text-base leading-relaxed mb-6 max-w-sm">
-              {event.description}
+            <p className="text-party-gold/70 text-xs tracking-[0.3em] uppercase mb-2">
+              ברוכים הבאים ל
             </p>
-          )}
+
+            <h1 className="font-display text-4xl sm:text-5xl font-bold text-white mb-3 leading-tight">
+              {event.name}
+            </h1>
+
+            {/* Decorative divider */}
+            <div className="flex items-center gap-3 my-3 text-party-gold/50">
+              <span className="h-px w-10 bg-party-gold/30" />
+              <span className="text-lg">✦</span>
+              <span className="h-px w-10 bg-party-gold/30" />
+            </div>
+
+            {event.event_date && (
+              <div className="flex items-center gap-1.5 text-party-gold-light/80 text-sm mb-3 font-medium">
+                <Calendar className="h-3.5 w-3.5" />
+                <span>{formatDate(event.event_date)}</span>
+              </div>
+            )}
+
+            {event.description && (
+              <p className="text-gray-400 text-base leading-relaxed mb-2 max-w-sm italic">
+                {event.description}
+              </p>
+            )}
+          </div>
+
+          <div className="w-full mt-6 flex flex-col items-center">
 
           {event.privacy_mode === "private" && (
             <div className="flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-xl px-4 py-2 text-amber-300 text-sm mb-6">
@@ -253,6 +269,7 @@ export default function EventEntryPage() {
               מכין את הכניסה...
             </div>
           )}
+          </div>
         </div>
       </div>
 
