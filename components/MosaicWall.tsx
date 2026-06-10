@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
-import { Upload, RefreshCw, Loader2, Grid3x3, X, ArrowRight } from "lucide-react";
+import { Upload, RefreshCw, Loader2, Grid3x3, X, ArrowRight, Download } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 import { saveMosaic } from "@/lib/media";
@@ -96,6 +96,24 @@ export default function MosaicWall({ event, isAdmin, adminToken }: MosaicWallPro
         }
       });
   }, [loadMedia, event.id]);
+
+  const handleDownload = useCallback(async () => {
+    if (!resultUrl) return;
+    try {
+      const res = await fetch(resultUrl);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `clink-mosaic-${event.name || "event"}.jpg`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      console.error("Mosaic download error", e);
+    }
+  }, [resultUrl, event.name]);
 
   // Auto-hide controls after 4s of inactivity when mosaic is showing
   useEffect(() => {
@@ -339,6 +357,13 @@ export default function MosaicWall({ event, isAdmin, adminToken }: MosaicWallPro
       {/* Controls overlay — appears on mouse move */}
       {showControls && (
         <div className="absolute top-4 right-4 flex items-center gap-2 animate-fade-in">
+          <button
+            onClick={(e) => { e.stopPropagation(); handleDownload(); }}
+            className="flex items-center gap-1.5 bg-black/70 backdrop-blur-sm border border-white/10 hover:border-purple-500/40 text-white text-xs font-medium px-3 py-2 rounded-xl transition-all"
+          >
+            <Download className="h-3.5 w-3.5" />
+            הורדה
+          </button>
           <button
             onClick={(e) => { e.stopPropagation(); loadMedia().then(generate); }}
             disabled={generating}

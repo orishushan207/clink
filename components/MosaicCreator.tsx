@@ -6,7 +6,6 @@ import { Upload, Download, Loader2, X, RefreshCw, Check } from "lucide-react";
 import type { Media } from "@/types";
 import { cn } from "@/lib/utils";
 import { saveMosaic } from "@/lib/media";
-import { supabase } from "@/lib/supabase/client";
 
 interface MosaicCreatorProps {
   media: Media[];
@@ -54,6 +53,12 @@ function loadImage(src: string): Promise<HTMLImageElement> {
   });
 }
 
+interface SavedMosaic {
+  id: string;
+  image_url: string;
+  created_at: string;
+}
+
 export default function MosaicCreator({ media, eventId, adminToken }: MosaicCreatorProps) {
   const [targetFile, setTargetFile] = useState<File | null>(null);
   const [targetUrl, setTargetUrl] = useState<string | null>(null);
@@ -64,19 +69,64 @@ export default function MosaicCreator({ media, eventId, adminToken }: MosaicCrea
   const [resultUrl, setResultUrl] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [savedMosaics, setSavedMosaics] = useState<SavedMosaic[]>([]);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Load previously saved mosaic on mount
-  useEffect(() => {
-    supabase
-      .from("events")
-      .select("mosaic_url")
-      .eq("id", eventId)
-      .single()
-      .then(({ data }) => {
-        if (data?.mosaic_url) setResultUrl(data.mosaic_url);
-      });
+  const loadSavedMosaics = useCallback(async () => {
+    try {
+      const res = await fetch(`/api/mosaic?eventId=${eventId}`);
+      const { mosaics } = await res.json();
+      setSavedMosaics(mosaics ?? []);
+    } catch { /* silent */ }
   }, [eventId]);
+
+  // Load previously saved mosaics on mount
+  useEffect(() => {
+    loadSavedMosaics();
+  }, [loadSavedMosaics]);
+
+  const downloadImage = async (url: string, filename: string) => {
+    try {
+      if (url.startsWith("data:")) {
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        a.click();
+        return;
+      }
+      const res = await fetch(url);
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(blobUrl);
+    } catch (e) {
+      console.error("Download error", e);
+    }
+  };
+
+  const handleDeleteMosaic = async (id: string) => {
+    if (!confirm("למחוק את הפסיפס הזה?")) return;
+    setDeletingId(id);
+    try {
+      const res = await fetch("/api/mosaic", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, eventId, adminToken }),
+      });
+      if (!res.ok) throw new Error();
+      setSavedMosaics((prev) => prev.filter((m) => m.id !== id));
+    } catch {
+      alert("שגיאה במחיקת הפסיפס");
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   const imageMedia = media.filter((m) => m.media_type !== "video" && m.file_url);
 
@@ -183,6 +233,7 @@ export default function MosaicCreator({ media, eventId, adminToken }: MosaicCrea
       try {
         await saveMosaic(dataUrl, eventId, adminToken);
         setSaved(true);
+        await loadSavedMosaics();
       } catch (e) {
         console.error("Save mosaic error", e);
       } finally {
@@ -197,15 +248,7 @@ export default function MosaicCreator({ media, eventId, adminToken }: MosaicCrea
     } finally {
       setGenerating(false);
     }
-  }, [targetUrl, imageMedia, gridSize]);
-
-  const handleDownload = () => {
-    if (!resultUrl) return;
-    const a = document.createElement("a");
-    a.href = resultUrl;
-    a.download = "mosaic.jpg";
-    a.click();
-  };
+  }, [targetUrl, imageMedia, gridSize, eventId, adminToken, loadSavedMosaics]);
 
   return (
     <div className="space-y-5" dir="rtl">
@@ -335,12 +378,53 @@ export default function MosaicCreator({ media, eventId, adminToken }: MosaicCrea
             <img src={resultUrl} alt="mosaic result" className="w-full h-full object-contain" />
           </div>
           <button
-            onClick={handleDownload}
+            onClick={() => downloadImage(resultUrl, "clink-mosaic.jpg")}
             className="w-full py-3 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 hover:bg-emerald-500/30 text-emerald-400 font-bold text-sm flex items-center justify-center gap-2 transition-all"
           >
             <Download className="h-4 w-4" />
             הורד פסיפס
           </button>
+        </div>
+      )}
+
+      {/* Saved mosaics history */}
+      {savedMosaics.length > 0 && (
+        <div className="space-y-2 pt-2 border-t border-party-border">
+          <p className="text-sm text-gray-400 font-medium">פסיפסים שנשמרו ({savedMosaics.length})</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {savedMosaics.map((m) => (
+              <div key={m.id} className="space-y-1.5">
+                <div className="relative w-full aspect-square rounded-xl overflow-hidden border border-party-border">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={m.image_url} alt="פסיפס שמור" className="w-full h-full object-cover" />
+                </div>
+                <p className="text-[10px] text-gray-600 text-center">
+                  {new Date(m.created_at).toLocaleDateString("he-IL")}
+                </p>
+                <div className="flex gap-1.5">
+                  <button
+                    onClick={() => downloadImage(m.image_url, `clink-mosaic-${m.id}.jpg`)}
+                    className="flex-1 p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 transition-all"
+                    title="הורד"
+                  >
+                    <Download className="h-3.5 w-3.5 mx-auto" />
+                  </button>
+                  <button
+                    onClick={() => handleDeleteMosaic(m.id)}
+                    disabled={deletingId === m.id}
+                    className="flex-1 p-1.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-all disabled:opacity-50"
+                    title="מחק"
+                  >
+                    {deletingId === m.id ? (
+                      <Loader2 className="h-3.5 w-3.5 mx-auto animate-spin" />
+                    ) : (
+                      <X className="h-3.5 w-3.5 mx-auto" />
+                    )}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
