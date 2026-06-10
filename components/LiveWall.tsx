@@ -484,7 +484,7 @@ export default function LiveWall({ event, isAdmin = false }: LiveWallProps) {
           {/* Close button — always visible regardless of controls auto-hide */}
           <button
             onClick={() => { setMode("grid"); setShowSettings(false); setPaused(false); }}
-            className="absolute top-3 right-4 z-30 p-2 rounded-xl bg-black/40 hover:bg-white/20 transition-colors"
+            className="absolute top-16 right-4 z-30 p-2 rounded-xl bg-black/40 hover:bg-white/20 transition-colors"
             title="סגור"
           >
             <X className="h-5 w-5" />
