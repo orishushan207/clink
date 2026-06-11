@@ -14,19 +14,19 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
-          <label className="text-sm font-medium text-gray-300">{label}</label>
+          <label className="text-sm font-medium text-wedding-muted">{label}</label>
         )}
         <input
           ref={ref}
           className={cn(
-            "w-full bg-party-surface2 border border-party-border rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-party-gold focus:border-transparent transition-all text-right",
+            "w-full bg-wedding-card border border-wedding-border rounded-xl px-4 py-3 text-wedding-ink placeholder:text-wedding-muted focus:outline-none focus:ring-2 focus:ring-wedding-accent focus:border-transparent transition-all text-right",
             error && "border-red-500 focus:ring-red-500",
             className
           )}
           {...props}
         />
         {hint && !error && (
-          <span className="text-xs text-gray-500">{hint}</span>
+          <span className="text-xs text-wedding-muted">{hint}</span>
         )}
         {error && <span className="text-xs text-red-400">{error}</span>}
       </div>
@@ -45,12 +45,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
-          <label className="text-sm font-medium text-gray-300">{label}</label>
+          <label className="text-sm font-medium text-wedding-muted">{label}</label>
         )}
         <textarea
           ref={ref}
           className={cn(
-            "w-full bg-party-surface2 border border-party-border rounded-xl px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-party-gold focus:border-transparent transition-all resize-none text-right",
+            "w-full bg-wedding-card border border-wedding-border rounded-xl px-4 py-3 text-wedding-ink placeholder:text-wedding-muted focus:outline-none focus:ring-2 focus:ring-wedding-accent focus:border-transparent transition-all resize-none text-right",
             error && "border-red-500 focus:ring-red-500",
             className
           )}

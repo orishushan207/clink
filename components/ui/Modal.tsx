@@ -54,17 +54,17 @@ export default function Modal({
       {/* Panel */}
       <div
         className={cn(
-          "relative w-full sm:max-w-md bg-party-surface border border-party-border rounded-t-3xl sm:rounded-3xl p-6 animate-slide-up shadow-2xl shadow-black/50",
+          "wedding-card relative w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl p-6 animate-slide-up shadow-2xl",
           className
         )}
       >
         {/* Header */}
         {title && (
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-lg font-bold text-white">{title}</h2>
+            <h2 className="text-lg font-bold text-wedding-ink">{title}</h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10"
+              className="text-wedding-muted hover:text-wedding-ink transition-colors p-1 rounded-lg hover:bg-wedding-accent/10"
             >
               <X className="h-5 w-5" />
             </button>
@@ -73,7 +73,7 @@ export default function Modal({
         {!title && (
           <button
             onClick={onClose}
-            className="absolute top-4 left-4 text-gray-400 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10"
+            className="absolute top-4 left-4 text-wedding-muted hover:text-wedding-ink transition-colors p-1 rounded-lg hover:bg-wedding-accent/10"
           >
             <X className="h-5 w-5" />
           </button>

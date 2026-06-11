@@ -26,10 +26,10 @@ export default function Spinner({ size = "md", className }: SpinnerProps) {
 
 export function FullPageSpinner() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-party-bg">
+    <div className="flex min-h-screen items-center justify-center bg-wedding-bg">
       <div className="flex flex-col items-center gap-4">
         <Spinner size="lg" />
-        <p className="text-gray-400 text-sm">טוען...</p>
+        <p className="text-wedding-muted text-sm">טוען...</p>
       </div>
     </div>
   );
