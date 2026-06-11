@@ -101,6 +101,15 @@ video {
   border: 1px solid rgba(224, 184, 168, 0.15);
 }
 
+/* Light "wedding invitation" card — used on pages migrated to the
+   cream/ivory palette */
+.wedding-card {
+  background: rgba(255, 250, 245, 0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(180, 130, 110, 0.15);
+  box-shadow: 0 10px 40px rgba(60, 40, 30, 0.08);
+}
+
 /* Safe area for mobile (notch, home indicator) */
 .safe-bottom {
   padding-bottom: env(safe-area-inset-bottom);

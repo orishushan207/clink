@@ -16,6 +16,16 @@ const config: Config = {
         "party-gold": "#d9a98e",
         "party-gold-light": "#f0cdb8",
         "party-gold-dark": "#b9826a",
+        // Light "wedding invitation" palette — applied gradually,
+        // page by page, alongside the existing dark party-* tokens.
+        "wedding-bg": "#faf3ec",
+        "wedding-card": "#fffaf5",
+        "wedding-ink": "#3a2a22",
+        "wedding-muted": "#a8927f",
+        "wedding-border": "rgba(180, 130, 110, 0.18)",
+        "wedding-accent": "#c9836a",
+        "wedding-accent-light": "#e3b6a4",
+        "wedding-accent-dark": "#a8654a",
       },
       backgroundImage: {
         "party-gradient": "linear-gradient(135deg, #d9a98e 0%, #c98e8a 100%)",

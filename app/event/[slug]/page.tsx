@@ -125,10 +125,10 @@ export default function EventEntryPage() {
 
   if (notFound) {
     return (
-      <div className="min-h-screen bg-party-bg flex flex-col items-center justify-center px-6 text-center">
+      <div className="min-h-screen bg-wedding-bg flex flex-col items-center justify-center px-6 text-center">
         <div className="text-6xl mb-4">🔍</div>
-        <h1 className="text-2xl font-bold text-white mb-2">אירוע לא נמצא</h1>
-        <p className="text-gray-400">ייתכן שהקישור שגוי או שהאירוע הסתיים</p>
+        <h1 className="text-2xl font-bold text-wedding-ink mb-2">אירוע לא נמצא</h1>
+        <p className="text-wedding-muted">ייתכן שהקישור שגוי או שהאירוע הסתיים</p>
       </div>
     );
   }
@@ -141,10 +141,10 @@ export default function EventEntryPage() {
   // Non-admin trying to enter a locked event
   if (locked && !adminEventId) {
     return (
-      <div className="min-h-screen bg-party-bg flex flex-col items-center justify-center px-6 text-center gap-4">
+      <div className="min-h-screen bg-wedding-bg flex flex-col items-center justify-center px-6 text-center gap-4">
         <div className="text-6xl">🔒</div>
-        <h1 className="text-2xl font-bold text-white">הגלריה נסגרה</h1>
-        <p className="text-gray-400 max-w-xs">
+        <h1 className="text-2xl font-bold text-wedding-ink">הגלריה נסגרה</h1>
+        <p className="text-wedding-muted max-w-xs">
           הגישה לאורחים ניתנת רק במשך {GUEST_LOCK_HOURS} שעות מתחילת האירוע.
           אם אתה בעל האירוע, התחבר דרך פאנל הניהול.
         </p>
@@ -154,7 +154,7 @@ export default function EventEntryPage() {
 
   return (
     <>
-      <div className="min-h-screen bg-party-bg relative overflow-hidden">
+      <div className="min-h-screen bg-wedding-bg relative overflow-hidden">
         {event.cover_image_url && (
           <div className="absolute inset-0">
             <Image
@@ -164,15 +164,15 @@ export default function EventEntryPage() {
               className="object-cover opacity-20 blur-2xl scale-110"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-party-bg/60 via-party-bg/80 to-party-bg" />
+            <div className="absolute inset-0 bg-gradient-to-b from-wedding-bg/60 via-wedding-bg/85 to-wedding-bg" />
           </div>
         )}
 
         <div className="relative z-10 max-w-lg mx-auto px-6 py-16 flex flex-col items-center text-center min-h-screen justify-center">
           {/* Invitation card */}
-          <div className="w-full glass-card rounded-[2rem] px-6 py-10 sm:px-10 sm:py-12 flex flex-col items-center animate-float-in">
+          <div className="w-full wedding-card rounded-[2rem] px-6 py-10 sm:px-10 sm:py-12 flex flex-col items-center animate-float-in">
             {event.cover_image_url && (
-              <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-party-gold/40 shadow-2xl mb-6 ring-4 ring-party-gold/10">
+              <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-wedding-accent/40 shadow-2xl mb-6 ring-4 ring-wedding-accent/10">
                 <Image
                   src={event.cover_image_url}
                   alt={event.name}
@@ -183,30 +183,30 @@ export default function EventEntryPage() {
               </div>
             )}
 
-            <p className="text-party-gold/70 text-xs tracking-[0.3em] uppercase mb-2">
+            <p className="text-wedding-accent/80 text-xs tracking-[0.3em] uppercase mb-2">
               ברוכים הבאים ל
             </p>
 
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-white mb-3 leading-tight">
+            <h1 className="font-display text-4xl sm:text-5xl font-bold text-wedding-ink mb-3 leading-tight">
               {event.name}
             </h1>
 
             {/* Decorative divider */}
-            <div className="flex items-center gap-3 my-3 text-party-gold/50">
-              <span className="h-px w-10 bg-party-gold/30" />
+            <div className="flex items-center gap-3 my-3 text-wedding-accent/60">
+              <span className="h-px w-10 bg-wedding-accent/30" />
               <span className="text-lg">✦</span>
-              <span className="h-px w-10 bg-party-gold/30" />
+              <span className="h-px w-10 bg-wedding-accent/30" />
             </div>
 
             {event.event_date && (
-              <div className="flex items-center gap-1.5 text-party-gold-light/80 text-sm mb-3 font-medium">
+              <div className="flex items-center gap-1.5 text-wedding-accent-dark/90 text-sm mb-3 font-medium">
                 <Calendar className="h-3.5 w-3.5" />
                 <span>{formatDate(event.event_date)}</span>
               </div>
             )}
 
             {event.description && (
-              <p className="text-gray-400 text-base leading-relaxed mb-2 max-w-sm italic">
+              <p className="text-wedding-muted text-base leading-relaxed mb-2 max-w-sm italic">
                 {event.description}
               </p>
             )}
@@ -256,7 +256,7 @@ export default function EventEntryPage() {
               </Link>
               <button
                 onClick={() => setShowModal(true)}
-                className="flex items-center justify-center gap-2 w-full border border-white/10 hover:border-white/20 text-gray-300 hover:text-white font-medium py-3 rounded-2xl transition-all"
+                className="flex items-center justify-center gap-2 w-full border border-wedding-border hover:border-wedding-accent/40 text-wedding-muted hover:text-wedding-ink font-medium py-3 rounded-2xl transition-all"
               >
                 <Images className="h-4 w-4" />
                 כניסה לClink כאורח
@@ -265,7 +265,7 @@ export default function EventEntryPage() {
           )}
 
           {!adminEventId && (
-            <div className="text-gray-500 text-sm animate-pulse">
+            <div className="text-wedding-muted text-sm animate-pulse">
               מכין את הכניסה...
             </div>
           )}
