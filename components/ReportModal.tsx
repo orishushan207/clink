@@ -46,7 +46,7 @@ export default function ReportModal({
   return (
     <Modal open={open} onClose={onClose} title="דיווח על תוכן">
       <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-2 text-gray-400 text-sm">
+        <div className="flex items-center gap-2 text-wedding-muted text-sm">
           <Flag className="h-4 w-4" />
           <span>בחר את הסיבה לדיווח:</span>
         </div>
@@ -59,8 +59,8 @@ export default function ReportModal({
               className={cn(
                 "text-right px-4 py-3 rounded-xl border transition-all text-sm font-medium",
                 selected === reason
-                  ? "border-party-gold bg-party-gold-light/15 text-yellow-300"
-                  : "border-party-border bg-party-surface2 text-gray-300 hover:border-white/20"
+                  ? "border-wedding-accent bg-wedding-accent-light/15 text-wedding-accent-dark"
+                  : "border-wedding-border bg-wedding-bg text-wedding-muted hover:border-wedding-accent/30"
               )}
             >
               {reason}

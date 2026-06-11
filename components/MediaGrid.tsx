@@ -138,7 +138,7 @@ export default function MediaGrid({
                 "flex-shrink-0 px-4 py-2 rounded-xl text-sm font-medium transition-all",
                 filter === opt.value
                   ? "btn-gold text-white"
-                  : "bg-party-surface2 text-gray-400 hover:text-white border border-party-border"
+                  : "wedding-card text-wedding-muted hover:text-wedding-ink border border-wedding-border"
               )}
             >
               {opt.label}
@@ -151,8 +151,8 @@ export default function MediaGrid({
             className={cn(
               "flex-shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium transition-all border",
               hideBlurry
-                ? "bg-party-gold/20 border-party-gold/50 text-yellow-300"
-                : "bg-party-surface2 border-party-border text-gray-400 hover:text-white"
+                ? "bg-wedding-accent/20 border-wedding-accent/50 text-wedding-accent-dark"
+                : "wedding-card border-wedding-border text-wedding-muted hover:text-wedding-ink"
             )}
             title="הסתר תמונות מטושטשות"
           >
@@ -171,7 +171,7 @@ export default function MediaGrid({
                 setBlurSensitivity(s => s === "normal" ? "high" : "normal");
                 // Re-trigger compute for new threshold
               }}
-              className="flex-shrink-0 flex items-center gap-1 px-2.5 py-2 rounded-xl text-xs font-medium border border-party-border bg-party-surface2 text-gray-400 hover:text-white transition-all"
+              className="flex-shrink-0 flex items-center gap-1 px-2.5 py-2 rounded-xl text-xs font-medium border border-wedding-border wedding-card text-wedding-muted hover:text-wedding-ink transition-all"
               title="שנה רגישות"
             >
               {blurSensitivity === "normal" ? "🎚 רגיל" : "🎚 גבוה"}
@@ -191,10 +191,10 @@ export default function MediaGrid({
               className={cn(
                 "flex-shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium transition-all border",
                 selectedGuestId
-                  ? "bg-party-gold/20 border-party-gold/50 text-yellow-300"
+                  ? "bg-wedding-accent/20 border-wedding-accent/50 text-wedding-accent-dark"
                   : showGuestPicker
-                  ? "bg-white/10 border-white/20 text-white"
-                  : "bg-party-surface2 border-party-border text-gray-400 hover:text-white"
+                  ? "bg-wedding-accent/10 border-wedding-accent/20 text-wedding-ink"
+                  : "wedding-card border-wedding-border text-wedding-muted hover:text-wedding-ink"
               )}
             >
               <Users className="h-3.5 w-3.5" />
@@ -209,7 +209,7 @@ export default function MediaGrid({
               {selectedGuestId && (
                 <span
                   onClick={(e) => { e.stopPropagation(); setSelectedGuestId(null); }}
-                  className="mr-1 hover:text-red-400 transition-colors"
+                  className="mr-1 hover:text-red-500 transition-colors"
                 >
                   <X className="h-3 w-3" />
                 </span>
@@ -220,8 +220,8 @@ export default function MediaGrid({
 
         {/* Guest picker dropdown */}
         {showGuestPicker && uniqueGuests.length > 1 && (
-          <div className="bg-party-surface border border-party-border rounded-2xl p-3 animate-fade-in">
-            <p className="text-xs text-gray-500 mb-2.5">בחר אורח לסינון:</p>
+          <div className="wedding-card border border-wedding-border rounded-2xl p-3 animate-fade-in">
+            <p className="text-xs text-wedding-muted mb-2.5">בחר אורח לסינון:</p>
             <div className="flex flex-wrap gap-2">
               {uniqueGuests.map(guest => (
                 <button
@@ -233,8 +233,8 @@ export default function MediaGrid({
                   className={cn(
                     "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm transition-all border",
                     selectedGuestId === guest.id
-                      ? "bg-party-gold/20 border-party-gold/50 text-yellow-300"
-                      : "bg-party-surface2 border-party-border text-gray-300 hover:border-party-gold/30 hover:text-white"
+                      ? "bg-wedding-accent/20 border-wedding-accent/50 text-wedding-accent-dark"
+                      : "bg-wedding-bg border-wedding-border text-wedding-muted hover:border-wedding-accent/30 hover:text-wedding-ink"
                   )}
                 >
                   {guest.avatar && (
@@ -247,7 +247,7 @@ export default function MediaGrid({
                     )
                   )}
                   <span>{guest.nickname}</span>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-wedding-muted">
                     ({media.filter(m => m.guest?.id === guest.id).length})
                   </span>
                 </button>
@@ -267,10 +267,10 @@ export default function MediaGrid({
         ).length;
         if (hiddenCount === 0) return null;
         return (
-          <div className="flex items-center gap-2 text-sm text-yellow-300 bg-party-gold/10 border border-party-gold/20 rounded-xl px-3 py-2">
+          <div className="flex items-center gap-2 text-sm text-wedding-accent-dark bg-wedding-accent/10 border border-wedding-accent/20 rounded-xl px-3 py-2">
             <ScanSearch className="h-3.5 w-3.5" />
             <span>מסנן מטושטשות ({blurSensitivity === "high" ? "רגישות גבוהה" : "רגישות רגילה"}) — {hiddenCount} הוסתרו</span>
-            <button onClick={() => setHideBlurry(false)} className="mr-auto text-gray-500 hover:text-white transition-colors">
+            <button onClick={() => setHideBlurry(false)} className="mr-auto text-wedding-muted hover:text-wedding-ink transition-colors">
               <X className="h-3.5 w-3.5" />
             </button>
           </div>
@@ -279,11 +279,11 @@ export default function MediaGrid({
 
       {/* Active guest filter label */}
       {selectedGuest && (
-        <div className="flex items-center gap-2 text-sm text-yellow-300 bg-party-gold/10 border border-party-gold/20 rounded-xl px-3 py-2">
+        <div className="flex items-center gap-2 text-sm text-wedding-accent-dark bg-wedding-accent/10 border border-wedding-accent/20 rounded-xl px-3 py-2">
           <Users className="h-3.5 w-3.5" />
           <span>מציג תמונות של <strong>{selectedGuest.nickname}</strong></span>
-          <span className="text-gray-500">({displayMedia.length} פריטים)</span>
-          <button onClick={() => setSelectedGuestId(null)} className="mr-auto text-gray-500 hover:text-white transition-colors">
+          <span className="text-wedding-muted">({displayMedia.length} פריטים)</span>
+          <button onClick={() => setSelectedGuestId(null)} className="mr-auto text-wedding-muted hover:text-wedding-ink transition-colors">
             <X className="h-3.5 w-3.5" />
           </button>
         </div>
@@ -293,10 +293,10 @@ export default function MediaGrid({
       {displayMedia.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20 gap-4">
           <div className="text-6xl opacity-50">📷</div>
-          <p className="text-gray-500 text-center">
+          <p className="text-wedding-muted text-center">
             {selectedGuestId ? "אין תמונות לאורח זה" : "עדיין לא הועלו תמונות לאירוע"}
           </p>
-          {!selectedGuestId && <p className="text-gray-600 text-sm text-center">היה הראשון להעלות!</p>}
+          {!selectedGuestId && <p className="text-wedding-muted/70 text-sm text-center">היה הראשון להעלות!</p>}
         </div>
       )}
 

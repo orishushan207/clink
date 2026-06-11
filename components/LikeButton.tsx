@@ -76,8 +76,8 @@ export default function LikeButton({
           className={cn(
             "flex items-center justify-center w-8 h-8 rounded-xl transition-all active:scale-90",
             liked
-              ? "text-amber-400 bg-amber-500/15"
-              : "text-gray-400 hover:text-amber-400 hover:bg-amber-500/10"
+              ? "text-amber-500 bg-amber-500/15"
+              : "text-wedding-muted hover:text-amber-500 hover:bg-amber-500/10"
           )}
         >
           <Heart className={cn("h-4 w-4 transition-all", liked && "fill-pink-400")} />
@@ -90,8 +90,8 @@ export default function LikeButton({
           className={cn(
             "min-w-[1.25rem] h-6 px-1.5 rounded-lg text-xs font-semibold tabular-nums transition-all border",
             count > 0
-              ? "text-amber-400 border-amber-500/30 hover:border-amber-500/60 hover:bg-amber-500/10 active:scale-95"
-              : "text-gray-500 border-white/10 cursor-default"
+              ? "text-amber-500 border-amber-500/30 hover:border-amber-500/60 hover:bg-amber-500/10 active:scale-95"
+              : "text-wedding-muted border-wedding-border cursor-default"
           )}
         >
           {count}
@@ -101,42 +101,42 @@ export default function LikeButton({
       {/* Likers modal */}
       {showLikers && (
         <div
-          className="fixed inset-0 z-[60] flex items-end justify-center bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-[60] flex items-end justify-center bg-black/40 backdrop-blur-sm"
           onClick={() => setShowLikers(false)}
         >
           <div
-            className="w-full max-w-md bg-[#1a1a2e] border border-white/10 rounded-t-3xl p-6 pb-10 max-h-[60vh] overflow-y-auto safe-bottom"
+            className="w-full max-w-md wedding-card border border-wedding-border rounded-t-3xl p-6 pb-10 max-h-[60vh] overflow-y-auto safe-bottom"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-white font-bold text-lg flex items-center gap-2">
-                <Heart className="h-4 w-4 fill-pink-400 text-amber-400" />
+              <h3 className="text-wedding-ink font-bold text-lg flex items-center gap-2">
+                <Heart className="h-4 w-4 fill-pink-400 text-amber-500" />
                 {count} לייקים
               </h3>
               <button
                 onClick={() => setShowLikers(false)}
-                className="text-gray-400 hover:text-white p-1"
+                className="text-wedding-muted hover:text-wedding-ink p-1"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
             {loadingLikers ? (
-              <div className="text-center text-gray-400 py-6">טוען...</div>
+              <div className="text-center text-wedding-muted py-6">טוען...</div>
             ) : likers.length === 0 ? (
-              <div className="text-center text-gray-400 py-6">אין לייקים עדיין</div>
+              <div className="text-center text-wedding-muted py-6">אין לייקים עדיין</div>
             ) : (
               <ul className="space-y-3">
                 {likers.map((liker, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full overflow-hidden bg-white/10 flex items-center justify-center flex-shrink-0">
+                    <div className="w-9 h-9 rounded-full overflow-hidden bg-wedding-accent/10 flex items-center justify-center flex-shrink-0">
                       {liker.avatar?.startsWith("http") ? (
                         <Image src={liker.avatar} alt={liker.nickname} width={36} height={36} className="w-full h-full object-cover" />
                       ) : (
                         <span className="text-lg">{liker.avatar || "👤"}</span>
                       )}
                     </div>
-                    <span className="text-white font-medium">{liker.nickname}</span>
+                    <span className="text-wedding-ink font-medium">{liker.nickname}</span>
                   </li>
                 ))}
               </ul>

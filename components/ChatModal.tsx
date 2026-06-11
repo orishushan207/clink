@@ -105,28 +105,28 @@ export default function ChatModal({ eventId, me, other, onClose }: ChatModalProp
         <Image src={p.avatar} alt={p.nickname} width={28} height={28} className="w-full h-full object-cover" />
       </div>
     ) : (
-      <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-base">
+      <div className="w-7 h-7 rounded-full bg-wedding-accent/10 flex items-center justify-center flex-shrink-0 text-base">
         {p.avatar || "👤"}
       </div>
     );
 
   return (
-    <div className="fixed inset-0 z-[60] flex flex-col bg-party-bg" dir="rtl">
+    <div className="fixed inset-0 z-[60] flex flex-col bg-wedding-bg" dir="rtl">
       {/* Header */}
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-party-border bg-party-surface/80 backdrop-blur-md flex-shrink-0">
-        <button onClick={onClose} className="p-1.5 rounded-xl hover:bg-white/10 text-gray-400 transition-all">
+      <div className="flex items-center gap-3 px-4 py-3 border-b border-wedding-border wedding-card/80 backdrop-blur-md flex-shrink-0">
+        <button onClick={onClose} className="p-1.5 rounded-xl hover:bg-wedding-accent/10 text-wedding-muted transition-all">
           <X className="h-5 w-5" />
         </button>
         <AvatarEl p={other} />
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-white truncate">{other.nickname}</p>
+          <p className="text-sm font-semibold text-wedding-ink truncate">{other.nickname}</p>
         </div>
       </div>
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
         {messages.length === 0 && (
-          <div className="text-center py-12 text-gray-600 text-sm">התחל שיחה עם {other.nickname}</div>
+          <div className="text-center py-12 text-wedding-muted text-sm">התחל שיחה עם {other.nickname}</div>
         )}
         {messages.map((msg) => {
           const isMine = msg.sender_id === me.id;
@@ -137,8 +137,8 @@ export default function ChatModal({ eventId, me, other, onClose }: ChatModalProp
                 className={cn(
                   "max-w-[75%] px-3 py-2 rounded-2xl text-sm",
                   isMine
-                    ? "bg-party-gold text-white rounded-br-sm"
-                    : "bg-party-surface border border-party-border text-white rounded-bl-sm"
+                    ? "bg-wedding-accent text-white rounded-br-sm"
+                    : "wedding-card border border-wedding-border text-wedding-ink rounded-bl-sm"
                 )}
               >
                 {msg.content}
@@ -150,7 +150,7 @@ export default function ChatModal({ eventId, me, other, onClose }: ChatModalProp
       </div>
 
       {/* Input */}
-      <div className="flex-shrink-0 px-4 py-3 border-t border-party-border bg-party-surface/80 backdrop-blur-md">
+      <div className="flex-shrink-0 px-4 py-3 border-t border-wedding-border wedding-card/80 backdrop-blur-md">
         <div className="flex gap-2 items-center">
           <input
             type="text"
@@ -158,12 +158,12 @@ export default function ChatModal({ eventId, me, other, onClose }: ChatModalProp
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
             placeholder={`הודעה ל${other.nickname}...`}
-            className="flex-1 bg-party-bg border border-party-border rounded-2xl px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-party-gold transition-colors"
+            className="flex-1 bg-wedding-bg border border-wedding-border rounded-2xl px-4 py-2.5 text-sm text-wedding-ink placeholder-wedding-muted focus:outline-none focus:border-wedding-accent transition-colors"
           />
           <button
             onClick={sendMessage}
             disabled={!text.trim() || sending}
-            className="p-2.5 bg-party-gold hover:bg-party-gold-light disabled:opacity-40 disabled:cursor-not-allowed rounded-2xl text-white transition-all"
+            className="p-2.5 bg-wedding-accent hover:bg-wedding-accent-dark disabled:opacity-40 disabled:cursor-not-allowed rounded-2xl text-white transition-all"
           >
             <Send className="h-4 w-4 scale-x-[-1]" />
           </button>

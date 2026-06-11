@@ -170,8 +170,8 @@ export default function GuestNameModal({
           <div className="flex justify-center mb-3">
             <PicMeLogo size={48} showText={false} />
           </div>
-          <h2 className="text-xl font-bold text-white">אורח/ת יקר/ה ברוכים הבאים לClink!</h2>
-          <p className="text-gray-400 text-sm mt-1">{eventName}</p>
+          <h2 className="text-xl font-bold text-wedding-ink">אורח/ת יקר/ה ברוכים הבאים לClink!</h2>
+          <p className="text-wedding-muted text-sm mt-1">{eventName}</p>
         </div>
 
         {/* Nickname input */}
@@ -196,7 +196,7 @@ export default function GuestNameModal({
             <button
               type="button"
               onClick={() => setShowPin(true)}
-              className="flex items-center gap-2 text-xs text-gray-500 hover:text-gray-300 transition-colors"
+              className="flex items-center gap-2 text-xs text-wedding-muted hover:text-wedding-ink transition-colors"
             >
               <Shield className="h-3.5 w-3.5" />
               הוסף קוד אישי (מומלץ — מונע שימוש בכינוי שלך ממכשיר אחר)
@@ -219,7 +219,7 @@ export default function GuestNameModal({
                 dir="ltr"
                 error={pinRequired ? error : undefined}
               />
-              <p className="text-xs text-gray-500 mt-1.5">
+              <p className="text-xs text-wedding-muted mt-1.5">
                 {pinRequired
                   ? "הזן את הקוד האישי ששמרת בכניסה הקודמת"
                   : "אם תגדיר קוד, רק מי שיודע אותו יוכל להיכנס בשם הכינוי הזה ממכשיר אחר"}
@@ -230,13 +230,13 @@ export default function GuestNameModal({
 
         {/* Profile photo upload */}
         <div>
-          <p className="text-sm font-medium text-gray-300 mb-3">
+          <p className="text-sm font-medium text-wedding-ink mb-3">
             תמונת פרופיל (לא חובה)
           </p>
 
           {photoUrl ? (
             <div className="flex items-center gap-3">
-              <div className="relative w-16 h-16 rounded-full overflow-hidden ring-2 ring-party-gold">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden ring-2 ring-wedding-accent">
                 <Image src={photoUrl} alt="פרופיל" fill className="object-cover" />
               </div>
               <button
@@ -244,7 +244,7 @@ export default function GuestNameModal({
                   setPhotoUrl(null);
                   if (fileInputRef.current) fileInputRef.current.value = "";
                 }}
-                className="flex items-center gap-1.5 text-sm text-red-400 hover:text-red-300"
+                className="flex items-center gap-1.5 text-sm text-red-500 hover:text-red-600"
               >
                 <X className="w-4 h-4" />
                 הסר תמונה
@@ -254,7 +254,7 @@ export default function GuestNameModal({
             <button
               onClick={() => fileInputRef.current?.click()}
               disabled={uploading}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-dashed border-party-gold/40 text-yellow-300 text-sm hover:bg-party-gold/10 transition-colors disabled:opacity-50"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-dashed border-wedding-accent/40 text-wedding-accent-dark text-sm hover:bg-wedding-accent/10 transition-colors disabled:opacity-50"
             >
               <Camera className="w-4 h-4" />
               {uploading ? "מעלה..." : "העלה תמונה מהגלריה"}
@@ -273,7 +273,7 @@ export default function GuestNameModal({
         {/* Emoji selection — only if no photo */}
         {!photoUrl && (
           <div>
-            <p className="text-sm font-medium text-gray-300 mb-3">
+            <p className="text-sm font-medium text-wedding-ink mb-3">
               או בחר אמוג&apos;י
             </p>
             <div className="grid grid-cols-8 gap-2">
@@ -286,8 +286,8 @@ export default function GuestNameModal({
                   className={cn(
                     "text-xl p-2 rounded-xl transition-all hover:scale-110 active:scale-95",
                     selectedEmoji === emoji
-                      ? "bg-party-gold/20 ring-2 ring-party-gold"
-                      : "hover:bg-white/5"
+                      ? "bg-wedding-accent/20 ring-2 ring-wedding-accent"
+                      : "hover:bg-wedding-accent/5"
                   )}
                 >
                   {emoji}
@@ -312,10 +312,10 @@ export default function GuestNameModal({
 
         {/* Admin login toggle */}
         {eventSlug && (
-          <div className="border-t border-party-border pt-4">
+          <div className="border-t border-wedding-border pt-4">
             <button
               onClick={() => { setShowAdminLogin(v => !v); setAdminError(""); }}
-              className="flex items-center gap-2 text-xs text-gray-500 hover:text-gray-300 transition-colors mx-auto"
+              className="flex items-center gap-2 text-xs text-wedding-muted hover:text-wedding-ink transition-colors mx-auto"
             >
               <Shield className="h-3.5 w-3.5" />
               {showAdminLogin ? "סגור כניסת מנהל" : "כניסה כמנהל האירוע"}
@@ -329,7 +329,7 @@ export default function GuestNameModal({
                   onChange={(e) => { setAdminEmail(e.target.value); setAdminError(""); }}
                   placeholder="אימייל מנהל"
                   dir="ltr"
-                  className="w-full bg-party-surface2 border border-party-border rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-party-gold transition-colors"
+                  className="w-full bg-wedding-bg border border-wedding-border rounded-xl px-4 py-2.5 text-sm text-wedding-ink placeholder-wedding-muted focus:outline-none focus:border-wedding-accent transition-colors"
                 />
                 <div className="relative">
                   <input
@@ -339,23 +339,23 @@ export default function GuestNameModal({
                     onKeyDown={(e) => e.key === "Enter" && handleAdminLogin()}
                     placeholder="סיסמת מנהל"
                     dir="rtl"
-                    className="w-full bg-party-surface2 border border-party-border rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-party-gold transition-colors pl-10"
+                    className="w-full bg-wedding-bg border border-wedding-border rounded-xl px-4 py-2.5 text-sm text-wedding-ink placeholder-wedding-muted focus:outline-none focus:border-wedding-accent transition-colors pl-10"
                   />
                   <button
                     type="button"
                     onClick={() => setShowAdminPassword(v => !v)}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-wedding-muted hover:text-wedding-ink"
                   >
                     {showAdminPassword ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
                   </button>
                 </div>
                 {adminError && (
-                  <p className="text-xs text-red-400 text-center">{adminError}</p>
+                  <p className="text-xs text-red-500 text-center">{adminError}</p>
                 )}
                 <button
                   onClick={handleAdminLogin}
                   disabled={adminLoading || !adminPassword.trim() || !adminEmail.trim()}
-                  className="w-full flex items-center justify-center gap-2 py-2.5 bg-party-gold hover:bg-party-gold-light disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-semibold rounded-xl transition-all"
+                  className="w-full flex items-center justify-center gap-2 py-2.5 bg-wedding-accent hover:bg-wedding-accent-dark disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-semibold rounded-xl transition-all"
                 >
                   {adminLoading
                     ? <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />

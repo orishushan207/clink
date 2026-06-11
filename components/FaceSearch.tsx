@@ -172,8 +172,8 @@ export default function FaceSearch({ media, onResults }: FaceSearchProps) {
         className={cn(
           "flex-shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium transition-all border",
           matchCount !== null
-            ? "bg-party-gold/20 border-party-gold/50 text-yellow-300"
-            : "bg-party-surface2 border-party-border text-gray-400 hover:text-white"
+            ? "bg-wedding-accent/20 border-wedding-accent/50 text-wedding-accent-dark"
+            : "wedding-card border-wedding-border text-wedding-muted hover:text-wedding-ink"
         )}
         title="מצא תמונות שאתה מופיע בהן"
       >
@@ -188,23 +188,23 @@ export default function FaceSearch({ media, onResults }: FaceSearchProps) {
       {/* Modal */}
       {open && (
         <div
-          className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-sm"
+          className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-sm"
           onClick={handleClose}
         >
           <div
-            className="w-full sm:max-w-sm bg-party-surface border border-party-border rounded-t-3xl sm:rounded-3xl p-6 space-y-4 animate-slide-up"
+            className="w-full sm:max-w-sm wedding-card border border-wedding-border rounded-t-3xl sm:rounded-3xl p-6 space-y-4 animate-slide-up"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-bold text-white text-lg flex items-center gap-2">
-                  <ScanFace className="h-5 w-5 text-yellow-400" />
+                <h3 className="font-bold text-wedding-ink text-lg flex items-center gap-2">
+                  <ScanFace className="h-5 w-5 text-wedding-accent" />
                   חפש אותי בתמונות
                 </h3>
-                <p className="text-xs text-gray-500 mt-0.5">AI מזהה את הפנים שלך בכל הגלריה</p>
+                <p className="text-xs text-wedding-muted mt-0.5">AI מזהה את הפנים שלך בכל הגלריה</p>
               </div>
-              <button onClick={handleClose} className="p-1.5 rounded-xl hover:bg-white/10 text-gray-400">
+              <button onClick={handleClose} className="p-1.5 rounded-xl hover:bg-wedding-accent/10 text-wedding-muted">
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -212,7 +212,7 @@ export default function FaceSearch({ media, onResults }: FaceSearchProps) {
             {/* Content per step */}
             {step === "idle" && (
               <div className="space-y-3">
-                <div className="bg-party-gold/10 border border-party-gold/20 rounded-2xl p-4 text-sm text-yellow-300 space-y-1.5">
+                <div className="bg-wedding-accent/10 border border-wedding-accent/20 rounded-2xl p-4 text-sm text-wedding-accent-dark space-y-1.5">
                   <p>📸 צלם סלפי</p>
                   <p>🤖 ה-AI ימפה את הפנים שלך</p>
                   <p>🔍 ויחפש אותך בכל {media.filter(m => m.media_type === "image").length} התמונות</p>
@@ -229,9 +229,9 @@ export default function FaceSearch({ media, onResults }: FaceSearchProps) {
 
             {step === "loading_models" && (
               <div className="flex flex-col items-center gap-3 py-6">
-                <Loader2 className="h-8 w-8 text-yellow-400 animate-spin" />
-                <p className="text-sm text-gray-400">טוען מודל AI...</p>
-                <p className="text-xs text-gray-600">~5 שניות בפעם הראשונה</p>
+                <Loader2 className="h-8 w-8 text-wedding-accent animate-spin" />
+                <p className="text-sm text-wedding-muted">טוען מודל AI...</p>
+                <p className="text-xs text-wedding-muted/70">~5 שניות בפעם הראשונה</p>
               </div>
             )}
 
@@ -246,7 +246,7 @@ export default function FaceSearch({ media, onResults }: FaceSearchProps) {
                   />
                   {/* Face guide overlay */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-48 h-48 border-2 border-party-gold/60 rounded-full" />
+                    <div className="w-48 h-48 border-2 border-wedding-accent/60 rounded-full" />
                   </div>
                 </div>
                 <canvas ref={canvasRef} className="hidden" />
@@ -263,17 +263,17 @@ export default function FaceSearch({ media, onResults }: FaceSearchProps) {
             {step === "scanning" && (
               <div className="space-y-4 py-2">
                 <div className="flex flex-col items-center gap-3">
-                  <ScanFace className="h-8 w-8 text-yellow-400 animate-pulse" />
-                  <p className="text-sm text-white font-medium">סורק {media.filter(m => m.media_type === "image").length} תמונות...</p>
+                  <ScanFace className="h-8 w-8 text-wedding-accent animate-pulse" />
+                  <p className="text-sm text-wedding-ink font-medium">סורק {media.filter(m => m.media_type === "image").length} תמונות...</p>
                 </div>
                 <div className="space-y-1.5">
-                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-2 bg-wedding-border rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-party-gold-light to-amber-400 rounded-full transition-all duration-300"
+                      className="h-full bg-gradient-to-r from-wedding-accent-light to-wedding-accent rounded-full transition-all duration-300"
                       style={{ width: `${progress}%` }}
                     />
                   </div>
-                  <p className="text-xs text-gray-500 text-center">{progress}%</p>
+                  <p className="text-xs text-wedding-muted text-center">{progress}%</p>
                 </div>
                 <canvas ref={canvasRef} className="hidden" />
               </div>
@@ -285,21 +285,21 @@ export default function FaceSearch({ media, onResults }: FaceSearchProps) {
                   "rounded-2xl p-4 text-center",
                   matchCount! > 0
                     ? "bg-emerald-500/10 border border-emerald-500/20"
-                    : "bg-gray-500/10 border border-gray-500/20"
+                    : "bg-wedding-accent/5 border border-wedding-border"
                 )}>
                   <div className="text-4xl mb-2">{matchCount! > 0 ? "🎉" : "🔍"}</div>
-                  <p className="text-white font-bold text-lg">
+                  <p className="text-wedding-ink font-bold text-lg">
                     {matchCount! > 0 ? `נמצאו ${matchCount} תמונות!` : "לא נמצאו תמונות"}
                   </p>
-                  <p className="text-xs text-gray-400 mt-1">
+                  <p className="text-xs text-wedding-muted mt-1">
                     {matchCount! > 0 ? "הגלריה מסוננת לתמונות שלך" : "ייתכן שאין תמונות שלך, או שהאיכות נמוכה"}
                   </p>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={handleClose} className="flex-1 py-2.5 bg-party-gold hover:bg-party-gold-light text-white rounded-2xl text-sm font-medium transition-all">
+                  <button onClick={handleClose} className="flex-1 py-2.5 bg-wedding-accent hover:bg-wedding-accent-dark text-white rounded-2xl text-sm font-medium transition-all">
                     הצג תוצאות
                   </button>
-                  <button onClick={() => { setStep("idle"); onResults(null); }} className="flex-1 py-2.5 bg-party-surface2 text-gray-300 rounded-2xl text-sm transition-all">
+                  <button onClick={() => { setStep("idle"); onResults(null); }} className="flex-1 py-2.5 bg-wedding-bg border border-wedding-border text-wedding-ink rounded-2xl text-sm transition-all">
                     נסה שוב
                   </button>
                 </div>
@@ -310,11 +310,11 @@ export default function FaceSearch({ media, onResults }: FaceSearchProps) {
               <div className="space-y-4">
                 <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 text-center">
                   <div className="text-3xl mb-2">⚠️</div>
-                  <p className="text-red-300 text-sm">{errorMsg}</p>
+                  <p className="text-red-500 text-sm">{errorMsg}</p>
                 </div>
                 <button
                   onClick={() => setStep("idle")}
-                  className="w-full py-2.5 bg-party-surface2 text-gray-300 rounded-2xl text-sm"
+                  className="w-full py-2.5 bg-wedding-bg border border-wedding-border text-wedding-ink rounded-2xl text-sm"
                 >
                   נסה שוב
                 </button>

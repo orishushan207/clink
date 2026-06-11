@@ -94,7 +94,7 @@ export default function MediaCard({
     <>
       <div
         className={cn(
-          "group relative bg-party-surface border border-party-border rounded-2xl overflow-hidden transition-all hover:border-party-gold/30",
+          "group relative wedding-card border border-wedding-border rounded-2xl overflow-hidden transition-all hover:border-wedding-accent/30",
           (isPending || isRejected) && "opacity-75",
           isWinner && votesCount > 0 && "border-amber-500/40 shadow-lg shadow-amber-500/10"
         )}
@@ -108,7 +108,7 @@ export default function MediaCard({
 
         {/* Media Preview */}
         <div
-          className="relative aspect-square cursor-pointer overflow-hidden bg-party-surface2"
+          className="relative aspect-square cursor-pointer overflow-hidden bg-wedding-bg"
           onClick={onClick}
         >
           {isVideo ? (
@@ -195,7 +195,7 @@ export default function MediaCard({
                 <div className="flex items-center gap-1">
                   <button
                     onClick={() => setCommentsOpen(true)}
-                    className="flex items-center justify-center w-8 h-8 rounded-xl text-gray-400 hover:text-yellow-400 transition-colors hover:bg-party-gold/10 flex-shrink-0"
+                    className="flex items-center justify-center w-8 h-8 rounded-xl text-wedding-muted hover:text-wedding-accent-dark transition-colors hover:bg-wedding-accent/10 flex-shrink-0"
                   >
                     <MessageCircle className="h-4 w-4" />
                   </button>
@@ -203,7 +203,7 @@ export default function MediaCard({
                     onClick={() => setCommentsOpen(true)}
                     className={cn(
                       "min-w-[1.25rem] h-6 px-1.5 rounded-lg text-xs font-semibold tabular-nums transition-all border flex-shrink-0",
-                      "text-yellow-400 border-party-gold/30 hover:border-party-gold/60 hover:bg-party-gold/10 active:scale-95"
+                      "text-wedding-accent-dark border-wedding-accent/30 hover:border-wedding-accent/60 hover:bg-wedding-accent/10 active:scale-95"
                     )}
                   >
                     {commentCount}
@@ -227,7 +227,7 @@ export default function MediaCard({
                 {/* Share */}
                 <button
                   onClick={() => setShareOpen(true)}
-                  className="flex items-center gap-1 text-xs text-gray-500 hover:text-yellow-400 transition-colors px-2 py-1.5 rounded-lg hover:bg-party-gold/10 whitespace-nowrap flex-shrink-0"
+                  className="flex items-center gap-1 text-xs text-wedding-muted hover:text-wedding-accent-dark transition-colors px-2 py-1.5 rounded-lg hover:bg-wedding-accent/10 whitespace-nowrap flex-shrink-0"
                   title="שתף"
                 >
                   <Share2 className="h-3.5 w-3.5" />
@@ -237,17 +237,17 @@ export default function MediaCard({
                 <button
                   onClick={handleDownload}
                   disabled={downloading}
-                  className="flex items-center gap-1 text-xs text-gray-500 hover:text-yellow-400 transition-colors px-2 py-1.5 rounded-lg hover:bg-party-gold/10 whitespace-nowrap flex-shrink-0 disabled:opacity-40"
+                  className="flex items-center gap-1 text-xs text-wedding-muted hover:text-wedding-accent-dark transition-colors px-2 py-1.5 rounded-lg hover:bg-wedding-accent/10 whitespace-nowrap flex-shrink-0 disabled:opacity-40"
                 >
                   {downloading
-                    ? <span className="h-3.5 w-3.5 border-2 border-gray-500/30 border-t-gray-500 rounded-full animate-spin" />
+                    ? <span className="h-3.5 w-3.5 border-2 border-wedding-muted/30 border-t-wedding-muted rounded-full animate-spin" />
                     : <Download className="h-3.5 w-3.5" />}
                 </button>
 
                 {/* Report */}
                 <button
                   onClick={() => setReportOpen(true)}
-                  className="flex items-center gap-1 text-xs text-gray-500 hover:text-red-400 transition-colors px-2 py-1.5 rounded-lg hover:bg-red-500/10 whitespace-nowrap flex-shrink-0"
+                  className="flex items-center gap-1 text-xs text-wedding-muted hover:text-red-500 transition-colors px-2 py-1.5 rounded-lg hover:bg-red-500/10 whitespace-nowrap flex-shrink-0"
                 >
                   <Flag className="h-3.5 w-3.5" />
                 </button>
@@ -256,7 +256,7 @@ export default function MediaCard({
                 {isOwner && onDelete && (
                   <button
                     onClick={() => setDeleteConfirm(true)}
-                    className="flex items-center gap-1 text-xs text-gray-500 hover:text-red-400 transition-colors px-2 py-1.5 rounded-lg hover:bg-red-500/10 whitespace-nowrap flex-shrink-0"
+                    className="flex items-center gap-1 text-xs text-wedding-muted hover:text-red-500 transition-colors px-2 py-1.5 rounded-lg hover:bg-red-500/10 whitespace-nowrap flex-shrink-0"
                     title="מחק תמונה שלי"
                   >
                     <Trash2 className="h-3.5 w-3.5" />
@@ -270,15 +270,15 @@ export default function MediaCard({
               <div className="flex items-center gap-1">
                 {isPending && (
                   <>
-                    <button onClick={() => onApprove?.(media.id)} className="p-1.5 rounded-lg hover:bg-emerald-500/20 text-gray-400 hover:text-emerald-400 transition-colors" title="אשר">
+                    <button onClick={() => onApprove?.(media.id)} className="p-1.5 rounded-lg hover:bg-emerald-500/20 text-wedding-muted hover:text-emerald-500 transition-colors" title="אשר">
                       <CheckCircle className="h-4 w-4" />
                     </button>
-                    <button onClick={() => onReject?.(media.id)} className="p-1.5 rounded-lg hover:bg-amber-500/20 text-gray-400 hover:text-amber-400 transition-colors" title="דחה">
+                    <button onClick={() => onReject?.(media.id)} className="p-1.5 rounded-lg hover:bg-amber-500/20 text-wedding-muted hover:text-amber-500 transition-colors" title="דחה">
                       <XCircle className="h-4 w-4" />
                     </button>
                   </>
                 )}
-                <button onClick={() => onDelete?.(media.id)} className="p-1.5 rounded-lg hover:bg-red-500/20 text-gray-400 hover:text-red-400 transition-colors" title="מחק">
+                <button onClick={() => onDelete?.(media.id)} className="p-1.5 rounded-lg hover:bg-red-500/20 text-wedding-muted hover:text-red-500 transition-colors" title="מחק">
                   <Trash2 className="h-4 w-4" />
                 </button>
               </div>
@@ -289,19 +289,19 @@ export default function MediaCard({
 
       {/* Delete confirm overlay */}
       {deleteConfirm && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onClick={() => setDeleteConfirm(false)}>
-          <div className="bg-[#1a1a2e] border border-red-500/30 rounded-2xl p-6 max-w-xs w-full text-center" onClick={e => e.stopPropagation()}>
+        <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4" onClick={() => setDeleteConfirm(false)}>
+          <div className="wedding-card border border-red-500/30 rounded-2xl p-6 max-w-xs w-full text-center" onClick={e => e.stopPropagation()}>
             <div className="flex justify-center mb-3">
               <div className="p-3 rounded-full bg-red-500/10 border border-red-500/20">
-                <AlertTriangle className="h-6 w-6 text-red-400" />
+                <AlertTriangle className="h-6 w-6 text-red-500" />
               </div>
             </div>
-            <h3 className="text-white font-bold mb-1">מחיקת תמונה</h3>
-            <p className="text-gray-400 text-sm mb-5">פעולה זו תמחק את התמונה לצמיתות ולא ניתן לשחזרה.</p>
+            <h3 className="text-wedding-ink font-bold mb-1">מחיקת תמונה</h3>
+            <p className="text-wedding-muted text-sm mb-5">פעולה זו תמחק את התמונה לצמיתות ולא ניתן לשחזרה.</p>
             <div className="flex gap-2">
               <button
                 onClick={() => setDeleteConfirm(false)}
-                className="flex-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 text-sm transition-all"
+                className="flex-1 py-2.5 rounded-xl border border-wedding-border hover:bg-wedding-accent/10 text-wedding-ink text-sm transition-all"
               >
                 ביטול
               </button>

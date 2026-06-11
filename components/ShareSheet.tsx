@@ -82,17 +82,17 @@ export default function ShareSheet({ media, eventName, onClose }: ShareSheetProp
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm"
+      className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
-        className="w-full sm:max-w-sm bg-party-surface border border-party-border rounded-t-3xl sm:rounded-3xl p-6 space-y-4 animate-slide-up"
+        className="w-full sm:max-w-sm wedding-card border border-wedding-border rounded-t-3xl sm:rounded-3xl p-6 space-y-4 animate-slide-up"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex items-center justify-between">
-          <h3 className="font-bold text-white text-lg">שתף תמונה</h3>
-          <button onClick={onClose} className="p-1.5 rounded-xl hover:bg-white/10 text-gray-400 hover:text-white transition-all">
+          <h3 className="font-bold text-wedding-ink text-lg">שתף תמונה</h3>
+          <button onClick={onClose} className="p-1.5 rounded-xl hover:bg-wedding-accent/10 text-wedding-muted hover:text-wedding-ink transition-all">
             <X className="h-5 w-5" />
           </button>
         </div>
@@ -107,7 +107,7 @@ export default function ShareSheet({ media, eventName, onClose }: ShareSheetProp
             <div className="w-10 h-10 rounded-2xl bg-[#25D366] flex items-center justify-center">
               <MessageCircle className="h-5 w-5 text-white fill-white" />
             </div>
-            <span className="text-sm text-white font-medium">וואטסאפ</span>
+            <span className="text-sm text-wedding-ink font-medium">וואטסאפ</span>
           </button>
 
           {/* Instagram / Native Share */}
@@ -115,51 +115,51 @@ export default function ShareSheet({ media, eventName, onClose }: ShareSheetProp
             <button
               onClick={shareNative}
               disabled={sharing}
-              className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-gradient-to-br from-party-gold/10 to-amber-500/10 border border-party-gold/20 hover:from-party-gold/20 hover:to-amber-500/20 transition-all"
+              className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-gradient-to-br from-wedding-accent/10 to-amber-500/10 border border-wedding-accent/20 hover:from-wedding-accent/20 hover:to-amber-500/20 transition-all"
             >
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-party-gold to-amber-500 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-wedding-accent to-amber-500 flex items-center justify-center">
                 <Instagram className="h-5 w-5 text-white" />
               </div>
-              <span className="text-sm text-white font-medium">
+              <span className="text-sm text-wedding-ink font-medium">
                 {sharing ? "שולח..." : "שתף"}
               </span>
             </button>
           ) : (
             <button
               onClick={copyLink}
-              className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-party-gold/10 border border-party-gold/20 hover:bg-party-gold/20 transition-all"
+              className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-wedding-accent/10 border border-wedding-accent/20 hover:bg-wedding-accent/20 transition-all"
             >
-              <div className={cn("w-10 h-10 rounded-2xl flex items-center justify-center transition-all", copied ? "bg-emerald-500" : "bg-party-gold")}>
+              <div className={cn("w-10 h-10 rounded-2xl flex items-center justify-center transition-all", copied ? "bg-emerald-500" : "bg-wedding-accent")}>
                 {copied ? <Check className="h-5 w-5 text-white" /> : <Link2 className="h-5 w-5 text-white" />}
               </div>
-              <span className="text-sm text-white font-medium">{copied ? "הועתק!" : "העתק קישור"}</span>
+              <span className="text-sm text-wedding-ink font-medium">{copied ? "הועתק!" : "העתק קישור"}</span>
             </button>
           )}
 
           {/* Copy link */}
           <button
             onClick={copyLink}
-            className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all"
+            className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-wedding-bg border border-wedding-border hover:bg-wedding-accent/10 transition-all"
           >
-            <div className={cn("w-10 h-10 rounded-2xl flex items-center justify-center transition-all", copied ? "bg-emerald-500" : "bg-white/10")}>
-              {copied ? <Check className="h-5 w-5 text-white" /> : <Link2 className="h-5 w-5 text-gray-300" />}
+            <div className={cn("w-10 h-10 rounded-2xl flex items-center justify-center transition-all", copied ? "bg-emerald-500" : "bg-wedding-accent/15")}>
+              {copied ? <Check className="h-5 w-5 text-white" /> : <Link2 className="h-5 w-5 text-wedding-accent-dark" />}
             </div>
-            <span className="text-sm text-gray-300 font-medium">{copied ? "הועתק!" : "העתק קישור"}</span>
+            <span className="text-sm text-wedding-ink font-medium">{copied ? "הועתק!" : "העתק קישור"}</span>
           </button>
 
           {/* Download */}
           <button
             onClick={download}
-            className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all"
+            className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-wedding-bg border border-wedding-border hover:bg-wedding-accent/10 transition-all"
           >
-            <div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center">
-              <Download className="h-5 w-5 text-gray-300" />
+            <div className="w-10 h-10 rounded-2xl bg-wedding-accent/15 flex items-center justify-center">
+              <Download className="h-5 w-5 text-wedding-accent-dark" />
             </div>
-            <span className="text-sm text-gray-300 font-medium">הורד</span>
+            <span className="text-sm text-wedding-ink font-medium">הורד</span>
           </button>
         </div>
 
-        <p className="text-xs text-gray-600 text-center">
+        <p className="text-xs text-wedding-muted text-center">
           {hasNativeShare ? 'לחץ "שתף" כדי לפתוח את אינסטגרם, הודעות ועוד' : ""}
         </p>
       </div>

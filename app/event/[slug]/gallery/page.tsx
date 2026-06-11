@@ -441,22 +441,22 @@ export default function GalleryPage() {
   if (!mounted || loading) return <FullPageSpinner />;
   // No guest session and not admin bypass → redirect (handled by useEffect above)
   if (!guestSession && !adminBypass) return <FullPageSpinner />;
-  if (notFound) return <div className="min-h-screen bg-party-bg flex items-center justify-center"><p className="text-gray-400">אירוע לא נמצא</p></div>;
+  if (notFound) return <div className="min-h-screen bg-wedding-bg flex items-center justify-center"><p className="text-wedding-muted">אירוע לא נמצא</p></div>;
   if (!event) return <FullPageSpinner />;
 
   // Guests can't access after 48h — admins are exempt
   if (isEventLockedForGuests(event.created_at, event.guest_lock_hours ?? GUEST_LOCK_HOURS) && !adminEventId) {
     return (
-      <div className="min-h-screen bg-party-bg flex flex-col items-center justify-center px-6 text-center gap-4">
-        <div className="p-5 rounded-full bg-white/5 border border-white/10 mb-2">
-          <Lock className="h-10 w-10 text-gray-400" />
+      <div className="min-h-screen bg-wedding-bg flex flex-col items-center justify-center px-6 text-center gap-4">
+        <div className="p-5 rounded-full bg-wedding-accent/5 border border-wedding-border mb-2">
+          <Lock className="h-10 w-10 text-wedding-muted" />
         </div>
-        <h1 className="text-2xl font-bold text-white">הגלריה נסגרה</h1>
-        <p className="text-gray-400 max-w-xs leading-relaxed">
+        <h1 className="text-2xl font-bold text-wedding-ink">הגלריה נסגרה</h1>
+        <p className="text-wedding-muted max-w-xs leading-relaxed">
           הגישה לאורחים ניתנת רק במשך {GUEST_LOCK_HOURS} שעות מתחילת האירוע.<br />
           ניתן להוריד תמונות רק מפאנל הניהול.
         </p>
-        <Link href="/" className="mt-4 px-6 py-2.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white text-sm transition-all">
+        <Link href="/" className="mt-4 px-6 py-2.5 rounded-2xl border border-wedding-border hover:bg-wedding-accent/10 text-wedding-ink text-sm transition-all">
           חזרה לדף הבית
         </Link>
       </div>
@@ -474,7 +474,7 @@ export default function GalleryPage() {
     : null;
 
   return (
-    <div className="min-h-screen bg-party-bg pb-24 relative">
+    <div className="min-h-screen bg-wedding-bg pb-24 relative">
       {/* Cover image background */}
       {event.cover_image_url && (
         <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
@@ -485,14 +485,14 @@ export default function GalleryPage() {
             className="object-cover opacity-50 blur-sm scale-110"
             priority
           />
-          <div className="absolute inset-0 bg-party-bg/60" />
+          <div className="absolute inset-0 bg-wedding-bg/60" />
         </div>
       )}
       {/* Header */}
-      <header className="sticky top-0 z-30 bg-party-bg/95 backdrop-blur-md border-b border-party-border">
+      <header className="sticky top-0 z-30 bg-wedding-bg/95 backdrop-blur-md border-b border-wedding-border">
         <div className="max-w-2xl mx-auto px-4 py-3 flex flex-col items-center gap-0.5">
           <Image src="/clink-logo-transparent.png" alt="Clink" width={72} height={28} className="object-contain" />
-          <p className="text-xs text-gray-400 truncate max-w-[240px]">{event.name}</p>
+          <p className="text-xs text-wedding-muted truncate max-w-[240px]">{event.name}</p>
         </div>
       </header>
 
@@ -507,25 +507,25 @@ export default function GalleryPage() {
             return aOnline - bOnline;
           });
           return (
-            <div className="bg-party-surface border border-party-border rounded-2xl overflow-hidden">
+            <div className="wedding-card border border-wedding-border rounded-2xl overflow-hidden">
               <button
                 onClick={() => setShowParticipants(v => !v)}
-                className="w-full flex items-center justify-between px-4 py-3 text-sm text-gray-300 hover:text-white transition-colors"
+                className="w-full flex items-center justify-between px-4 py-3 text-sm text-wedding-muted hover:text-wedding-ink transition-colors"
               >
                 <div className="flex items-center gap-2">
-                  <Users className="h-4 w-4 text-gray-500" />
+                  <Users className="h-4 w-4 text-wedding-muted" />
                   <span>כל המשתתפים ({allGuests.length})</span>
                   {onlineCount > 0 && (
-                    <span className="flex items-center gap-1 text-xs text-green-400">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse inline-block" />
+                    <span className="flex items-center gap-1 text-xs text-green-600">
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse inline-block" />
                       {onlineCount} אורחים מחוברים כרגע
                     </span>
                   )}
                 </div>
-                <span className="text-gray-500 text-xs">{showParticipants ? "▲" : "▼"}</span>
+                <span className="text-wedding-muted text-xs">{showParticipants ? "▲" : "▼"}</span>
               </button>
               {showParticipants && (
-                <div className="border-t border-party-border divide-y divide-party-border/50 max-h-64 overflow-y-auto" dir="rtl">
+                <div className="border-t border-wedding-border divide-y divide-wedding-border/50 max-h-64 overflow-y-auto" dir="rtl">
                   {sorted.map(g => {
                     const isOnline = onlineIds.has(g.id);
                     const isMe = g.id === effectiveMe?.id;
@@ -535,7 +535,7 @@ export default function GalleryPage() {
                       <div key={g.id} className="flex items-center justify-between px-4 py-2.5">
                         <div className="flex items-center gap-2.5">
                           <div className="relative w-8 h-8 flex-shrink-0">
-                            <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-base overflow-hidden">
+                            <div className="w-8 h-8 rounded-full bg-wedding-accent/10 flex items-center justify-center text-base overflow-hidden">
                               {g.avatar?.startsWith("http") ? (
                                 <Image src={g.avatar} alt={g.nickname} width={32} height={32} className="w-full h-full object-cover" />
                               ) : (
@@ -543,17 +543,17 @@ export default function GalleryPage() {
                               )}
                             </div>
                             {isOnline && (
-                              <span className="absolute bottom-0 left-0 w-2.5 h-2.5 bg-green-400 rounded-full border-2 border-party-surface animate-pulse" />
+                              <span className="absolute bottom-0 left-0 w-2.5 h-2.5 bg-green-400 rounded-full border-2 border-wedding-card animate-pulse" />
                             )}
                           </div>
-                          <span className={cn("text-sm", isMe ? "text-yellow-300 font-medium" : "text-white")}>
-                            {g.nickname}{isMe && <span className="text-xs text-yellow-400 mr-1">(אתה)</span>}
+                          <span className={cn("text-sm", isMe ? "text-wedding-accent-dark font-medium" : "text-wedding-ink")}>
+                            {g.nickname}{isMe && <span className="text-xs text-wedding-accent mr-1">(אתה)</span>}
                           </span>
                         </div>
                         {canChat && (
                           <button
                             onClick={() => setChatWith(g)}
-                            className="flex items-center gap-1 px-3 py-1 rounded-xl bg-party-gold-light/10 hover:bg-party-gold/20 text-yellow-400 text-xs transition-colors"
+                            className="flex items-center gap-1 px-3 py-1 rounded-xl bg-wedding-accent-light/10 hover:bg-wedding-accent/20 text-wedding-accent-dark text-xs transition-colors"
                           >
                             <MessageCircle className="h-3.5 w-3.5" />
                             צ׳אט
@@ -590,8 +590,8 @@ export default function GalleryPage() {
               className={cn(
                 "w-full flex items-center justify-center gap-2 py-2.5 border text-sm font-medium rounded-2xl transition-all",
                 downloadingAll
-                  ? "bg-red-500/10 border-red-500/30 hover:bg-red-500/20 text-red-300"
-                  : "bg-party-surface border-party-border hover:border-party-gold/40 hover:bg-party-gold/5 text-gray-300 hover:text-white"
+                  ? "bg-red-500/10 border-red-500/30 hover:bg-red-500/20 text-red-500"
+                  : "wedding-card border-wedding-border hover:border-wedding-accent/40 hover:bg-wedding-accent/5 text-wedding-muted hover:text-wedding-ink"
               )}
             >
               {downloadingAll ? (
@@ -601,8 +601,8 @@ export default function GalleryPage() {
               )}
             </button>
             {downloadingAll && downloadAllProgress && (
-              <div className="h-1 bg-white/10 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-party-gold-light to-amber-400 transition-all duration-300 rounded-full" style={{ width: `${(downloadAllProgress.done / downloadAllProgress.total) * 100}%` }} />
+              <div className="h-1 bg-wedding-border rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-wedding-accent-light to-wedding-accent transition-all duration-300 rounded-full" style={{ width: `${(downloadAllProgress.done / downloadAllProgress.total) * 100}%` }} />
               </div>
             )}
           </div>

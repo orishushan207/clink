@@ -68,10 +68,10 @@ export default function VoteButton({
       className={cn(
         "flex items-center gap-1 text-xs font-medium transition-all rounded-lg px-2 py-1",
         isVotedByMe
-          ? "bg-amber-500/30 text-amber-300 border border-amber-500/50"
+          ? "bg-amber-500/30 text-amber-600 border border-amber-500/50"
           : isWinner && votesCount > 0
-          ? "bg-amber-500/10 text-amber-400/70 hover:bg-amber-500/20 border border-amber-500/20"
-          : "bg-white/5 text-gray-400 hover:bg-amber-500/10 hover:text-amber-400 border border-white/10"
+          ? "bg-amber-500/10 text-amber-600/70 hover:bg-amber-500/20 border border-amber-500/20"
+          : "bg-wedding-bg text-wedding-muted hover:bg-amber-500/10 hover:text-amber-600 border border-wedding-border"
       )}
     >
       <Crown

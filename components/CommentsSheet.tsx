@@ -85,20 +85,20 @@ export default function CommentsSheet({
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-end justify-center bg-black/60 backdrop-blur-sm"
+      className="fixed inset-0 z-[60] flex items-end justify-center bg-black/40 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-md bg-[#1a1a2e] border border-white/10 rounded-t-3xl flex flex-col"
+        className="w-full max-w-md wedding-card border border-wedding-border rounded-t-3xl flex flex-col"
         style={{ maxHeight: "75vh" }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 flex-shrink-0">
-          <h3 className="text-white font-bold text-base">
-            תגובות {comments.length > 0 && <span className="text-gray-400 font-normal text-sm">({comments.length})</span>}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-wedding-border flex-shrink-0">
+          <h3 className="text-wedding-ink font-bold text-base">
+            תגובות {comments.length > 0 && <span className="text-wedding-muted font-normal text-sm">({comments.length})</span>}
           </h3>
-          <button onClick={onClose} className="text-gray-400 hover:text-white p-1">
+          <button onClick={onClose} className="text-wedding-muted hover:text-wedding-ink p-1">
             <X className="h-5 w-5" />
           </button>
         </div>
@@ -106,13 +106,13 @@ export default function CommentsSheet({
         {/* Comments list */}
         <div className="flex-1 overflow-y-auto px-4 py-3 space-y-4 min-h-0">
           {loading ? (
-            <p className="text-center text-gray-500 py-8">טוען...</p>
+            <p className="text-center text-wedding-muted py-8">טוען...</p>
           ) : comments.length === 0 ? (
-            <p className="text-center text-gray-500 py-8">אין תגובות עדיין — היה הראשון!</p>
+            <p className="text-center text-wedding-muted py-8">אין תגובות עדיין — היה הראשון!</p>
           ) : (
             comments.map((c) => (
               <div key={c.id} className="flex gap-3">
-                <div className="w-8 h-8 rounded-full overflow-hidden bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div className="w-8 h-8 rounded-full overflow-hidden bg-wedding-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                   {c.guests?.avatar?.startsWith("http") ? (
                     <Image src={c.guests.avatar} alt={c.guests.nickname} width={32} height={32} className="w-full h-full object-cover" />
                   ) : (
@@ -121,10 +121,10 @@ export default function CommentsSheet({
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-sm font-semibold text-white">{c.guests?.nickname || "אורח"}</span>
-                    <span className="text-xs text-gray-500">{formatRelative(c.created_at)}</span>
+                    <span className="text-sm font-semibold text-wedding-ink">{c.guests?.nickname || "אורח"}</span>
+                    <span className="text-xs text-wedding-muted">{formatRelative(c.created_at)}</span>
                   </div>
-                  <p className="text-sm text-gray-200 mt-0.5 break-words">{c.content}</p>
+                  <p className="text-sm text-wedding-ink/80 mt-0.5 break-words">{c.content}</p>
                 </div>
               </div>
             ))
@@ -133,7 +133,7 @@ export default function CommentsSheet({
         </div>
 
         {/* Input */}
-        <div className="flex items-center gap-2 px-4 py-3 border-t border-white/10 flex-shrink-0">
+        <div className="flex items-center gap-2 px-4 py-3 border-t border-wedding-border flex-shrink-0">
           <input
             ref={inputRef}
             type="text"
@@ -142,7 +142,7 @@ export default function CommentsSheet({
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
             placeholder="כתוב תגובה..."
             maxLength={300}
-            className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-party-gold/50"
+            className="flex-1 bg-wedding-bg border border-wedding-border rounded-xl px-4 py-2.5 text-sm text-wedding-ink placeholder-wedding-muted focus:outline-none focus:border-wedding-accent/50"
           />
           <button
             onClick={handleSend}
@@ -150,8 +150,8 @@ export default function CommentsSheet({
             className={cn(
               "w-10 h-10 rounded-xl flex items-center justify-center transition-all",
               text.trim()
-                ? "bg-party-gold hover:bg-party-gold-light text-white active:scale-95"
-                : "bg-white/5 text-gray-500 cursor-default"
+                ? "bg-wedding-accent hover:bg-wedding-accent-dark text-white active:scale-95"
+                : "bg-wedding-bg text-wedding-muted cursor-default"
             )}
           >
             <Send className="h-4 w-4" />
