@@ -241,7 +241,7 @@ export default function CheckoutPage() {
 
         {/* Logo */}
         <div className="flex justify-center mb-8">
-          <PicMeLogo size={64} textSize="text-2xl" />
+          <PicMeLogo size={64} textSize="text-2xl" dark />
         </div>
 
         <Link href="/" className="inline-flex items-center gap-2 text-wedding-muted hover:text-wedding-ink transition-colors mb-6 text-sm">

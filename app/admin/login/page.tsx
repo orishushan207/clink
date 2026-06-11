@@ -65,7 +65,7 @@ export default function AdminLoginPage() {
       <div className="min-h-screen bg-wedding-bg flex items-center justify-center px-4">
         <div className="w-full max-w-sm">
           <div className="flex flex-col items-center mb-8">
-            <PicMeLogo size={64} textSize="text-2xl" />
+            <PicMeLogo size={64} textSize="text-2xl" dark />
             <h1 className="text-xl font-bold text-wedding-ink mt-4">בחר אירוע לניהול</h1>
             <p className="text-wedding-muted text-sm mt-1">נמצאו מספר אירועים תחת המייל שלך</p>
           </div>
@@ -97,7 +97,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
-          <PicMeLogo size={80} textSize="text-3xl" />
+          <PicMeLogo size={80} textSize="text-3xl" dark />
           <h1 className="text-xl font-bold text-wedding-ink mt-4">כניסה לניהול אירוע</h1>
           <p className="text-wedding-muted text-sm mt-1">היכנס עם המייל והסיסמה שהגדרת</p>
         </div>

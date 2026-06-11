@@ -168,7 +168,7 @@ export default function GuestNameModal({
         {/* Header */}
         <div className="text-center">
           <div className="flex justify-center mb-3">
-            <PicMeLogo size={48} showText={false} />
+            <PicMeLogo size={48} showText={false} dark />
           </div>
           <h2 className="text-xl font-bold text-wedding-ink">אורח/ת יקר/ה ברוכים הבאים לClink!</h2>
           <p className="text-wedding-muted text-sm mt-1">{eventName}</p>

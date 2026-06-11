@@ -19,7 +19,7 @@ export default function LandingPage() {
           style={{ backgroundImage: "url('/hero-bg.jpg')" }}
         />
         {/* Gradient overlay — keeps text readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-wedding-bg pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/55 to-black/75 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/20 pointer-events-none" />
 
         <div className="relative max-w-5xl mx-auto px-6 pt-16 pb-10">
@@ -520,7 +520,7 @@ export default function LandingPage() {
       {/* ─── FOOTER ─── */}
       <footer className="border-t border-wedding-border py-8 px-6 text-center text-wedding-muted text-sm">
         <div className="flex justify-center mb-3">
-          <PicMeLogo size={28} textSize="text-base" />
+          <PicMeLogo size={28} textSize="text-base" dark />
         </div>
 
         {/* Contact */}
