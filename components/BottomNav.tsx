@@ -162,27 +162,27 @@ export default function BottomNav({
         <>
           <div className="fixed inset-0 z-40" onClick={() => setShowLiveMenu(false)} />
           <div className="fixed bottom-[72px] inset-x-0 flex justify-center z-[55] pb-safe pointer-events-none">
-            <div className="bg-[#1a1a2e] border border-party-border rounded-2xl overflow-hidden shadow-xl w-52 pointer-events-auto animate-fade-in">
+            <div className="wedding-card border border-wedding-border rounded-2xl overflow-hidden shadow-xl w-52 pointer-events-auto animate-fade-in">
               <Link
                 href={`/event/${slug}/live`}
                 onClick={() => setShowLiveMenu(false)}
-                className="flex items-center gap-3 px-4 py-3.5 hover:bg-white/5 transition-colors border-b border-party-border"
+                className="flex items-center gap-3 px-4 py-3.5 hover:bg-wedding-accent/10 transition-colors border-b border-wedding-border"
               >
                 <Tv2 className="h-4 w-4 text-red-400 flex-shrink-0" />
                 <div>
-                  <p className="text-white text-xs font-semibold">Live Wall 🔴</p>
-                  <p className="text-gray-500 text-[10px]">מצגת חיה לאולם</p>
+                  <p className="text-wedding-ink text-xs font-semibold">Live Wall 🔴</p>
+                  <p className="text-wedding-muted text-[10px]">מצגת חיה לאולם</p>
                 </div>
               </Link>
               <Link
                 href={`/event/${slug}/mosaic${adminToken ? `?token=${adminToken}` : ""}`}
                 onClick={() => setShowLiveMenu(false)}
-                className="flex items-center gap-3 px-4 py-3.5 hover:bg-white/5 transition-colors"
+                className="flex items-center gap-3 px-4 py-3.5 hover:bg-wedding-accent/10 transition-colors"
               >
                 <Grid3x3 className="h-4 w-4 text-purple-400 flex-shrink-0" />
                 <div>
-                  <p className="text-white text-xs font-semibold">Clink פסיפס 🎨</p>
-                  <p className="text-gray-500 text-[10px]">פסיפס האירוע</p>
+                  <p className="text-wedding-ink text-xs font-semibold">Clink פסיפס 🎨</p>
+                  <p className="text-wedding-muted text-[10px]">פסיפס האירוע</p>
                 </div>
               </Link>
             </div>
@@ -199,33 +199,33 @@ export default function BottomNav({
               <button
                 onClick={() => { setShowPlusMenu(false); galleryRef.current?.click(); }}
                 disabled={!isIdentified || uploading}
-                className="w-44 flex items-center justify-center gap-3 bg-party-gold/10 border border-party-gold/50 rounded-2xl px-5 py-3.5 text-base font-semibold text-yellow-300 shadow-lg hover:bg-party-gold/20 hover:border-party-gold transition-all disabled:opacity-40"
+                className="w-44 flex items-center justify-center gap-3 bg-wedding-accent/10 border border-wedding-accent/50 rounded-2xl px-5 py-3.5 text-base font-semibold text-wedding-accent-dark shadow-lg hover:bg-wedding-accent/20 hover:border-wedding-accent transition-all disabled:opacity-40"
               >
-                <Images className="h-5 w-5 text-yellow-400 flex-shrink-0" />
+                <Images className="h-5 w-5 text-wedding-accent flex-shrink-0" />
                 גלריה
               </button>
               <button
                 onClick={() => { setShowPlusMenu(false); cameraRef.current?.click(); }}
                 disabled={!isIdentified || uploading}
-                className="w-44 flex items-center justify-center gap-3 bg-party-gold/10 border border-party-gold/50 rounded-2xl px-5 py-3.5 text-base font-semibold text-yellow-300 shadow-lg hover:bg-party-gold/20 hover:border-party-gold transition-all disabled:opacity-40"
+                className="w-44 flex items-center justify-center gap-3 bg-wedding-accent/10 border border-wedding-accent/50 rounded-2xl px-5 py-3.5 text-base font-semibold text-wedding-accent-dark shadow-lg hover:bg-wedding-accent/20 hover:border-wedding-accent transition-all disabled:opacity-40"
               >
-                <Camera className="h-5 w-5 text-yellow-400 flex-shrink-0" />
+                <Camera className="h-5 w-5 text-wedding-accent flex-shrink-0" />
                 מצלמה
               </button>
-              <div className="w-2.5 h-2.5 bg-party-surface border-b border-r border-party-gold/30 rotate-45 -mt-1.5" />
+              <div className="w-2.5 h-2.5 wedding-card border-b border-r border-wedding-accent/30 rotate-45 -mt-1.5" />
             </div>
           </div>
         </>
       )}
 
       {/* Bottom nav bar */}
-      <nav className="fixed bottom-0 inset-x-0 z-50 bg-party-bg/95 backdrop-blur-md border-t border-party-border" dir="rtl">
+      <nav className="fixed bottom-0 inset-x-0 z-50 bg-wedding-bg/95 backdrop-blur-md border-t border-wedding-border" dir="rtl">
         <div className="max-w-lg mx-auto grid grid-cols-7 items-end pb-safe">
 
           {/* בית */}
           <button
             onClick={() => router.push(`/event/${slug}/gallery`)}
-            className={cn("flex flex-col items-center gap-1 py-3 transition-all", activeTab === "home" ? "text-yellow-400" : "text-gray-500 hover:text-gray-300")}
+            className={cn("flex flex-col items-center gap-1 py-3 transition-all", activeTab === "home" ? "text-wedding-accent" : "text-wedding-muted hover:text-wedding-ink")}
           >
             <Home className="h-5 w-5" />
             <span className="text-[10px] font-medium">בית</span>
@@ -234,14 +234,14 @@ export default function BottomNav({
           {/* Live — button */}
           <button
             onClick={() => setShowLiveMenu(v => !v)}
-            className={cn("flex flex-col items-center gap-1 py-3 transition-all w-full", (activeTab === "live" || showLiveMenu) ? "text-yellow-400" : "text-gray-500 hover:text-gray-300")}
+            className={cn("flex flex-col items-center gap-1 py-3 transition-all w-full", (activeTab === "live" || showLiveMenu) ? "text-wedding-accent" : "text-wedding-muted hover:text-wedding-ink")}
           >
             <Tv2 className="h-5 w-5" />
             <span className="text-[10px] font-medium">Live</span>
           </button>
 
           {/* התראות */}
-          <div className={cn("flex flex-col items-center gap-1 py-3 transition-all", activeTab === "notifications" ? "text-yellow-400" : "text-gray-500 hover:text-gray-300")}>
+          <div className={cn("flex flex-col items-center gap-1 py-3 transition-all", activeTab === "notifications" ? "text-wedding-accent" : "text-wedding-muted hover:text-wedding-ink")}>
             <div className="h-5 flex items-center justify-center">
               <NotificationBell
                 guestId={guestId}
@@ -258,8 +258,8 @@ export default function BottomNav({
             <button
               onClick={() => setShowPlusMenu(v => !v)}
               className={cn(
-                "w-12 h-12 rounded-full flex items-center justify-center shadow-md shadow-party-gold/30 transition-all active:scale-95",
-                "bg-gradient-to-br from-party-gold to-amber-500",
+                "w-12 h-12 rounded-full flex items-center justify-center shadow-md shadow-wedding-accent/30 transition-all active:scale-95",
+                "bg-gradient-to-br from-wedding-accent to-amber-500",
                 uploading && "opacity-60 cursor-wait"
               )}
             >
@@ -268,14 +268,14 @@ export default function BottomNav({
                 : <Plus className="h-6 w-6 text-white" strokeWidth={2.5} />
               }
             </button>
-            <span className="text-[10px] font-medium text-gray-500 mt-0.5">העלאה</span>
+            <span className="text-[10px] font-medium text-wedding-muted mt-0.5">העלאה</span>
           </div>
 
           {/* הודעות */}
           <button
             onClick={onGroupChatOpen}
             disabled={!isIdentified}
-            className={cn("flex flex-col items-center gap-1 py-3 transition-all disabled:opacity-40", activeTab === "messages" ? "text-yellow-400" : "text-gray-500 hover:text-gray-300")}
+            className={cn("flex flex-col items-center gap-1 py-3 transition-all disabled:opacity-40", activeTab === "messages" ? "text-wedding-accent" : "text-wedding-muted hover:text-wedding-ink")}
           >
             <div className="relative">
               <MessageSquare className="h-5 w-5" />
@@ -292,7 +292,7 @@ export default function BottomNav({
           {event.show_leaderboard ? (
             <Link
               href={`/event/${slug}/leaderboard`}
-              className={cn("flex flex-col items-center gap-1 py-3 transition-all", activeTab === "leaderboard" ? "text-yellow-400" : "text-gray-500 hover:text-gray-300")}
+              className={cn("flex flex-col items-center gap-1 py-3 transition-all", activeTab === "leaderboard" ? "text-wedding-accent" : "text-wedding-muted hover:text-wedding-ink")}
             >
               <Trophy className="h-5 w-5" />
               <span className="text-[10px] font-medium">מובילים</span>
@@ -304,7 +304,7 @@ export default function BottomNav({
           {/* תפריט */}
           <button
             onClick={() => setShowDrawer(true)}
-            className={cn("flex flex-col items-center gap-1 py-3 transition-all", activeTab === "menu" ? "text-yellow-400" : "text-gray-500 hover:text-gray-300")}
+            className={cn("flex flex-col items-center gap-1 py-3 transition-all", activeTab === "menu" ? "text-wedding-accent" : "text-wedding-muted hover:text-wedding-ink")}
           >
             <Menu className="h-5 w-5" />
             <span className="text-[10px] font-medium">תפריט</span>
@@ -317,18 +317,18 @@ export default function BottomNav({
       {showDrawer && (
         <>
           <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" onClick={() => setShowDrawer(false)} />
-          <div className="fixed bottom-0 inset-x-0 z-50 bg-party-surface border-t border-party-border rounded-t-3xl pb-safe" dir="rtl">
+          <div className="fixed bottom-0 inset-x-0 z-50 wedding-card border-t border-wedding-border rounded-t-3xl pb-safe" dir="rtl">
             {/* Handle */}
             <div className="flex justify-center pt-3 pb-1">
-              <div className="w-10 h-1 rounded-full bg-white/20" />
+              <div className="w-10 h-1 rounded-full bg-wedding-accent/20" />
             </div>
 
             {/* Profile section */}
             {guestId && (
-              <div className="px-4 pt-2 pb-4 border-b border-party-border">
+              <div className="px-4 pt-2 pb-4 border-b border-wedding-border">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-party-bg border border-party-border flex items-center justify-center text-2xl">
+                    <div className="w-12 h-12 rounded-full bg-wedding-bg border border-wedding-border flex items-center justify-center text-2xl">
                       {guestAvatar?.startsWith("http") ? (
                         <Image src={guestAvatar} alt="" width={48} height={48} className="rounded-full object-cover" />
                       ) : (
@@ -336,13 +336,13 @@ export default function BottomNav({
                       )}
                     </div>
                     <div>
-                      <p className="text-white font-semibold text-sm">{guestNickname || "אורח"}</p>
-                      <p className="text-gray-500 text-xs">פרופיל</p>
+                      <p className="text-wedding-ink font-semibold text-sm">{guestNickname || "אורח"}</p>
+                      <p className="text-wedding-muted text-xs">פרופיל</p>
                     </div>
                   </div>
                   <button
                     onClick={() => { setEditNickname(guestNickname ?? ""); setEditAvatar(guestAvatar ?? ""); setShowProfileEdit(true); setShowDrawer(false); }}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 text-xs font-medium hover:bg-yellow-400/20 transition-all"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-wedding-accent/10 border border-wedding-accent/20 text-wedding-accent-dark text-xs font-medium hover:bg-wedding-accent/20 transition-all"
                   >
                     <Pencil className="h-3.5 w-3.5" />
                     עריכה
@@ -355,24 +355,24 @@ export default function BottomNav({
             <div className="py-2">
               {event.show_leaderboard && (
                 <Link href={`/event/${slug}/leaderboard`} onClick={() => setShowDrawer(false)}
-                  className="flex items-center gap-3 px-5 py-3.5 hover:bg-white/5 transition-colors text-sm text-gray-300 hover:text-white">
-                  <Trophy className="h-5 w-5 text-yellow-400 flex-shrink-0" />
+                  className="flex items-center gap-3 px-5 py-3.5 hover:bg-wedding-accent/10 transition-colors text-sm text-wedding-ink/80 hover:text-wedding-ink">
+                  <Trophy className="h-5 w-5 text-wedding-accent flex-shrink-0" />
                   לוח מובילים
                 </Link>
               )}
               <button onClick={() => { setShowDrawer(false); setShowQR(true); }}
-                className="w-full flex items-center gap-3 px-5 py-3.5 hover:bg-white/5 transition-colors text-sm text-gray-300 hover:text-white">
-                <QrCode className="h-5 w-5 text-gray-400 flex-shrink-0" />
+                className="w-full flex items-center gap-3 px-5 py-3.5 hover:bg-wedding-accent/10 transition-colors text-sm text-wedding-ink/80 hover:text-wedding-ink">
+                <QrCode className="h-5 w-5 text-wedding-muted flex-shrink-0" />
                 הצגת ברקוד
               </button>
               {adminEventId && (
                 <Link href={`/admin/event/${adminEventId}`} onClick={() => setShowDrawer(false)}
-                  className="flex items-center gap-3 px-5 py-3.5 hover:bg-amber-500/5 transition-colors text-sm text-amber-400">
+                  className="flex items-center gap-3 px-5 py-3.5 hover:bg-amber-500/5 transition-colors text-sm text-amber-500">
                   <KeyRound className="h-5 w-5 flex-shrink-0" />
                   פאנל ניהול
                 </Link>
               )}
-              <div className="mx-4 border-t border-party-border my-1" />
+              <div className="mx-4 border-t border-wedding-border my-1" />
               <button onClick={() => { setShowDrawer(false); onLeave(); }}
                 className="w-full flex items-center gap-3 px-5 py-3.5 hover:bg-red-500/10 transition-colors text-sm text-red-400">
                 <LogOut className="h-5 w-5 flex-shrink-0" />
@@ -387,16 +387,16 @@ export default function BottomNav({
       {/* QR Modal */}
       {showQR && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4" onClick={() => setShowQR(false)}>
-          <div className="bg-party-surface border border-party-border rounded-3xl p-6 flex flex-col items-center gap-4 max-w-xs w-full" onClick={e => e.stopPropagation()}>
+          <div className="wedding-card border border-wedding-border rounded-3xl p-6 flex flex-col items-center gap-4 max-w-xs w-full" onClick={e => e.stopPropagation()}>
             <div className="flex items-center justify-between w-full">
-              <h2 className="text-white font-bold text-base">שתף עם חברים 📸</h2>
-              <button onClick={() => setShowQR(false)} className="p-1.5 rounded-xl hover:bg-white/10 text-gray-400">
+              <h2 className="text-wedding-ink font-bold text-base">שתף עם חברים 📸</h2>
+              <button onClick={() => setShowQR(false)} className="p-1.5 rounded-xl hover:bg-wedding-accent/10 text-wedding-muted">
                 <X className="h-4 w-4" />
               </button>
             </div>
-            <p className="text-gray-400 text-xs text-center">תן לחבר לסרוק את הברקוד ולהצטרף לClink</p>
+            <p className="text-wedding-muted text-xs text-center">תן לחבר לסרוק את הברקוד ולהצטרף לClink</p>
             <QRCodeDisplay url={getEventUrl(event.slug)} eventName={event.name} size={200} />
-            <p className="text-gray-500 text-xs text-center break-all">{getEventUrl(event.slug)}</p>
+            <p className="text-wedding-muted text-xs text-center break-all">{getEventUrl(event.slug)}</p>
             <CopyLinkButton url={getEventUrl(event.slug)} />
           </div>
         </div>
@@ -405,16 +405,16 @@ export default function BottomNav({
       {/* Profile edit modal */}
       {showProfileEdit && guestId && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowProfileEdit(false)}>
-          <div className="bg-party-surface border border-party-border rounded-t-3xl w-full max-w-lg pb-safe" onClick={e => e.stopPropagation()} dir="rtl">
+          <div className="wedding-card border border-wedding-border rounded-t-3xl w-full max-w-lg pb-safe" onClick={e => e.stopPropagation()} dir="rtl">
             <div className="flex justify-center pt-3 pb-2">
-              <div className="w-10 h-1 rounded-full bg-white/20" />
+              <div className="w-10 h-1 rounded-full bg-wedding-accent/20" />
             </div>
-            <div className="flex items-center justify-between px-5 pb-4 border-b border-party-border">
-              <h2 className="text-white font-bold text-base flex items-center gap-2">
-                <User className="h-5 w-5 text-yellow-400" />
+            <div className="flex items-center justify-between px-5 pb-4 border-b border-wedding-border">
+              <h2 className="text-wedding-ink font-bold text-base flex items-center gap-2">
+                <User className="h-5 w-5 text-wedding-accent" />
                 עריכת פרופיל
               </h2>
-              <button onClick={() => setShowProfileEdit(false)} className="p-1.5 rounded-xl hover:bg-white/10 text-gray-400">
+              <button onClick={() => setShowProfileEdit(false)} className="p-1.5 rounded-xl hover:bg-wedding-accent/10 text-wedding-muted">
                 <X className="h-4 w-4" />
               </button>
             </div>
@@ -422,7 +422,7 @@ export default function BottomNav({
             <div className="px-5 py-4 space-y-5">
               {/* Avatar */}
               <div>
-                <p className="text-xs font-semibold text-gray-400 mb-3">בחר אווטאר</p>
+                <p className="text-xs font-semibold text-wedding-muted mb-3">בחר אווטאר</p>
                 <div className="grid grid-cols-8 gap-2">
                   {AVATAR_OPTIONS.map((emoji) => (
                     <button
@@ -431,8 +431,8 @@ export default function BottomNav({
                       className={cn(
                         "w-9 h-9 rounded-xl text-xl flex items-center justify-center transition-all",
                         editAvatar === emoji
-                          ? "bg-yellow-400/20 border-2 border-yellow-400 scale-110"
-                          : "bg-white/5 border border-white/10 hover:bg-white/10"
+                          ? "bg-wedding-accent/20 border-2 border-wedding-accent scale-110"
+                          : "bg-wedding-bg border border-wedding-border hover:bg-wedding-accent/10"
                       )}
                     >
                       {emoji}
@@ -443,13 +443,13 @@ export default function BottomNav({
 
               {/* Nickname */}
               <div>
-                <p className="text-xs font-semibold text-gray-400 mb-2">שם תצוגה</p>
+                <p className="text-xs font-semibold text-wedding-muted mb-2">שם תצוגה</p>
                 <input
                   type="text"
                   value={editNickname}
                   onChange={e => setEditNickname(e.target.value)}
                   maxLength={30}
-                  className="w-full bg-party-bg border border-party-border rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-party-gold transition-colors"
+                  className="w-full bg-wedding-bg border border-wedding-border rounded-xl px-4 py-3 text-wedding-ink text-sm focus:outline-none focus:border-wedding-accent transition-colors"
                 />
               </div>
 

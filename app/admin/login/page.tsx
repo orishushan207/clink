@@ -62,28 +62,28 @@ export default function AdminLoginPage() {
   // ── Event picker when user has multiple events ──
   if (multipleEvents.length > 0) {
     return (
-      <div className="min-h-screen bg-party-bg flex items-center justify-center px-4">
+      <div className="min-h-screen bg-wedding-bg flex items-center justify-center px-4">
         <div className="w-full max-w-sm">
           <div className="flex flex-col items-center mb-8">
             <PicMeLogo size={64} textSize="text-2xl" />
-            <h1 className="text-xl font-bold text-white mt-4">בחר אירוע לניהול</h1>
-            <p className="text-gray-500 text-sm mt-1">נמצאו מספר אירועים תחת המייל שלך</p>
+            <h1 className="text-xl font-bold text-wedding-ink mt-4">בחר אירוע לניהול</h1>
+            <p className="text-wedding-muted text-sm mt-1">נמצאו מספר אירועים תחת המייל שלך</p>
           </div>
           <div className="space-y-3">
             {multipleEvents.map((ev) => (
               <button
                 key={ev.eventId}
                 onClick={() => enterEvent(ev)}
-                className="w-full flex items-center justify-between p-4 bg-party-surface border border-party-border rounded-2xl hover:border-party-gold/40 transition-all text-right"
+                className="w-full flex items-center justify-between p-4 wedding-card border border-wedding-border rounded-2xl hover:border-wedding-accent/40 transition-all text-right"
               >
-                <span className="text-white font-medium">{ev.name || ev.slug}</span>
-                <LogIn className="h-4 w-4 text-yellow-400 flex-shrink-0" />
+                <span className="text-wedding-ink font-medium">{ev.name || ev.slug}</span>
+                <LogIn className="h-4 w-4 text-wedding-accent flex-shrink-0" />
               </button>
             ))}
           </div>
           <button
             onClick={() => setMultipleEvents([])}
-            className="w-full text-center text-gray-500 text-sm mt-6 hover:text-gray-400 transition-colors"
+            className="w-full text-center text-wedding-muted text-sm mt-6 hover:text-wedding-ink transition-colors"
           >
             חזור
           </button>
@@ -93,20 +93,20 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-party-bg flex items-center justify-center px-4">
+    <div className="min-h-screen bg-wedding-bg flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
           <PicMeLogo size={80} textSize="text-3xl" />
-          <h1 className="text-xl font-bold text-white mt-4">כניסה לניהול אירוע</h1>
-          <p className="text-gray-500 text-sm mt-1">היכנס עם המייל והסיסמה שהגדרת</p>
+          <h1 className="text-xl font-bold text-wedding-ink mt-4">כניסה לניהול אירוע</h1>
+          <p className="text-wedding-muted text-sm mt-1">היכנס עם המייל והסיסמה שהגדרת</p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1.5 flex items-center gap-1.5">
-              <Mail className="h-4 w-4 text-yellow-400" />
+            <label className="block text-sm font-medium text-wedding-muted mb-1.5 flex items-center gap-1.5">
+              <Mail className="h-4 w-4 text-wedding-accent" />
               כתובת מייל
             </label>
             <input
@@ -115,14 +115,14 @@ export default function AdminLoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
               dir="ltr"
-              className="w-full bg-party-surface border border-party-border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-party-gold transition-colors"
+              className="w-full wedding-card border border-wedding-border rounded-xl px-4 py-3 text-wedding-ink placeholder-wedding-muted/60 focus:outline-none focus:border-wedding-accent transition-colors"
               autoComplete="email"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1.5 flex items-center gap-1.5">
-              <Lock className="h-4 w-4 text-yellow-400" />
+            <label className="block text-sm font-medium text-wedding-muted mb-1.5 flex items-center gap-1.5">
+              <Lock className="h-4 w-4 text-wedding-accent" />
               סיסמה
             </label>
             <div className="relative">
@@ -132,13 +132,13 @@ export default function AdminLoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="הסיסמה שבחרת ביצירת האירוע"
                 dir="ltr"
-                className="w-full bg-party-surface border border-party-border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-party-gold transition-colors pr-12"
+                className="w-full wedding-card border border-wedding-border rounded-xl px-4 py-3 text-wedding-ink placeholder-wedding-muted/60 focus:outline-none focus:border-wedding-accent transition-colors pr-12"
                 autoComplete="current-password"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-wedding-muted hover:text-wedding-ink transition-colors"
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
@@ -148,7 +148,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading || !email.trim() || !password.trim()}
-            className="w-full flex items-center justify-center gap-2 btn-gold disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 rounded-xl transition-all shadow-lg shadow-party-gold/30 mt-2"
+            className="w-full flex items-center justify-center gap-2 btn-gold disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 rounded-xl transition-all shadow-lg shadow-wedding-accent/30 mt-2"
           >
             {loading ? (
               <span className="h-5 w-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -161,9 +161,9 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        <p className="text-center text-gray-600 text-xs mt-6">
+        <p className="text-center text-wedding-muted text-xs mt-6">
           לא יצרת אירוע עדיין?{" "}
-          <a href="/create" className="text-yellow-400 hover:text-yellow-300 transition-colors">
+          <a href="/create" className="text-wedding-accent hover:text-wedding-accent-dark transition-colors">
             צור אירוע חדש
           </a>
         </p>

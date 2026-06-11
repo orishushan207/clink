@@ -135,7 +135,7 @@ export default function GroupChatModal({ eventId, me, guests, onClose }: GroupCh
       </div>
     ) : (
       <div
-        className="rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-base"
+        className="rounded-full bg-wedding-accent/10 flex items-center justify-center flex-shrink-0 text-base"
         style={{ width: size, height: size }}
       >
         {p.avatar || "👤"}
@@ -143,25 +143,25 @@ export default function GroupChatModal({ eventId, me, guests, onClose }: GroupCh
     );
 
   return (
-    <div className="fixed inset-0 z-[60] flex flex-col bg-party-bg" dir="rtl">
+    <div className="fixed inset-0 z-[60] flex flex-col bg-wedding-bg" dir="rtl">
       {/* Header */}
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-party-border bg-party-surface/80 backdrop-blur-md flex-shrink-0">
+      <div className="flex items-center gap-3 px-4 py-3 border-b border-wedding-border bg-wedding-card/80 backdrop-blur-md flex-shrink-0">
         <button
           onClick={onClose}
-          className="p-1.5 rounded-xl hover:bg-white/10 text-gray-400 transition-all"
+          className="p-1.5 rounded-xl hover:bg-wedding-accent/10 text-wedding-muted transition-all"
         >
           <X className="h-5 w-5" />
         </button>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-white truncate">צ׳אט קבוצתי 💬</p>
-          <p className="text-xs text-gray-500">{guests.length} משתתפים</p>
+          <p className="text-sm font-semibold text-wedding-ink truncate">צ׳אט קבוצתי 💬</p>
+          <p className="text-xs text-wedding-muted">{guests.length} משתתפים</p>
         </div>
       </div>
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
         {messages.length === 0 && (
-          <div className="text-center py-12 text-gray-600 text-sm">
+          <div className="text-center py-12 text-wedding-muted text-sm">
             אין הודעות עדיין — היה הראשון לכתוב!
           </div>
         )}
@@ -178,14 +178,14 @@ export default function GroupChatModal({ eventId, me, guests, onClose }: GroupCh
               <div className={cn("flex flex-col max-w-[75%]", isMine ? "items-end" : "items-start")}>
                 {/* Sender name shown above bubble for messages from others */}
                 {!isMine && (
-                  <span className="text-xs text-gray-500 mb-0.5 px-1">{sender.nickname}</span>
+                  <span className="text-xs text-wedding-muted mb-0.5 px-1">{sender.nickname}</span>
                 )}
                 <div
                   className={cn(
                     "px-3 py-2 rounded-2xl text-sm",
                     isMine
-                      ? "bg-party-gold text-white rounded-br-sm"
-                      : "bg-party-surface border border-party-border text-white rounded-bl-sm"
+                      ? "bg-wedding-accent text-white rounded-br-sm"
+                      : "wedding-card border border-wedding-border text-wedding-ink rounded-bl-sm"
                   )}
                 >
                   {msg.content}
@@ -198,7 +198,7 @@ export default function GroupChatModal({ eventId, me, guests, onClose }: GroupCh
       </div>
 
       {/* Input */}
-      <div className="flex-shrink-0 px-4 py-3 border-t border-party-border bg-party-surface/80 backdrop-blur-md">
+      <div className="flex-shrink-0 px-4 py-3 border-t border-wedding-border bg-wedding-card/80 backdrop-blur-md">
         <div className="flex gap-2 items-center">
           <input
             type="text"
@@ -206,12 +206,12 @@ export default function GroupChatModal({ eventId, me, guests, onClose }: GroupCh
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
             placeholder="הודעה לכולם..."
-            className="flex-1 bg-party-bg border border-party-border rounded-2xl px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-party-gold transition-colors"
+            className="flex-1 bg-wedding-bg border border-wedding-border rounded-2xl px-4 py-2.5 text-sm text-wedding-ink placeholder-wedding-muted/60 focus:outline-none focus:border-wedding-accent transition-colors"
           />
           <button
             onClick={sendMessage}
             disabled={!text.trim() || sending}
-            className="p-2.5 bg-party-gold hover:bg-party-gold-light disabled:opacity-40 disabled:cursor-not-allowed rounded-2xl text-white transition-all"
+            className="p-2.5 bg-wedding-accent hover:bg-wedding-accent-light disabled:opacity-40 disabled:cursor-not-allowed rounded-2xl text-white transition-all"
           >
             <Send className="h-4 w-4 scale-x-[-1]" />
           </button>

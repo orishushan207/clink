@@ -38,7 +38,7 @@ const ONETIME_PLANS = [
     recommended: false,
     badge: null as string | null,
     bonus: null as string | null,
-    borderClass: "border-white/10",
+    borderClass: "border-wedding-border",
     glowClass: "",
   },
   {
@@ -55,8 +55,8 @@ const ONETIME_PLANS = [
     recommended: true,
     badge: "הכי מומלץ 🔥",
     bonus: null,
-    borderClass: "border-yellow-400/60",
-    glowClass: "shadow-lg shadow-yellow-400/10",
+    borderClass: "border-wedding-accent/60",
+    glowClass: "shadow-lg shadow-wedding-accent/10",
   },
   {
     id: "crown" as PlanTier,
@@ -94,7 +94,7 @@ const SUB_PLANS = [
     recommended: false,
     badge: null as string | null,
     bonus: null as string | null,
-    borderClass: "border-white/10",
+    borderClass: "border-wedding-border",
     glowClass: "",
   },
   {
@@ -112,8 +112,8 @@ const SUB_PLANS = [
     recommended: true,
     badge: "הכי מומלץ 🔥",
     bonus: null,
-    borderClass: "border-yellow-400/60",
-    glowClass: "shadow-lg shadow-yellow-400/10",
+    borderClass: "border-wedding-accent/60",
+    glowClass: "shadow-lg shadow-wedding-accent/10",
   },
   {
     id: "crown" as PlanTier,
@@ -220,15 +220,15 @@ export default function CheckoutPage() {
   // ── Success screen ──
   if (paid) {
     return (
-      <div className="min-h-screen bg-party-bg flex items-center justify-center px-4" dir="rtl">
+      <div className="min-h-screen bg-wedding-bg flex items-center justify-center px-4" dir="rtl">
         <div className="text-center">
           <div className="w-20 h-20 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center mx-auto mb-6">
             <Check className="h-10 w-10 text-emerald-400" />
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">התשלום עבר בהצלחה!</h2>
-          <p className="text-gray-400 text-sm mb-2">מעבירים אותך ליצירת האירוע...</p>
+          <h2 className="text-2xl font-bold text-wedding-ink mb-2">התשלום עבר בהצלחה!</h2>
+          <p className="text-wedding-muted text-sm mb-2">מעבירים אותך ליצירת האירוע...</p>
           <div className="flex justify-center mt-4">
-            <span className="h-5 w-5 border-2 border-party-gold/30 border-t-party-gold rounded-full animate-spin" />
+            <span className="h-5 w-5 border-2 border-wedding-accent/30 border-t-wedding-accent rounded-full animate-spin" />
           </div>
         </div>
       </div>
@@ -236,7 +236,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-party-bg py-10 px-4" dir="rtl">
+    <div className="min-h-screen bg-wedding-bg py-10 px-4" dir="rtl">
       <div className="max-w-2xl mx-auto">
 
         {/* Logo */}
@@ -244,20 +244,20 @@ export default function CheckoutPage() {
           <PicMeLogo size={64} textSize="text-2xl" />
         </div>
 
-        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6 text-sm">
+        <Link href="/" className="inline-flex items-center gap-2 text-wedding-muted hover:text-wedding-ink transition-colors mb-6 text-sm">
           <ArrowRight className="h-4 w-4" />
           חזרה לדף הבית
         </Link>
 
         {/* Mode toggle */}
-        <div className="flex bg-party-surface border border-party-border rounded-2xl p-1 mb-8 gap-1">
+        <div className="flex wedding-card border border-wedding-border rounded-2xl p-1 mb-8 gap-1">
           <button
             onClick={() => setMode("onetime")}
             className={cn(
               "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all",
               mode === "onetime"
-                ? "bg-party-gold text-white shadow-lg shadow-party-gold/30"
-                : "text-gray-400 hover:text-white"
+                ? "bg-wedding-accent text-white shadow-lg shadow-wedding-accent/30"
+                : "text-wedding-muted hover:text-wedding-ink"
             )}
           >
             <Zap className="h-4 w-4" />
@@ -268,8 +268,8 @@ export default function CheckoutPage() {
             className={cn(
               "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all",
               mode === "subscription"
-                ? "bg-party-gold text-white shadow-lg shadow-party-gold/30"
-                : "text-gray-400 hover:text-white"
+                ? "bg-wedding-accent text-white shadow-lg shadow-wedding-accent/30"
+                : "text-wedding-muted hover:text-wedding-ink"
             )}
           >
             <Repeat className="h-4 w-4" />
@@ -279,7 +279,7 @@ export default function CheckoutPage() {
 
         {/* Header */}
         <div className="text-center mb-6">
-          <p className="text-gray-400 text-sm">
+          <p className="text-wedding-muted text-sm">
             {mode === "onetime"
               ? "כל האירועים פתוחים ל-3 ימים · ניתן להאריך בפנייה לתמיכה"
               : "עד 4 אירועים בחודש · ביטול בכל עת"}
@@ -307,16 +307,16 @@ export default function CheckoutPage() {
                 {/* Background gradient per tier */}
                 <div className={cn(
                   "absolute inset-0",
-                  isLite   ? "bg-gradient-to-br from-[#1a1a2e] to-[#16213e]" : "",
-                  isPremium ? "bg-gradient-to-br from-[#2a1f00] via-[#1f1800] to-[#0d0d0d]" : "",
-                  isVip    ? "bg-gradient-to-br from-[#1a0a2e] via-[#150820] to-[#0d0d0d]" : "",
+                  isLite   ? "bg-wedding-card" : "",
+                  isPremium ? "bg-gradient-to-br from-wedding-accent/10 via-wedding-card to-wedding-card" : "",
+                  isVip    ? "bg-gradient-to-br from-purple-500/10 via-wedding-card to-wedding-card" : "",
                 )} />
 
                 {/* Shimmering top border */}
                 <div className={cn(
                   "absolute top-0 inset-x-0 h-[2px]",
-                  isLite    ? "bg-gradient-to-r from-transparent via-white/20 to-transparent" : "",
-                  isPremium ? "bg-gradient-to-r from-transparent via-yellow-400 to-transparent" : "",
+                  isLite    ? "bg-gradient-to-r from-transparent via-wedding-border to-transparent" : "",
+                  isPremium ? "bg-gradient-to-r from-transparent via-wedding-accent to-transparent" : "",
                   isVip     ? "bg-gradient-to-r from-transparent via-purple-400 to-transparent" : "",
                 )} />
 
@@ -324,7 +324,7 @@ export default function CheckoutPage() {
                 {plan.badge && (
                   <div className={cn(
                     "absolute top-4 right-0 px-3 py-1 text-[10px] font-black tracking-wide rounded-l-full",
-                    isPremium ? "bg-yellow-400 text-black" : "bg-purple-600 text-white"
+                    isPremium ? "bg-wedding-accent text-white" : "bg-purple-600 text-white"
                   )}>
                     {plan.badge}
                   </div>
@@ -335,66 +335,66 @@ export default function CheckoutPage() {
                   <div className={cn(
                     "absolute top-4 left-4 w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all",
                     isSelected
-                      ? isPremium ? "border-yellow-400 bg-yellow-400"
+                      ? isPremium ? "border-wedding-accent bg-wedding-accent"
                         : isVip ? "border-purple-400 bg-purple-400"
-                        : "border-white/50 bg-white/20"
-                      : "border-gray-700"
+                        : "border-wedding-accent/50 bg-wedding-accent/20"
+                      : "border-wedding-border"
                   )}>
-                    {isSelected && <Check className="h-2.5 w-2.5 text-black" />}
+                    {isSelected && <Check className="h-2.5 w-2.5 text-white" />}
                   </div>
 
                   {/* Emoji + name */}
                   <div className="mb-4">
                     <div className={cn(
                       "text-3xl mb-2 w-12 h-12 rounded-2xl flex items-center justify-center",
-                      isLite    ? "bg-white/5" : "",
-                      isPremium ? "bg-yellow-400/15" : "",
+                      isLite    ? "bg-wedding-bg" : "",
+                      isPremium ? "bg-wedding-accent/15" : "",
                       isVip     ? "bg-purple-500/15" : "",
                     )}>{plan.emoji}</div>
                     <h3 className={cn(
                       "font-black text-xl mb-1",
-                      isPremium ? "text-yellow-300" : isVip ? "text-purple-300" : "text-white"
+                      isPremium ? "text-wedding-accent-dark" : isVip ? "text-purple-600" : "text-wedding-ink"
                     )}>{plan.name}</h3>
-                    <p className="text-gray-500 text-[11px] leading-snug">{plan.tagline}</p>
+                    <p className="text-wedding-muted text-[11px] leading-snug">{plan.tagline}</p>
                   </div>
 
                   {/* Price */}
                   <div className={cn(
                     "mb-5 pb-5 border-b",
-                    isPremium ? "border-yellow-400/20" : isVip ? "border-purple-500/20" : "border-white/8"
+                    isPremium ? "border-wedding-accent/20" : isVip ? "border-purple-500/20" : "border-wedding-border"
                   )}>
                     <div className="flex items-end gap-1">
                       <span className={cn(
                         "text-4xl font-black",
-                        isPremium ? "text-yellow-300" : isVip ? "text-purple-300" : "text-white"
+                        isPremium ? "text-wedding-accent-dark" : isVip ? "text-purple-600" : "text-wedding-ink"
                       )}>{plan.price.toLocaleString()}</span>
-                      <span className="text-gray-400 text-sm mb-1.5">₪{mode === "subscription" ? "/חודש" : ""}</span>
+                      <span className="text-wedding-muted text-sm mb-1.5">₪{mode === "subscription" ? "/חודש" : ""}</span>
                     </div>
                     {mode === "onetime" && (
-                      <p className="text-gray-600 text-[10px] mt-0.5">לאירוע · 3 ימי גישה</p>
+                      <p className="text-wedding-muted text-[10px] mt-0.5">לאירוע · 3 ימי גישה</p>
                     )}
                   </div>
 
                   {/* Features */}
                   <ul className="space-y-2.5 mb-4 flex-1">
                     {plan.features.map((f) => (
-                      <li key={f} className="flex items-start gap-2 text-xs text-gray-300 text-right">
+                      <li key={f} className="flex items-start gap-2 text-xs text-wedding-ink text-right">
                         <div className={cn(
                           "mt-0.5 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0",
-                          isPremium ? "bg-yellow-400/20" : isVip ? "bg-purple-500/20" : "bg-white/10"
+                          isPremium ? "bg-wedding-accent/20" : isVip ? "bg-purple-500/20" : "bg-wedding-border"
                         )}>
                           <Check className={cn(
                             "h-2.5 w-2.5",
-                            isPremium ? "text-yellow-400" : isVip ? "text-purple-400" : "text-gray-400"
+                            isPremium ? "text-wedding-accent" : isVip ? "text-purple-500" : "text-wedding-muted"
                           )} />
                         </div>
                         {f}
                       </li>
                     ))}
                     {plan.excluded.map((f) => (
-                      <li key={f} className="flex items-start gap-2 text-xs text-gray-700 text-right">
-                        <div className="mt-0.5 w-4 h-4 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0">
-                          <X className="h-2.5 w-2.5 text-gray-700" />
+                      <li key={f} className="flex items-start gap-2 text-xs text-wedding-muted/60 text-right">
+                        <div className="mt-0.5 w-4 h-4 rounded-full bg-wedding-bg flex items-center justify-center flex-shrink-0">
+                          <X className="h-2.5 w-2.5 text-wedding-muted/60" />
                         </div>
                         {f}
                       </li>
@@ -404,7 +404,7 @@ export default function CheckoutPage() {
                   {/* Bonus */}
                   {plan.bonus && (
                     <div className="bg-purple-500/10 border border-purple-500/25 rounded-2xl px-4 py-3">
-                      <p className="text-purple-300 text-[11px] font-semibold leading-relaxed">{plan.bonus}</p>
+                      <p className="text-purple-600 text-[11px] font-semibold leading-relaxed">{plan.bonus}</p>
                     </div>
                   )}
 
@@ -412,12 +412,12 @@ export default function CheckoutPage() {
                   <div className={cn(
                     "mt-5 w-full py-2.5 rounded-xl text-xs font-bold text-center transition-all",
                     isSelected
-                      ? isPremium ? "bg-yellow-400 text-black"
+                      ? isPremium ? "bg-wedding-accent text-white"
                         : isVip ? "bg-purple-600 text-white"
-                        : "bg-white/15 text-white"
-                      : isPremium ? "bg-yellow-400/10 text-yellow-400 border border-yellow-400/30"
-                        : isVip ? "bg-purple-500/10 text-purple-400 border border-purple-500/30"
-                        : "bg-white/5 text-gray-400 border border-white/10"
+                        : "bg-wedding-accent/15 text-wedding-ink"
+                      : isPremium ? "bg-wedding-accent/10 text-wedding-accent-dark border border-wedding-accent/30"
+                        : isVip ? "bg-purple-500/10 text-purple-600 border border-purple-500/30"
+                        : "bg-wedding-bg text-wedding-muted border border-wedding-border"
                   )}>
                     {isSelected ? "✓ נבחר" : "בחרו מסלול זה"}
                   </div>
@@ -432,26 +432,26 @@ export default function CheckoutPage() {
           "rounded-2xl border-2 p-5 mb-6 transition-all",
           currentPlan.borderClass,
           currentPlan.glowClass,
-          "bg-gradient-to-br from-white/5 to-transparent"
+          "wedding-card"
         )}>
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <span className="text-xl">{currentPlan.emoji}</span>
               <div>
-                <h3 className="text-white font-black">מסלול {currentPlan.name}</h3>
-                <p className="text-gray-500 text-xs">{currentPlan.tagline}</p>
+                <h3 className="text-wedding-ink font-black">מסלול {currentPlan.name}</h3>
+                <p className="text-wedding-muted text-xs">{currentPlan.tagline}</p>
               </div>
             </div>
             <div className="text-left">
               <div className="text-2xl font-black gradient-text">{currentPlan.price.toLocaleString()} ₪</div>
-              <div className="text-xs text-gray-500">{mode === "subscription" ? "לחודש" : "לאירוע"}</div>
+              <div className="text-xs text-wedding-muted">{mode === "subscription" ? "לחודש" : "לאירוע"}</div>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-1.5">
             {currentPlan.features.map((f) => (
-              <span key={f} className="flex items-center gap-1.5 text-xs text-gray-300">
-                <Check className="h-3 w-3 text-emerald-400 flex-shrink-0" />
+              <span key={f} className="flex items-center gap-1.5 text-xs text-wedding-ink">
+                <Check className="h-3 w-3 text-emerald-500 flex-shrink-0" />
                 {f}
               </span>
             ))}
@@ -459,7 +459,7 @@ export default function CheckoutPage() {
 
           {currentPlan.bonus && (
             <div className="mt-4 bg-purple-500/10 border border-purple-500/20 rounded-xl px-4 py-3">
-              <p className="text-purple-300 text-xs font-semibold">{currentPlan.bonus}</p>
+              <p className="text-purple-600 text-xs font-semibold">{currentPlan.bonus}</p>
             </div>
           )}
 
@@ -468,8 +468,8 @@ export default function CheckoutPage() {
               ? ["תשלום חד פעמי", "אין מנוי", "גישה ל-3 ימים"]
               : ["עד 4 אירועים/חודש", "ביטול בכל עת", "3 ימי גישה לכל אירוע"]
             ).map((t) => (
-              <span key={t} className="flex items-center gap-1 text-xs text-gray-400">
-                <Check className="h-3 w-3 text-emerald-400" />
+              <span key={t} className="flex items-center gap-1 text-xs text-wedding-muted">
+                <Check className="h-3 w-3 text-emerald-500" />
                 {t}
               </span>
             ))}
@@ -479,95 +479,95 @@ export default function CheckoutPage() {
         <form onSubmit={handleSubmit} className="space-y-6">
 
           {/* Personal details */}
-          <div className="bg-party-surface border border-party-border rounded-2xl p-5 space-y-4">
+          <div className="wedding-card border border-wedding-border rounded-2xl p-5 space-y-4">
             <div className="flex items-center gap-2 mb-1">
-              <User className="h-4 w-4 text-yellow-400" />
-              <p className="text-sm font-semibold text-white">פרטים אישיים</p>
+              <User className="h-4 w-4 text-wedding-accent" />
+              <p className="text-sm font-semibold text-wedding-ink">פרטים אישיים</p>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-400 mb-1.5">שם מלא *</label>
+              <label className="block text-xs font-medium text-wedding-muted mb-1.5">שם מלא *</label>
               <input type="text" value={form.full_name} onChange={(e) => set("full_name", e.target.value)}
                 placeholder="ישראל ישראלי"
-                className={cn("w-full bg-party-surface2 border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-party-gold transition-all text-sm",
-                  errors.full_name ? "border-red-500" : "border-party-border")} />
-              {errors.full_name && <p className="text-red-400 text-xs mt-1">{errors.full_name}</p>}
+                className={cn("w-full bg-wedding-bg border rounded-xl px-4 py-3 text-wedding-ink placeholder-wedding-muted/60 focus:outline-none focus:ring-2 focus:ring-wedding-accent transition-all text-sm",
+                  errors.full_name ? "border-red-500" : "border-wedding-border")} />
+              {errors.full_name && <p className="text-red-500 text-xs mt-1">{errors.full_name}</p>}
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-400 mb-1.5 flex items-center gap-1">
+              <label className="block text-xs font-medium text-wedding-muted mb-1.5 flex items-center gap-1">
                 <Mail className="h-3 w-3" /> מייל * (לקבלת אישור ופרטי האירוע)
               </label>
               <input type="email" value={form.email} onChange={(e) => set("email", e.target.value)}
                 placeholder="your@email.com" dir="ltr" autoComplete="email"
-                className={cn("w-full bg-party-surface2 border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-party-gold transition-all text-sm",
-                  errors.email ? "border-red-500" : "border-party-border")} />
-              {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
+                className={cn("w-full bg-wedding-bg border rounded-xl px-4 py-3 text-wedding-ink placeholder-wedding-muted/60 focus:outline-none focus:ring-2 focus:ring-wedding-accent transition-all text-sm",
+                  errors.email ? "border-red-500" : "border-wedding-border")} />
+              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-400 mb-1.5 flex items-center gap-1">
+              <label className="block text-xs font-medium text-wedding-muted mb-1.5 flex items-center gap-1">
                 <Phone className="h-3 w-3" /> טלפון *
               </label>
               <input type="tel" value={form.phone} onChange={(e) => set("phone", e.target.value)}
                 placeholder="050-0000000" dir="ltr" autoComplete="tel"
-                className={cn("w-full bg-party-surface2 border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-party-gold transition-all text-sm",
-                  errors.phone ? "border-red-500" : "border-party-border")} />
-              {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
+                className={cn("w-full bg-wedding-bg border rounded-xl px-4 py-3 text-wedding-ink placeholder-wedding-muted/60 focus:outline-none focus:ring-2 focus:ring-wedding-accent transition-all text-sm",
+                  errors.phone ? "border-red-500" : "border-wedding-border")} />
+              {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
             </div>
           </div>
 
           {/* Payment details */}
-          <div className="bg-party-surface border border-party-border rounded-2xl p-5 space-y-4">
+          <div className="wedding-card border border-wedding-border rounded-2xl p-5 space-y-4">
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-2">
-                <CreditCard className="h-4 w-4 text-yellow-400" />
-                <p className="text-sm font-semibold text-white">פרטי תשלום</p>
+                <CreditCard className="h-4 w-4 text-wedding-accent" />
+                <p className="text-sm font-semibold text-wedding-ink">פרטי תשלום</p>
               </div>
-              <div className="flex items-center gap-1 text-xs text-gray-500">
+              <div className="flex items-center gap-1 text-xs text-wedding-muted">
                 <Lock className="h-3 w-3" />
                 מאובטח
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-400 mb-1.5">מספר כרטיס *</label>
+              <label className="block text-xs font-medium text-wedding-muted mb-1.5">מספר כרטיס *</label>
               <div className="relative">
                 <input type="text" inputMode="numeric" value={form.card_number}
                   onChange={(e) => set("card_number", formatCard(e.target.value))}
                   placeholder="0000 0000 0000 0000" dir="ltr" maxLength={19}
-                  className={cn("w-full bg-party-surface2 border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-party-gold transition-all text-sm tracking-widest",
-                    errors.card_number ? "border-red-500" : "border-party-border")} />
-                <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-600" />
+                  className={cn("w-full bg-wedding-bg border rounded-xl px-4 py-3 text-wedding-ink placeholder-wedding-muted/60 focus:outline-none focus:ring-2 focus:ring-wedding-accent transition-all text-sm tracking-widest",
+                    errors.card_number ? "border-red-500" : "border-wedding-border")} />
+                <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-wedding-muted" />
               </div>
-              {errors.card_number && <p className="text-red-400 text-xs mt-1">{errors.card_number}</p>}
+              {errors.card_number && <p className="text-red-500 text-xs mt-1">{errors.card_number}</p>}
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-gray-400 mb-1.5">תוקף *</label>
+                <label className="block text-xs font-medium text-wedding-muted mb-1.5">תוקף *</label>
                 <input type="text" inputMode="numeric" value={form.card_expiry}
                   onChange={(e) => set("card_expiry", formatExpiry(e.target.value))}
                   placeholder="MM/YY" dir="ltr" maxLength={5}
-                  className={cn("w-full bg-party-surface2 border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-party-gold transition-all text-sm",
-                    errors.card_expiry ? "border-red-500" : "border-party-border")} />
-                {errors.card_expiry && <p className="text-red-400 text-xs mt-1">{errors.card_expiry}</p>}
+                  className={cn("w-full bg-wedding-bg border rounded-xl px-4 py-3 text-wedding-ink placeholder-wedding-muted/60 focus:outline-none focus:ring-2 focus:ring-wedding-accent transition-all text-sm",
+                    errors.card_expiry ? "border-red-500" : "border-wedding-border")} />
+                {errors.card_expiry && <p className="text-red-500 text-xs mt-1">{errors.card_expiry}</p>}
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-400 mb-1.5">CVV *</label>
+                <label className="block text-xs font-medium text-wedding-muted mb-1.5">CVV *</label>
                 <input type="password" inputMode="numeric" value={form.card_cvv}
                   onChange={(e) => set("card_cvv", e.target.value.replace(/\D/g, "").slice(0, 4))}
                   placeholder="•••" dir="ltr" maxLength={4}
-                  className={cn("w-full bg-party-surface2 border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-party-gold transition-all text-sm",
-                    errors.card_cvv ? "border-red-500" : "border-party-border")} />
-                {errors.card_cvv && <p className="text-red-400 text-xs mt-1">{errors.card_cvv}</p>}
+                  className={cn("w-full bg-wedding-bg border rounded-xl px-4 py-3 text-wedding-ink placeholder-wedding-muted/60 focus:outline-none focus:ring-2 focus:ring-wedding-accent transition-all text-sm",
+                    errors.card_cvv ? "border-red-500" : "border-wedding-border")} />
+                {errors.card_cvv && <p className="text-red-500 text-xs mt-1">{errors.card_cvv}</p>}
               </div>
             </div>
 
             <div className="flex items-center gap-2 pt-1">
-              <span className="text-xs text-gray-600">מקבלים:</span>
+              <span className="text-xs text-wedding-muted">מקבלים:</span>
               {["Visa", "Mastercard", "Amex"].map((c) => (
-                <span key={c} className="text-xs text-gray-500 bg-white/5 border border-white/10 rounded px-2 py-0.5">{c}</span>
+                <span key={c} className="text-xs text-wedding-muted bg-wedding-bg border border-wedding-border rounded px-2 py-0.5">{c}</span>
               ))}
             </div>
           </div>
@@ -579,20 +579,20 @@ export default function CheckoutPage() {
               className={cn(
                 "mt-0.5 w-5 h-5 rounded-md border-2 flex-shrink-0 flex items-center justify-center transition-all",
                 agreedToTerms
-                  ? "bg-party-gold border-party-gold"
-                  : "border-gray-500 group-hover:border-gray-300"
+                  ? "bg-wedding-accent border-wedding-accent"
+                  : "border-wedding-muted group-hover:border-wedding-ink"
               )}
             >
               {agreedToTerms && <Check className="h-3 w-3 text-white" />}
             </div>
-            <span className="text-sm text-gray-300 leading-snug" onClick={() => setAgreedToTerms(v => !v)}>
+            <span className="text-sm text-wedding-ink leading-snug" onClick={() => setAgreedToTerms(v => !v)}>
               קראתי ואני מאשר/ת את{" "}
               <a
                 href="/terms"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={e => e.stopPropagation()}
-                className="text-party-gold underline hover:text-yellow-300 transition-colors"
+                className="text-wedding-accent underline hover:text-wedding-accent-dark transition-colors"
               >
                 תנאי השימוש
               </a>
@@ -602,7 +602,7 @@ export default function CheckoutPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={e => e.stopPropagation()}
-                className="text-party-gold underline hover:text-yellow-300 transition-colors"
+                className="text-wedding-accent underline hover:text-wedding-accent-dark transition-colors"
               >
                 מדיניות הפרטיות
               </a>
@@ -611,7 +611,7 @@ export default function CheckoutPage() {
 
           {/* Submit */}
           <button type="submit" disabled={loading || !agreedToTerms}
-            className="w-full flex items-center justify-center gap-3 btn-gold disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold text-lg py-4 rounded-2xl shadow-lg shadow-party-gold/30 transition-all active:scale-95">
+            className="w-full flex items-center justify-center gap-3 btn-gold disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold text-lg py-4 rounded-2xl shadow-lg shadow-wedding-accent/30 transition-all active:scale-95">
             {loading ? (
               <>
                 <span className="h-5 w-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -628,7 +628,7 @@ export default function CheckoutPage() {
             )}
           </button>
 
-          <p className="text-center text-gray-600 text-xs flex items-center justify-center gap-1">
+          <p className="text-center text-wedding-muted text-xs flex items-center justify-center gap-1">
             <Lock className="h-3 w-3" />
             תשלום מאובטח · הפרטים שלך מוצפנים ומוגנים
           </p>

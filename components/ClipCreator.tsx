@@ -249,24 +249,24 @@ export default function ClipCreator({ media, eventName }: ClipCreatorProps) {
   const unselected = approved.filter(m => !order.includes(m.id));
 
   return (
-    <div className="bg-party-surface border border-party-border rounded-2xl overflow-hidden">
+    <div className="wedding-card border border-wedding-border rounded-2xl overflow-hidden">
       <button
         onClick={() => setOpen(v => !v)}
-        className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-all"
+        className="w-full flex items-center justify-between p-4 hover:bg-wedding-accent/10 transition-all"
       >
         <div className="flex items-center gap-2">
-          <Film className="h-4 w-4 text-amber-400" />
-          <span className="text-sm font-semibold text-white">🎬 יצירת קליפ</span>
-          <span className="text-xs text-gray-500 bg-party-surface2 px-2 py-0.5 rounded-full border border-party-border">
+          <Film className="h-4 w-4 text-amber-500" />
+          <span className="text-sm font-semibold text-wedding-ink">🎬 יצירת קליפ</span>
+          <span className="text-xs text-wedding-muted bg-wedding-bg px-2 py-0.5 rounded-full border border-wedding-border">
             {approved.length} זמינים
           </span>
         </div>
-        <span className="text-gray-400 text-xs">{open ? "▲" : "▼"}</span>
+        <span className="text-wedding-muted text-xs">{open ? "▲" : "▼"}</span>
       </button>
 
       {open && (
-        <div className="px-4 pb-5 border-t border-party-border pt-4 space-y-4">
-          <p className="text-xs text-gray-500 leading-relaxed">
+        <div className="px-4 pb-5 border-t border-wedding-border pt-4 space-y-4">
+          <p className="text-xs text-wedding-muted leading-relaxed">
             בחר פריטים מהגריד וגרור לשינוי הסדר. ניתן לשלוט על משך כל תמונה וסרטון.
           </p>
 
@@ -274,7 +274,7 @@ export default function ClipCreator({ media, eventName }: ClipCreatorProps) {
           {orderedItems.length > 0 && (
             <div>
               <div className="flex items-center justify-between mb-2">
-                <p className="text-xs font-medium text-gray-400">סדר הקליפ ({orderedItems.length} פריטים)</p>
+                <p className="text-xs font-medium text-wedding-muted">סדר הקליפ ({orderedItems.length} פריטים)</p>
                 <button onClick={() => setOrder([])} className="text-xs text-red-400 hover:text-red-300 transition-colors">נקה הכל</button>
               </div>
               <div className="space-y-1.5 max-h-48 overflow-y-auto scrollbar-hide">
@@ -285,34 +285,34 @@ export default function ClipCreator({ media, eventName }: ClipCreatorProps) {
                     onDragStart={(e) => onDragStart(e, idx)}
                     onDragOver={(e) => onDragOver(e, idx)}
                     onDragEnd={onDragEnd}
-                    className="flex items-center gap-2 bg-party-surface2 border border-party-border rounded-xl px-2 py-1.5 cursor-grab active:cursor-grabbing group"
+                    className="flex items-center gap-2 bg-wedding-bg border border-wedding-border rounded-xl px-2 py-1.5 cursor-grab active:cursor-grabbing group"
                   >
-                    <GripVertical className="h-4 w-4 text-gray-600 flex-shrink-0" />
+                    <GripVertical className="h-4 w-4 text-wedding-muted flex-shrink-0" />
                     {/* Thumbnail */}
                     <div className="w-9 h-9 rounded-lg overflow-hidden flex-shrink-0 bg-black">
                       {item.media_type === "video" ? (
                         item.thumbnail_url
                           ? <img src={item.thumbnail_url} alt="" className="w-full h-full object-cover" />
-                          : <div className="w-full h-full flex items-center justify-center"><Play className="h-3 w-3 text-gray-400" /></div>
+                          : <div className="w-full h-full flex items-center justify-center"><Play className="h-3 w-3 text-wedding-muted" /></div>
                       ) : (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={item.file_url} alt="" className="w-full h-full object-cover" />
                       )}
                     </div>
-                    <span className="text-xs text-gray-300 flex-1 truncate">
+                    <span className="text-xs text-wedding-ink flex-1 truncate">
                       {item.guest?.nickname || "אורח"} {item.media_type === "video" ? "🎬" : "📸"}
                     </span>
-                    <span className="text-xs text-gray-600">#{idx + 1}</span>
+                    <span className="text-xs text-wedding-muted">#{idx + 1}</span>
                     {/* Up/Down */}
                     <div className="flex flex-col gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button onClick={() => idx > 0 && moveItem(idx, idx - 1)} disabled={idx === 0} className="text-gray-500 hover:text-white disabled:opacity-20">
+                      <button onClick={() => idx > 0 && moveItem(idx, idx - 1)} disabled={idx === 0} className="text-wedding-muted hover:text-wedding-ink disabled:opacity-20">
                         <ChevronUp className="h-3 w-3" />
                       </button>
-                      <button onClick={() => idx < orderedItems.length - 1 && moveItem(idx, idx + 1)} disabled={idx === orderedItems.length - 1} className="text-gray-500 hover:text-white disabled:opacity-20">
+                      <button onClick={() => idx < orderedItems.length - 1 && moveItem(idx, idx + 1)} disabled={idx === orderedItems.length - 1} className="text-wedding-muted hover:text-wedding-ink disabled:opacity-20">
                         <ChevronDown className="h-3 w-3" />
                       </button>
                     </div>
-                    <button onClick={() => removeFromOrder(item.id)} className="text-gray-600 hover:text-red-400 transition-colors flex-shrink-0">
+                    <button onClick={() => removeFromOrder(item.id)} className="text-wedding-muted hover:text-red-400 transition-colors flex-shrink-0">
                       <X className="h-3.5 w-3.5" />
                     </button>
                   </div>
@@ -324,8 +324,8 @@ export default function ClipCreator({ media, eventName }: ClipCreatorProps) {
           {/* ── AVAILABLE GRID ── */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <p className="text-xs font-medium text-gray-400">הוסף לקליפ</p>
-              <button onClick={toggleAll} className="flex items-center gap-1 text-xs text-yellow-400 hover:text-yellow-300 transition-colors">
+              <p className="text-xs font-medium text-wedding-muted">הוסף לקליפ</p>
+              <button onClick={toggleAll} className="flex items-center gap-1 text-xs text-wedding-accent hover:text-wedding-accent-dark transition-colors">
                 {order.length === approved.length ? <CheckSquare className="h-3.5 w-3.5" /> : <Square className="h-3.5 w-3.5" />}
                 {order.length === approved.length ? "בטל הכל" : "בחר הכל"}
               </button>
@@ -339,26 +339,26 @@ export default function ClipCreator({ media, eventName }: ClipCreatorProps) {
                     onClick={() => toggleItem(item.id)}
                     className={cn(
                       "relative aspect-square rounded-xl overflow-hidden border-2 transition-all",
-                      sel ? "border-party-gold opacity-50" : "border-transparent hover:border-white/20"
+                      sel ? "border-wedding-accent opacity-50" : "border-transparent hover:border-wedding-accent/30"
                     )}
                   >
                     {item.media_type === "video" ? (
-                      <div className="w-full h-full bg-party-surface2 flex items-center justify-center">
+                      <div className="w-full h-full bg-wedding-bg flex items-center justify-center">
                         {item.thumbnail_url
                           ? <img src={item.thumbnail_url} alt="" className="w-full h-full object-cover" />
-                          : <Play className="h-4 w-4 text-gray-400" />}
+                          : <Play className="h-4 w-4 text-wedding-muted" />}
                       </div>
                     ) : (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={item.file_url} alt="" className="w-full h-full object-cover" />
                     )}
                     {sel && (
-                      <div className="absolute inset-0 bg-party-gold/20 flex items-center justify-center">
-                        <CheckSquare className="h-4 w-4 text-yellow-300" />
+                      <div className="absolute inset-0 bg-wedding-accent/20 flex items-center justify-center">
+                        <CheckSquare className="h-4 w-4 text-wedding-accent-dark" />
                       </div>
                     )}
                     {item.media_type === "video" && !sel && (
-                      <div className="absolute bottom-0.5 left-0.5 text-[9px] bg-black/60 rounded px-1">🎬</div>
+                      <div className="absolute bottom-0.5 left-0.5 text-[9px] bg-black/60 text-white rounded px-1">🎬</div>
                     )}
                   </button>
                 );
@@ -367,23 +367,23 @@ export default function ClipCreator({ media, eventName }: ClipCreatorProps) {
           </div>
 
           {/* ── DURATION SETTINGS ── */}
-          <div className="p-3 bg-party-surface2 border border-party-border rounded-xl space-y-4">
-            <p className="text-xs font-medium text-gray-400">הגדרות משך</p>
+          <div className="p-3 bg-wedding-bg border border-wedding-border rounded-xl space-y-4">
+            <p className="text-xs font-medium text-wedding-muted">הגדרות משך</p>
 
             {/* Image duration */}
             <div>
               <div className="flex justify-between items-center mb-1.5">
-                <span className="text-xs text-gray-400">📸 משך תמונה</span>
-                <span className="text-xs font-semibold text-white">{imageDuration} שניות</span>
+                <span className="text-xs text-wedding-muted">📸 משך תמונה</span>
+                <span className="text-xs font-semibold text-wedding-ink">{imageDuration} שניות</span>
               </div>
               <input
                 type="range"
                 min={1} max={5} step={0.5}
                 value={imageDuration}
                 onChange={e => setImageDuration(Number(e.target.value))}
-                className="w-full accent-yellow-500"
+                className="w-full accent-wedding-accent"
               />
-              <div className="flex justify-between text-[10px] text-gray-600 mt-0.5">
+              <div className="flex justify-between text-[10px] text-wedding-muted mt-0.5">
                 <span>1s</span><span>5s</span>
               </div>
             </div>
@@ -391,8 +391,8 @@ export default function ClipCreator({ media, eventName }: ClipCreatorProps) {
             {/* Video duration */}
             <div>
               <div className="flex justify-between items-center mb-1.5">
-                <span className="text-xs text-gray-400">🎬 משך סרטון</span>
-                <span className="text-xs font-semibold text-white">
+                <span className="text-xs text-wedding-muted">🎬 משך סרטון</span>
+                <span className="text-xs font-semibold text-wedding-ink">
                   {videoDuration === "full" ? "אורך מלא" : `${videoDuration} שניות`}
                 </span>
               </div>
@@ -404,19 +404,19 @@ export default function ClipCreator({ media, eventName }: ClipCreatorProps) {
                   const v = Number(e.target.value);
                   setVideoDuration(v >= 31 ? "full" : v);
                 }}
-                className="w-full accent-yellow-500"
+                className="w-full accent-wedding-accent"
               />
-              <div className="flex justify-between text-[10px] text-gray-600 mt-0.5">
+              <div className="flex justify-between text-[10px] text-wedding-muted mt-0.5">
                 <span>1s</span><span>30s</span><span>מלא</span>
               </div>
             </div>
           </div>
 
           {/* ── MUSIC ── */}
-          <div className="p-3 bg-party-surface2 border border-party-border rounded-xl">
+          <div className="p-3 bg-wedding-bg border border-wedding-border rounded-xl">
             <div className="flex items-center justify-between">
-              <p className="text-xs font-medium text-gray-400 flex items-center gap-1.5">
-                <Music className="h-3.5 w-3.5 text-amber-400" />
+              <p className="text-xs font-medium text-wedding-muted flex items-center gap-1.5">
+                <Music className="h-3.5 w-3.5 text-amber-500" />
                 מוזיקת רקע (לא חובה)
               </p>
               {musicFile && (
@@ -426,13 +426,13 @@ export default function ClipCreator({ media, eventName }: ClipCreatorProps) {
               )}
             </div>
             {musicFile ? (
-              <p className="text-xs text-emerald-400 mt-1.5 flex items-center gap-1.5">
+              <p className="text-xs text-emerald-500 mt-1.5 flex items-center gap-1.5">
                 🎵 {musicFile.name}
               </p>
             ) : (
               <button
                 onClick={() => musicInputRef.current?.click()}
-                className="mt-2 text-xs text-gray-500 hover:text-gray-300 border border-dashed border-gray-700 hover:border-gray-500 rounded-lg px-3 py-2 w-full transition-all"
+                className="mt-2 text-xs text-wedding-muted hover:text-wedding-ink border border-dashed border-wedding-border hover:border-wedding-accent/40 rounded-lg px-3 py-2 w-full transition-all"
               >
                 + בחר קובץ MP3 / M4A / WAV
               </button>
@@ -449,17 +449,17 @@ export default function ClipCreator({ media, eventName }: ClipCreatorProps) {
           {/* ── PROGRESS ── */}
           {creating && progress && (
             <div className="space-y-1">
-              <div className="flex justify-between text-xs text-gray-400">
+              <div className="flex justify-between text-xs text-wedding-muted">
                 <span>{progress.label}</span>
                 <span>{progress.current}/{progress.total}</span>
               </div>
-              <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+              <div className="h-1.5 bg-wedding-accent/10 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-party-gold-light to-amber-400 transition-all duration-300 rounded-full"
+                  className="h-full bg-gradient-to-r from-wedding-accent-light to-amber-400 transition-all duration-300 rounded-full"
                   style={{ width: `${(progress.current / progress.total) * 100}%` }}
                 />
               </div>
-              <p className="text-[10px] text-gray-600 text-center">
+              <p className="text-[10px] text-wedding-muted text-center">
                 יצירת קליפ עשויה לקחת מספר דקות
               </p>
             </div>
@@ -469,7 +469,7 @@ export default function ClipCreator({ media, eventName }: ClipCreatorProps) {
           <button
             onClick={handleCreate}
             disabled={creating || order.length === 0}
-            className="w-full flex items-center justify-center gap-2 py-2.5 btn-gold disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-party-gold/20"
+            className="w-full flex items-center justify-center gap-2 py-2.5 btn-gold disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-wedding-accent/20"
           >
             {creating
               ? <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />

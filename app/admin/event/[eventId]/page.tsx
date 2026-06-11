@@ -483,10 +483,10 @@ export default function AdminDashboardPage() {
   // Invalid token
   if (tokenValid === false) {
     return (
-      <div className="min-h-screen bg-party-bg flex flex-col items-center justify-center px-6 text-center">
+      <div className="min-h-screen bg-wedding-bg flex flex-col items-center justify-center px-6 text-center">
         <Shield className="h-16 w-16 text-red-400 mb-4" />
-        <h1 className="text-2xl font-bold text-white mb-2">גישה נדחתה</h1>
-        <p className="text-gray-400 mb-6">
+        <h1 className="text-2xl font-bold text-wedding-ink mb-2">גישה נדחתה</h1>
+        <p className="text-wedding-muted mb-6">
           הטוקן אינו תקין. וודא שהקישור נכון.
         </p>
         <Link href="/">
@@ -501,13 +501,13 @@ export default function AdminDashboardPage() {
   const eventUrl = getEventUrl(event.slug);
 
   return (
-    <div className="min-h-screen bg-party-bg pb-20">
+    <div className="min-h-screen bg-wedding-bg pb-20">
       {/* Header */}
-      <header className="sticky top-0 z-30 bg-party-bg/95 backdrop-blur-md border-b border-party-border">
+      <header className="sticky top-0 z-30 bg-wedding-bg/95 backdrop-blur-md border-b border-wedding-border">
         <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-center gap-2">
-          <Shield className="h-4 w-4 text-yellow-400 flex-shrink-0" />
-          <h1 className="text-sm font-bold text-white truncate">{event.name}</h1>
-          <span className="text-xs text-gray-500">— ניהול</span>
+          <Shield className="h-4 w-4 text-wedding-accent flex-shrink-0" />
+          <h1 className="text-sm font-bold text-wedding-ink truncate">{event.name}</h1>
+          <span className="text-xs text-wedding-muted">— ניהול</span>
         </div>
       </header>
 
@@ -522,12 +522,12 @@ export default function AdminDashboardPage() {
         />
 
         {/* Quick controls */}
-        <div className="bg-party-surface border border-party-border rounded-2xl p-4 space-y-3">
-          <h2 className="text-sm font-semibold text-gray-300">שליטה מהירה</h2>
+        <div className="wedding-card border border-wedding-border rounded-2xl p-4 space-y-3">
+          <h2 className="text-sm font-semibold text-wedding-ink/80">שליטה מהירה</h2>
 
           {/* Toggle uploads */}
-          <div className="flex items-center justify-between p-3 bg-party-surface2 rounded-xl">
-            <span className="text-sm text-white flex items-center gap-2">
+          <div className="flex items-center justify-between p-3 bg-wedding-bg rounded-xl">
+            <span className="text-sm text-wedding-ink flex items-center gap-2">
               {event.uploads_open ? "🟢" : "🔴"}
               {event.uploads_open ? "העלאות פתוחות" : "העלאות סגורות"}
             </span>
@@ -547,8 +547,8 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Privacy mode */}
-          <div className="p-3 bg-party-surface2 rounded-xl space-y-2">
-            <p className="text-xs font-medium text-gray-400 mb-2">מצב פרטיות</p>
+          <div className="p-3 bg-wedding-bg rounded-xl space-y-2">
+            <p className="text-xs font-medium text-wedding-muted mb-2">מצב פרטיות</p>
             <div className="grid grid-cols-3 gap-2">
               {([
                 { mode: "open" as const, icon: Globe, label: "פתוח", desc: "כל מי שיש לו קישור" },
@@ -561,8 +561,8 @@ export default function AdminDashboardPage() {
                   className={cn(
                     "flex flex-col items-center gap-1.5 p-3 rounded-xl border text-center transition-all",
                     event.privacy_mode === mode
-                      ? "bg-party-gold/15 border-party-gold text-yellow-400"
-                      : "bg-party-bg border-party-border text-gray-400 hover:text-gray-200 hover:border-gray-500"
+                      ? "bg-wedding-accent/15 border-wedding-accent text-wedding-accent-dark"
+                      : "wedding-card border-wedding-border text-wedding-muted hover:text-wedding-ink hover:border-wedding-accent/40"
                   )}
                 >
                   <Icon className="h-4 w-4" />
@@ -574,15 +574,15 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Edit event name */}
-          <div className="p-3 bg-party-surface2 rounded-xl space-y-2">
+          <div className="p-3 bg-wedding-bg rounded-xl space-y-2">
             <div className="flex items-center justify-between">
-              <p className="text-xs font-medium text-gray-400 flex items-center gap-1.5">
+              <p className="text-xs font-medium text-wedding-muted flex items-center gap-1.5">
                 <Pencil className="h-3.5 w-3.5" /> שם האירוע
               </p>
               {!editingName && (
                 <button
                   onClick={() => { setNewName(event.name); setEditingName(true); }}
-                  className="text-xs text-yellow-400 hover:text-yellow-300 transition-colors"
+                  className="text-xs text-wedding-accent hover:text-wedding-accent-dark transition-colors"
                 >
                   עריכה
                 </button>
@@ -596,12 +596,12 @@ export default function AdminDashboardPage() {
                   onChange={(e) => setNewName(e.target.value)}
                   dir="rtl"
                   maxLength={100}
-                  className="flex-1 bg-party-surface border border-party-border rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-party-gold transition-colors"
+                  className="flex-1 wedding-card border border-wedding-border rounded-lg px-3 py-2 text-sm text-wedding-ink placeholder-wedding-muted/60 focus:outline-none focus:border-wedding-accent transition-colors"
                 />
                 <button
                   onClick={handleSaveName}
                   disabled={savingName || !newName.trim() || newName.trim().length < 2}
-                  className="flex items-center gap-1.5 px-3 py-2 bg-party-gold hover:bg-party-gold-light disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-2 bg-wedding-accent hover:bg-wedding-accent-light disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors"
                 >
                   {savingName
                     ? <span className="h-3.5 w-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -610,19 +610,19 @@ export default function AdminDashboardPage() {
                 </button>
                 <button
                   onClick={() => setEditingName(false)}
-                  className="px-3 py-2 text-gray-400 hover:text-white text-sm rounded-lg transition-colors"
+                  className="px-3 py-2 text-wedding-muted hover:text-wedding-ink text-sm rounded-lg transition-colors"
                 >
                   ביטול
                 </button>
               </div>
             ) : (
-              <p className="text-sm text-white">{event.name}</p>
+              <p className="text-sm text-wedding-ink">{event.name}</p>
             )}
           </div>
 
           {/* Edit cover image */}
-          <div className="p-3 bg-party-surface2 rounded-xl space-y-2">
-            <p className="text-xs font-medium text-gray-400 flex items-center gap-1.5">
+          <div className="p-3 bg-wedding-bg rounded-xl space-y-2">
+            <p className="text-xs font-medium text-wedding-muted flex items-center gap-1.5">
               <Camera className="h-3.5 w-3.5" /> תמונת כיסוי
             </p>
             <label className="cursor-pointer block">
@@ -637,7 +637,7 @@ export default function AdminDashboardPage() {
                   setCoverPreview(URL.createObjectURL(file));
                 }}
               />
-              <div className="relative w-full h-28 rounded-xl border-2 border-dashed border-party-border flex items-center justify-center overflow-hidden hover:border-party-gold/50 transition-all">
+              <div className="relative w-full h-28 rounded-xl border-2 border-dashed border-wedding-border flex items-center justify-center overflow-hidden hover:border-wedding-accent/50 transition-all">
                 {coverPreview || event.cover_image_url ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -646,7 +646,7 @@ export default function AdminDashboardPage() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="flex flex-col items-center gap-1 text-gray-500">
+                  <div className="flex flex-col items-center gap-1 text-wedding-muted">
                     <Camera className="h-6 w-6" />
                     <span className="text-xs">לחץ לבחירת תמונה</span>
                   </div>
@@ -661,7 +661,7 @@ export default function AdminDashboardPage() {
                 <button
                   onClick={handleSaveCover}
                   disabled={savingCover}
-                  className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-party-gold hover:bg-party-gold-light disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors"
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-wedding-accent hover:bg-wedding-accent-light disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors"
                 >
                   {savingCover
                     ? <span className="h-3.5 w-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -670,7 +670,7 @@ export default function AdminDashboardPage() {
                 </button>
                 <button
                   onClick={() => { setCoverFile(null); setCoverPreview(null); }}
-                  className="px-3 py-2 text-gray-400 hover:text-white text-sm rounded-lg transition-colors"
+                  className="px-3 py-2 text-wedding-muted hover:text-wedding-ink text-sm rounded-lg transition-colors"
                 >
                   ביטול
                 </button>
@@ -679,8 +679,8 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Change password */}
-          <div className="p-3 bg-party-surface2 rounded-xl space-y-2">
-            <p className="text-xs font-medium text-gray-400 flex items-center gap-1.5">
+          <div className="p-3 bg-wedding-bg rounded-xl space-y-2">
+            <p className="text-xs font-medium text-wedding-muted flex items-center gap-1.5">
               <KeyRound className="h-3.5 w-3.5" /> שינוי סיסמת מנהל
             </p>
             <div className="flex gap-2">
@@ -691,12 +691,12 @@ export default function AdminDashboardPage() {
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="סיסמה חדשה"
                   dir="rtl"
-                  className="w-full bg-party-surface border border-party-border rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-party-gold transition-colors pl-8"
+                  className="w-full wedding-card border border-wedding-border rounded-lg px-3 py-2 text-sm text-wedding-ink placeholder-wedding-muted/60 focus:outline-none focus:border-wedding-accent transition-colors pl-8"
                 />
                 <button
                   type="button"
                   onClick={() => setShowNewPassword(v => !v)}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 text-wedding-muted hover:text-wedding-ink"
                 >
                   {showNewPassword ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
                 </button>
@@ -704,7 +704,7 @@ export default function AdminDashboardPage() {
               <button
                 onClick={handleChangePassword}
                 disabled={savingPassword || !newPassword.trim()}
-                className="flex items-center gap-1.5 px-3 py-2 bg-party-gold hover:bg-party-gold-light disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors"
+                className="flex items-center gap-1.5 px-3 py-2 bg-wedding-accent hover:bg-wedding-accent-light disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors"
               >
                 {savingPassword
                   ? <span className="h-3.5 w-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -717,7 +717,7 @@ export default function AdminDashboardPage() {
 
           {/* Event link */}
           <div className="flex items-center gap-2">
-            <p className="text-xs text-gray-500 flex-1 font-mono truncate">
+            <p className="text-xs text-wedding-muted flex-1 font-mono truncate">
               {eventUrl}
             </p>
             <CopyLinkButton url={eventUrl} label="העתק" />
@@ -725,18 +725,18 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* QR Code toggle */}
-        <div className="bg-party-surface border border-party-border rounded-2xl overflow-hidden">
+        <div className="wedding-card border border-wedding-border rounded-2xl overflow-hidden">
           <button
             onClick={() => setShowQR(!showQR)}
-            className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-all"
+            className="w-full flex items-center justify-between p-4 hover:bg-wedding-accent/10 transition-all"
           >
-            <span className="text-sm font-medium text-white">
+            <span className="text-sm font-medium text-wedding-ink">
               📱 QR Code לאירוע
             </span>
             {showQR ? (
-              <ChevronUp className="h-4 w-4 text-gray-400" />
+              <ChevronUp className="h-4 w-4 text-wedding-muted" />
             ) : (
-              <ChevronDown className="h-4 w-4 text-gray-400" />
+              <ChevronDown className="h-4 w-4 text-wedding-muted" />
             )}
           </button>
           {showQR && (
@@ -770,7 +770,7 @@ export default function AdminDashboardPage() {
                 "flex-1 flex items-center justify-center gap-2 py-3 rounded-2xl text-sm font-medium transition-all",
                 activeTab === key
                   ? "btn-gold text-white"
-                  : "bg-party-surface border border-party-border text-gray-400 hover:text-white"
+                  : "wedding-card border border-wedding-border text-wedding-muted hover:text-wedding-ink"
               )}
             >
               <Icon className="h-4 w-4" />
@@ -807,25 +807,25 @@ export default function AdminDashboardPage() {
         {activeTab === "reports" && (
           <div className="space-y-3">
             {reports.length === 0 ? (
-              <p className="text-center text-gray-500 py-12">
+              <p className="text-center text-wedding-muted py-12">
                 אין דיווחים 🎉
               </p>
             ) : (
               reports.map((report) => (
                 <div
                   key={report.id}
-                  className="bg-party-surface border border-red-500/20 rounded-2xl p-4"
+                  className="wedding-card border border-red-500/20 rounded-2xl p-4"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="text-sm font-medium text-white">
+                      <p className="text-sm font-medium text-wedding-ink">
                         {report.reason}
                       </p>
-                      <p className="text-xs text-gray-500 mt-1">
+                      <p className="text-xs text-wedding-muted mt-1">
                         דווח על ידי: {report.guest?.nickname || "אורח"}
                       </p>
                       {report.media && (
-                        <p className="text-xs text-gray-600">
+                        <p className="text-xs text-wedding-muted">
                           סוג:{" "}
                           {report.media.media_type === "video"
                             ? "סרטון"
@@ -854,7 +854,7 @@ export default function AdminDashboardPage() {
         {activeTab === "guests" && (
           <div className="space-y-3">
             {guests.length === 0 ? (
-              <p className="text-center text-gray-500 py-12">
+              <p className="text-center text-wedding-muted py-12">
                 אין אורחים עדיין
               </p>
             ) : (
@@ -862,7 +862,7 @@ export default function AdminDashboardPage() {
                 <div
                   key={guest.id}
                   className={cn(
-                    "bg-party-surface border border-party-border rounded-2xl p-3 flex items-center gap-3",
+                    "wedding-card border border-wedding-border rounded-2xl p-3 flex items-center gap-3",
                     guest.blocked && "opacity-60"
                   )}
                   dir="rtl"
@@ -875,10 +875,10 @@ export default function AdminDashboardPage() {
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-white truncate">
+                    <p className="text-sm font-medium text-wedding-ink truncate">
                       {guest.nickname}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-wedding-muted">
                       {new Date(guest.created_at).toLocaleDateString("he-IL")}
                     </p>
                   </div>
@@ -894,7 +894,7 @@ export default function AdminDashboardPage() {
                       className={cn(
                         "text-xs px-2 py-1 rounded-lg border transition-all font-medium",
                         guest.blocked
-                          ? "border-gray-600 text-gray-400 hover:text-white hover:border-gray-400"
+                          ? "border-wedding-border text-wedding-muted hover:text-wedding-ink hover:border-wedding-accent/40"
                           : "border-red-500/40 text-red-400 hover:bg-red-500/10"
                       )}
                     >
@@ -909,22 +909,22 @@ export default function AdminDashboardPage() {
 
         {/* Clink פסיפס — collapsible section (Spark / Crown only) */}
         {event.mosaic_enabled ? (
-        <div className="bg-party-surface border border-party-border rounded-2xl overflow-hidden">
+        <div className="wedding-card border border-wedding-border rounded-2xl overflow-hidden">
           <button
             onClick={() => setMosaicOpen(v => !v)}
-            className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-all"
+            className="w-full flex items-center justify-between p-4 hover:bg-wedding-accent/10 transition-all"
           >
             <div className="flex items-center gap-2">
               <Grid3x3 className="h-4 w-4 text-purple-400" />
-              <span className="text-sm font-semibold text-white">🎨 Clink פסיפס</span>
-              <span className="text-xs text-gray-500 bg-party-surface2 px-2 py-0.5 rounded-full border border-party-border">
+              <span className="text-sm font-semibold text-wedding-ink">🎨 Clink פסיפס</span>
+              <span className="text-xs text-wedding-muted bg-wedding-bg px-2 py-0.5 rounded-full border border-wedding-border">
                 {media.filter(m => m.status === "approved" && m.media_type !== "video").length} תמונות
               </span>
             </div>
-            <span className="text-gray-400 text-xs">{mosaicOpen ? "▲" : "▼"}</span>
+            <span className="text-wedding-muted text-xs">{mosaicOpen ? "▲" : "▼"}</span>
           </button>
 
-          <div className={mosaicOpen ? "px-4 pb-5 border-t border-party-border pt-4 space-y-4" : "hidden"}>
+          <div className={mosaicOpen ? "px-4 pb-5 border-t border-wedding-border pt-4 space-y-4" : "hidden"}>
               <a
                 href={`/event/${event.slug}/mosaic?token=${event.admin_token}`}
                 target="_blank"
@@ -932,8 +932,8 @@ export default function AdminDashboardPage() {
                 className="flex items-center justify-between w-full bg-purple-500/10 border border-purple-500/30 hover:bg-purple-500/20 hover:border-purple-500/50 rounded-xl p-3 transition-all group"
               >
                 <div>
-                  <p className="text-white font-bold text-sm">📺 הקרן Clink פסיפס</p>
-                  <p className="text-gray-500 text-xs mt-0.5">פתח בטאב חדש — מתאים להקרנה על מסך גדול</p>
+                  <p className="text-wedding-ink font-bold text-sm">📺 הקרן Clink פסיפס</p>
+                  <p className="text-wedding-muted text-xs mt-0.5">פתח בטאב חדש — מתאים להקרנה על מסך גדול</p>
                 </div>
                 <span className="text-purple-400 text-xs font-medium group-hover:translate-x-[-2px] transition-transform">פתח ←</span>
               </a>
@@ -941,15 +941,15 @@ export default function AdminDashboardPage() {
           </div>
         </div>
         ) : (
-        <div className="bg-party-surface border border-party-border rounded-2xl p-4 flex items-center justify-between gap-4">
+        <div className="wedding-card border border-wedding-border rounded-2xl p-4 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <span className="text-2xl">🎨</span>
             <div>
-              <p className="text-sm font-semibold text-white">Clink פסיפס</p>
-              <p className="text-xs text-gray-500 mt-0.5">לא כלול במסלול הנוכחי</p>
+              <p className="text-sm font-semibold text-wedding-ink">Clink פסיפס</p>
+              <p className="text-xs text-wedding-muted mt-0.5">לא כלול במסלול הנוכחי</p>
             </div>
           </div>
-          <a href="/checkout" className="text-xs text-yellow-400 border border-yellow-400/30 bg-yellow-400/10 px-3 py-1.5 rounded-xl hover:bg-yellow-400/20 transition-all font-semibold whitespace-nowrap">
+          <a href="/checkout" className="text-xs text-wedding-accent-dark border border-wedding-accent/30 bg-wedding-accent/10 px-3 py-1.5 rounded-xl hover:bg-wedding-accent/20 transition-all font-semibold whitespace-nowrap">
             שדרג ל-Spark ↗
           </a>
         </div>
@@ -959,11 +959,11 @@ export default function AdminDashboardPage() {
         <ClipCreator media={media} eventName={event.name} />
 
         {/* Download ZIP */}
-        <div className="bg-party-surface border border-party-border rounded-2xl p-4">
+        <div className="wedding-card border border-wedding-border rounded-2xl p-4">
           <div className="flex items-center justify-between mb-1">
             <div>
-              <p className="text-sm font-semibold text-white">💾 הורדת כל המדיה</p>
-              <p className="text-xs text-gray-500 mt-0.5">
+              <p className="text-sm font-semibold text-wedding-ink">💾 הורדת כל המדיה</p>
+              <p className="text-xs text-wedding-muted mt-0.5">
                 {media.filter(m => m.status === "approved").length} קבצים מאושרים · קובץ ZIP
               </p>
             </div>
@@ -974,7 +974,7 @@ export default function AdminDashboardPage() {
                 "flex items-center gap-2 px-4 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed text-sm font-semibold rounded-xl transition-all",
                 downloading
                   ? "bg-red-500/10 border border-red-500/30 hover:bg-red-500/20 text-red-300"
-                  : "btn-gold text-white shadow-lg shadow-party-gold/20"
+                  : "btn-gold text-white shadow-lg shadow-wedding-accent/20"
               )}
             >
               {downloading ? (
@@ -991,9 +991,9 @@ export default function AdminDashboardPage() {
             </button>
           </div>
           {downloading && downloadProgress && (
-            <div className="mt-3 h-1.5 bg-white/10 rounded-full overflow-hidden">
+            <div className="mt-3 h-1.5 bg-wedding-accent/10 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-party-gold-light to-amber-400 transition-all duration-300 rounded-full"
+                className="h-full bg-gradient-to-r from-wedding-accent-light to-amber-400 transition-all duration-300 rounded-full"
                 style={{ width: `${(downloadProgress.done / downloadProgress.total) * 100}%` }}
               />
             </div>
@@ -1001,12 +1001,12 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Danger zone — delete event */}
-        <div className="bg-party-surface border border-red-500/20 rounded-2xl p-4">
+        <div className="wedding-card border border-red-500/20 rounded-2xl p-4">
           <h3 className="text-sm font-semibold text-red-400 mb-1 flex items-center gap-2">
             <AlertTriangle className="h-4 w-4" />
             אזור מסוכן
           </h3>
-          <p className="text-xs text-gray-500 mb-3 leading-relaxed">
+          <p className="text-xs text-wedding-muted mb-3 leading-relaxed">
             מחיקת האירוע תמחק לצמיתות את כל התמונות, הסרטונים, האורחים, הלייקים וכל הנתונים הקשורים. פעולה זו אינה ניתנת לביטול.
           </p>
 
@@ -1039,7 +1039,7 @@ export default function AdminDashboardPage() {
                 <button
                   onClick={() => setShowDeleteConfirm(false)}
                   disabled={deletingEvent}
-                  className="px-4 py-2 rounded-xl text-sm text-gray-400 hover:text-white border border-party-border hover:border-white/20 transition-all"
+                  className="px-4 py-2 rounded-xl text-sm text-wedding-muted hover:text-wedding-ink border border-wedding-border hover:border-wedding-accent/40 transition-all"
                 >
                   ביטול
                 </button>

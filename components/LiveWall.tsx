@@ -292,7 +292,7 @@ export default function LiveWall({ event, isAdmin = false }: LiveWallProps) {
               <ArrowRight className="h-4 w-4" />
             </button>
             <div>
-              <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-party-gold to-amber-400 bg-clip-text text-transparent">
+              <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-wedding-accent to-amber-400 bg-clip-text text-transparent">
                 {event.name}
               </h1>
               <p className="text-gray-400 text-xs mt-0.5">Live Wall 🔴</p>
@@ -336,7 +336,7 @@ export default function LiveWall({ event, isAdmin = false }: LiveWallProps) {
       {/* Dramatic new-upload announcement */}
       {newAnnouncement && (
         <div className="fixed inset-0 z-[45] flex items-center justify-center pointer-events-none">
-          <div className="text-center px-8 py-10 rounded-3xl bg-black/60 backdrop-blur-md border border-party-gold/30 animate-scale-in">
+          <div className="text-center px-8 py-10 rounded-3xl bg-black/60 backdrop-blur-md border border-wedding-accent/30 animate-scale-in">
             <div className="text-7xl mb-3">
               {newAnnouncement.avatar && !newAnnouncement.avatar.startsWith("http")
                 ? newAnnouncement.avatar
@@ -384,7 +384,7 @@ export default function LiveWall({ event, isAdmin = false }: LiveWallProps) {
                   onClick={() => setFilter(val)}
                   className={cn(
                     "flex-1 py-1.5 rounded-lg text-sm transition-colors",
-                    filter === val ? "bg-party-gold text-white" : "bg-white/10 text-gray-300 hover:bg-white/20"
+                    filter === val ? "bg-wedding-accent text-white" : "bg-white/10 text-gray-300 hover:bg-white/20"
                   )}
                 >
                   {label}
@@ -398,7 +398,7 @@ export default function LiveWall({ event, isAdmin = false }: LiveWallProps) {
               onClick={() => setHideBlurry(v => !v)}
               className={cn(
                 "w-full py-1.5 rounded-lg text-sm transition-colors flex items-center justify-center gap-2",
-                hideBlurry ? "bg-party-gold text-white" : "bg-white/10 text-gray-300 hover:bg-white/20"
+                hideBlurry ? "bg-wedding-accent text-white" : "bg-white/10 text-gray-300 hover:bg-white/20"
               )}
             >
               🔍 {hideBlurry ? "מסתיר תמונות מטושטשות" : "הסתר תמונות מטושטשות"}
@@ -425,7 +425,7 @@ export default function LiveWall({ event, isAdmin = false }: LiveWallProps) {
                 onClick={() => { setSlideIndex(idx); setPaused(true); setMode("slideshow"); showControls(); }}
                 className={cn(
                   "relative mb-3 break-inside-avoid rounded-2xl overflow-hidden group cursor-pointer",
-                  item.isNew && "ring-2 ring-party-gold animate-pulse-glow"
+                  item.isNew && "ring-2 ring-wedding-accent animate-pulse-glow"
                 )}
               >
                 {item.media_type === "video" ? (
@@ -477,7 +477,7 @@ export default function LiveWall({ event, isAdmin = false }: LiveWallProps) {
           {/* Progress bar */}
           {currentItem && !paused && (
             <div className="absolute top-0 inset-x-0 h-1.5 bg-white/10 z-10">
-              <div ref={progressRef} className="h-full bg-gradient-to-r from-party-gold-light to-amber-400 w-0" />
+              <div ref={progressRef} className="h-full bg-gradient-to-r from-wedding-accent-light to-amber-400 w-0" />
             </div>
           )}
 
@@ -547,7 +547,7 @@ export default function LiveWall({ event, isAdmin = false }: LiveWallProps) {
                       onClick={() => { setFilter(val); setSlideIndex(0); }}
                       className={cn(
                         "flex-1 py-1.5 rounded-lg text-sm transition-colors",
-                        filter === val ? "bg-party-gold text-white" : "bg-white/10 text-gray-300 hover:bg-white/20"
+                        filter === val ? "bg-wedding-accent text-white" : "bg-white/10 text-gray-300 hover:bg-white/20"
                       )}
                     >
                       {label}
@@ -561,7 +561,7 @@ export default function LiveWall({ event, isAdmin = false }: LiveWallProps) {
                   onClick={() => { setHideBlurry(v => !v); setSlideIndex(0); }}
                   className={cn(
                     "w-full py-1.5 rounded-lg text-sm transition-colors flex items-center justify-center gap-2",
-                    hideBlurry ? "bg-party-gold text-white" : "bg-white/10 text-gray-300 hover:bg-white/20"
+                    hideBlurry ? "bg-wedding-accent text-white" : "bg-white/10 text-gray-300 hover:bg-white/20"
                   )}
                 >
                   🔍 {hideBlurry ? "מסתיר תמונות מטושטשות" : "הסתר תמונות מטושטשות"}
@@ -593,7 +593,7 @@ export default function LiveWall({ event, isAdmin = false }: LiveWallProps) {
                       onClick={() => setVideoDuration(val)}
                       className={cn(
                         "px-3 py-1.5 rounded-lg text-sm transition-colors",
-                        videoDuration === val ? "bg-party-gold text-white" : "bg-white/10 text-gray-300 hover:bg-white/20"
+                        videoDuration === val ? "bg-wedding-accent text-white" : "bg-white/10 text-gray-300 hover:bg-white/20"
                       )}
                     >
                       {label}

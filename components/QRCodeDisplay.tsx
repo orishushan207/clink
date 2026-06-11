@@ -55,7 +55,7 @@ export default function QRCodeDisplay({
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <div className="flex items-center gap-2 text-yellow-400">
+      <div className="flex items-center gap-2 text-wedding-accent">
         <QrCode className="h-5 w-5" />
         <span className="text-sm font-medium">QR Code לאירוע</span>
       </div>
@@ -63,7 +63,7 @@ export default function QRCodeDisplay({
       {/* QR Code */}
       <div
         ref={qrRef}
-        className="bg-white p-4 rounded-2xl shadow-lg shadow-party-gold/20"
+        className="bg-white p-4 rounded-2xl shadow-lg shadow-wedding-accent/20"
       >
         <QRCode
           value={url}
@@ -74,7 +74,7 @@ export default function QRCodeDisplay({
         />
       </div>
 
-      <p className="text-xs text-gray-500 text-center max-w-[200px] leading-relaxed">
+      <p className="text-xs text-wedding-muted text-center max-w-[200px] leading-relaxed">
         אורחים סורקים את ה-QR code כדי להצטרף לClink
       </p>
 

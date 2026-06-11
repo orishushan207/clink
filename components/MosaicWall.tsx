@@ -226,36 +226,36 @@ export default function MosaicWall({ event, isAdmin, adminToken }: MosaicWallPro
   // ── Setup screen (no mosaic yet) ──
   if (!resultUrl) {
     return (
-      <div className="min-h-screen bg-black flex flex-col items-center justify-center gap-8 p-8" dir="rtl">
+      <div className="min-h-screen bg-wedding-bg flex flex-col items-center justify-center gap-8 p-8" dir="rtl">
         {/* Back button */}
         <button
           onClick={() => router.back()}
-          className="absolute top-4 right-4 flex items-center gap-1.5 text-gray-500 hover:text-white text-sm transition-colors"
+          className="absolute top-4 right-4 flex items-center gap-1.5 text-wedding-muted hover:text-wedding-ink text-sm transition-colors"
         >
           <ArrowRight className="h-4 w-4" />
           חזרה
         </button>
 
         <div className="flex items-center gap-3 mb-2">
-          <Grid3x3 className="h-8 w-8 text-purple-400" />
+          <Grid3x3 className="h-8 w-8 text-wedding-accent" />
           <div>
-            <h1 className="text-white text-2xl font-black">Clink פסיפס</h1>
-            <p className="text-gray-500 text-sm">{event.name}</p>
+            <h1 className="text-wedding-ink text-2xl font-black">Clink פסיפס</h1>
+            <p className="text-wedding-muted text-sm">{event.name}</p>
           </div>
         </div>
 
         {generating ? (
           <div className="w-full max-w-sm space-y-4 text-center">
-            <Loader2 className="h-10 w-10 text-purple-400 animate-spin mx-auto" />
-            <p className="text-gray-300 text-sm">{progressLabel}</p>
-            <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+            <Loader2 className="h-10 w-10 text-wedding-accent animate-spin mx-auto" />
+            <p className="text-wedding-ink text-sm">{progressLabel}</p>
+            <div className="h-2 bg-wedding-border rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-purple-600 to-purple-400 rounded-full transition-all duration-300"
+                className="h-full bg-gradient-to-r from-wedding-accent-dark to-wedding-accent rounded-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <p className="text-purple-400 font-bold">{progress}%</p>
-            <p className="text-gray-600 text-xs">{photoCount} תמונות אורחים</p>
+            <p className="text-wedding-accent font-bold">{progress}%</p>
+            <p className="text-wedding-muted text-xs">{photoCount} תמונות אורחים</p>
           </div>
         ) : (
           <div className="w-full max-w-md space-y-6">
@@ -264,8 +264,8 @@ export default function MosaicWall({ event, isAdmin, adminToken }: MosaicWallPro
               className={cn(
                 "border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all",
                 targetUrl
-                  ? "border-purple-500/50 bg-purple-500/5"
-                  : "border-white/10 hover:border-purple-500/40 hover:bg-purple-500/5"
+                  ? "border-wedding-accent/50 bg-wedding-accent/5"
+                  : "border-wedding-border hover:border-wedding-accent/40 hover:bg-wedding-accent/5"
               )}
               onClick={() => fileInputRef.current?.click()}
             >
@@ -282,10 +282,10 @@ export default function MosaicWall({ event, isAdmin, adminToken }: MosaicWallPro
               {targetUrl ? (
                 <div className="flex flex-col items-center gap-3">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={targetUrl} alt="target" className="w-28 h-28 object-cover rounded-xl border border-purple-500/30 mx-auto" />
-                  <p className="text-purple-300 text-sm font-medium">תמונת יעד נבחרה ✓</p>
+                  <img src={targetUrl} alt="target" className="w-28 h-28 object-cover rounded-xl border border-wedding-accent/30 mx-auto" />
+                  <p className="text-wedding-accent text-sm font-medium">תמונת יעד נבחרה ✓</p>
                   <button
-                    className="text-xs text-gray-600 hover:text-white flex items-center gap-1 transition-colors"
+                    className="text-xs text-wedding-muted hover:text-wedding-ink flex items-center gap-1 transition-colors"
                     onClick={(e) => { e.stopPropagation(); setTargetUrl(null); }}
                   >
                     <X className="h-3 w-3" /> החלף
@@ -293,9 +293,9 @@ export default function MosaicWall({ event, isAdmin, adminToken }: MosaicWallPro
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-2">
-                  <Upload className="h-8 w-8 text-gray-600" />
-                  <p className="text-gray-400 text-sm">בחרו תמונת יעד להקרנה</p>
-                  <p className="text-gray-700 text-xs">הפסיפס ייבנה סביבה</p>
+                  <Upload className="h-8 w-8 text-wedding-muted" />
+                  <p className="text-wedding-muted text-sm">בחרו תמונת יעד להקרנה</p>
+                  <p className="text-wedding-muted text-xs">הפסיפס ייבנה סביבה</p>
                 </div>
               )}
             </div>
@@ -309,8 +309,8 @@ export default function MosaicWall({ event, isAdmin, adminToken }: MosaicWallPro
                   className={cn(
                     "px-4 py-2 rounded-xl text-sm font-medium border transition-all",
                     gridSize === opt.value
-                      ? "bg-purple-600/30 border-purple-500/60 text-purple-300"
-                      : "bg-white/5 border-white/10 text-gray-500 hover:text-white"
+                      ? "bg-wedding-accent/20 border-wedding-accent/60 text-wedding-accent-dark"
+                      : "bg-wedding-card border-wedding-border text-wedding-muted hover:text-wedding-ink"
                   )}
                 >
                   {opt.label}
@@ -318,12 +318,12 @@ export default function MosaicWall({ event, isAdmin, adminToken }: MosaicWallPro
               ))}
             </div>
 
-            <p className="text-center text-gray-600 text-xs">{photoCount} תמונות אורחים זמינות</p>
+            <p className="text-center text-wedding-muted text-xs">{photoCount} תמונות אורחים זמינות</p>
 
             <button
               onClick={generate}
               disabled={!targetUrl || media.length === 0}
-              className="w-full py-4 rounded-2xl bg-purple-600 hover:bg-purple-500 disabled:opacity-30 disabled:cursor-not-allowed text-white font-black text-lg transition-all shadow-lg shadow-purple-500/30 active:scale-95"
+              className="w-full py-4 rounded-2xl bg-wedding-accent hover:bg-wedding-accent-dark disabled:opacity-30 disabled:cursor-not-allowed text-white font-black text-lg transition-all shadow-lg shadow-wedding-accent/30 active:scale-95"
             >
               🎨 צור פסיפס
             </button>

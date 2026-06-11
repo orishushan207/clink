@@ -252,13 +252,13 @@ export default function MosaicCreator({ media, eventId, adminToken }: MosaicCrea
 
   return (
     <div className="space-y-5" dir="rtl">
-      <div className="bg-party-surface border border-party-border rounded-2xl p-4 space-y-1">
-        <h3 className="text-white font-bold text-base">🎨 Clink פסיפס</h3>
-        <p className="text-gray-400 text-sm">
+      <div className="wedding-card border border-wedding-border rounded-2xl p-4 space-y-1">
+        <h3 className="text-wedding-ink font-bold text-base">🎨 Clink פסיפס</h3>
+        <p className="text-wedding-muted text-sm">
           בחר תמונת יעד (למשל: הזוג) ו-{imageMedia.length} תמונות האורחים יסדרו את עצמן כפסיפס שיוצר אותה.
         </p>
         {imageMedia.length < 10 && (
-          <p className="text-amber-400 text-xs mt-1">
+          <p className="text-amber-500 text-xs mt-1">
             ⚠️ מומלץ לפחות 10 תמונות לתוצאה טובה (כרגע: {imageMedia.length})
           </p>
         )}
@@ -269,8 +269,8 @@ export default function MosaicCreator({ media, eventId, adminToken }: MosaicCrea
         className={cn(
           "border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all",
           targetUrl
-            ? "border-party-gold/40 bg-party-gold/5"
-            : "border-party-border hover:border-party-gold/40 hover:bg-party-gold/5"
+            ? "border-wedding-accent/40 bg-wedding-accent/5"
+            : "border-wedding-border hover:border-wedding-accent/40 hover:bg-wedding-accent/5"
         )}
         onClick={() => fileInputRef.current?.click()}
       >
@@ -286,12 +286,12 @@ export default function MosaicCreator({ media, eventId, adminToken }: MosaicCrea
         />
         {targetUrl ? (
           <div className="flex flex-col items-center gap-3">
-            <div className="relative w-32 h-32 rounded-xl overflow-hidden border border-party-gold/30">
+            <div className="relative w-32 h-32 rounded-xl overflow-hidden border border-wedding-accent/30">
               <Image src={targetUrl} alt="target" fill className="object-cover" sizes="128px" />
             </div>
-            <p className="text-sm text-yellow-400 font-medium">תמונת יעד נבחרה ✓</p>
+            <p className="text-sm text-wedding-accent font-medium">תמונת יעד נבחרה ✓</p>
             <button
-              className="text-xs text-gray-500 hover:text-white flex items-center gap-1 transition-colors"
+              className="text-xs text-wedding-muted hover:text-wedding-ink flex items-center gap-1 transition-colors"
               onClick={(e) => { e.stopPropagation(); setTargetFile(null); setTargetUrl(null); setResultUrl(null); }}
             >
               <X className="h-3 w-3" /> החלף תמונה
@@ -299,16 +299,16 @@ export default function MosaicCreator({ media, eventId, adminToken }: MosaicCrea
           </div>
         ) : (
           <div className="flex flex-col items-center gap-2 py-4">
-            <Upload className="h-8 w-8 text-gray-500" />
-            <p className="text-sm text-gray-400">לחץ לבחירת תמונת יעד</p>
-            <p className="text-xs text-gray-600">JPG, PNG — התמונה שהפסיפס יצייר</p>
+            <Upload className="h-8 w-8 text-wedding-muted" />
+            <p className="text-sm text-wedding-muted">לחץ לבחירת תמונת יעד</p>
+            <p className="text-xs text-wedding-muted">JPG, PNG — התמונה שהפסיפס יצייר</p>
           </div>
         )}
       </div>
 
       {/* Grid size selector */}
       <div className="space-y-2">
-        <p className="text-sm text-gray-400 font-medium">גודל רשת</p>
+        <p className="text-sm text-wedding-muted font-medium">גודל רשת</p>
         <div className="grid grid-cols-3 gap-2">
           {GRID_OPTIONS.map((opt) => (
             <button
@@ -317,8 +317,8 @@ export default function MosaicCreator({ media, eventId, adminToken }: MosaicCrea
               className={cn(
                 "py-2.5 rounded-xl text-sm font-medium border transition-all",
                 gridSize === opt.value
-                  ? "bg-party-gold/20 border-party-gold/50 text-yellow-300"
-                  : "bg-party-surface border-party-border text-gray-400 hover:text-white"
+                  ? "bg-wedding-accent/20 border-wedding-accent/50 text-wedding-accent-dark"
+                  : "wedding-card border-wedding-border text-wedding-muted hover:text-wedding-ink"
               )}
             >
               {opt.label}
@@ -342,15 +342,15 @@ export default function MosaicCreator({ media, eventId, adminToken }: MosaicCrea
       {generating && (
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-gray-400 flex items-center gap-1.5">
+            <span className="text-wedding-muted flex items-center gap-1.5">
               <Loader2 className="h-3.5 w-3.5 animate-spin" />
               {progressLabel}
             </span>
-            <span className="text-yellow-400 font-bold">{progress}%</span>
+            <span className="text-wedding-accent font-bold">{progress}%</span>
           </div>
-          <div className="h-2 bg-party-surface2 rounded-full overflow-hidden">
+          <div className="h-2 bg-wedding-accent/10 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-party-gold to-yellow-400 rounded-full transition-all duration-300"
+              className="h-full bg-gradient-to-r from-wedding-accent to-amber-400 rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -361,19 +361,19 @@ export default function MosaicCreator({ media, eventId, adminToken }: MosaicCrea
       {resultUrl && !generating && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-yellow-400">הפסיפס מוכן! 🎉</p>
+            <p className="text-sm font-medium text-wedding-accent">הפסיפס מוכן! 🎉</p>
             {saving && (
-              <span className="flex items-center gap-1 text-xs text-gray-500">
+              <span className="flex items-center gap-1 text-xs text-wedding-muted">
                 <Loader2 className="h-3 w-3 animate-spin" /> שומר...
               </span>
             )}
             {saved && !saving && (
-              <span className="flex items-center gap-1 text-xs text-emerald-400">
+              <span className="flex items-center gap-1 text-xs text-emerald-500">
                 <Check className="h-3 w-3" /> נשמר
               </span>
             )}
           </div>
-          <div className="relative w-full aspect-square rounded-2xl overflow-hidden border border-party-gold/30">
+          <div className="relative w-full aspect-square rounded-2xl overflow-hidden border border-wedding-accent/30">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={resultUrl} alt="mosaic result" className="w-full h-full object-contain" />
           </div>
@@ -389,16 +389,16 @@ export default function MosaicCreator({ media, eventId, adminToken }: MosaicCrea
 
       {/* Saved mosaics history */}
       {savedMosaics.length > 0 && (
-        <div className="space-y-2 pt-2 border-t border-party-border">
-          <p className="text-sm text-gray-400 font-medium">פסיפסים שנשמרו ({savedMosaics.length})</p>
+        <div className="space-y-2 pt-2 border-t border-wedding-border">
+          <p className="text-sm text-wedding-muted font-medium">פסיפסים שנשמרו ({savedMosaics.length})</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {savedMosaics.map((m) => (
               <div key={m.id} className="space-y-1.5">
-                <div className="relative w-full aspect-square rounded-xl overflow-hidden border border-party-border">
+                <div className="relative w-full aspect-square rounded-xl overflow-hidden border border-wedding-border">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={m.image_url} alt="פסיפס שמור" className="w-full h-full object-cover" />
                 </div>
-                <p className="text-[10px] text-gray-600 text-center">
+                <p className="text-[10px] text-wedding-muted text-center">
                   {new Date(m.created_at).toLocaleDateString("he-IL")}
                 </p>
                 <div className="flex gap-1.5">

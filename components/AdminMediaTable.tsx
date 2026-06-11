@@ -110,11 +110,11 @@ export default function AdminMediaTable({
                   "flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm font-medium transition-all",
                   statusFilter === s
                     ? "btn-gold text-white"
-                    : "bg-party-surface2 text-gray-400 hover:text-white border border-party-border"
+                    : "wedding-card text-wedding-muted hover:text-wedding-ink border border-wedding-border"
                 )}
               >
                 {statusLabels[s]}
-                <span className="text-xs bg-white/10 px-1.5 py-0.5 rounded-full">
+                <span className="text-xs bg-wedding-accent/10 px-1.5 py-0.5 rounded-full">
                   {counts[s]}
                 </span>
               </button>
@@ -127,8 +127,8 @@ export default function AdminMediaTable({
             className={cn(
               "flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm font-medium transition-all border",
               hideBlurry
-                ? "bg-party-gold/20 border-party-gold/50 text-yellow-300"
-                : "bg-party-surface2 border-party-border text-gray-400 hover:text-white"
+                ? "bg-wedding-accent/20 border-wedding-accent/50 text-wedding-accent-dark"
+                : "wedding-card border-wedding-border text-wedding-muted hover:text-wedding-ink"
             )}
             title="הסתר תמונות מטושטשות"
           >
@@ -147,10 +147,10 @@ export default function AdminMediaTable({
               className={cn(
                 "flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm font-medium transition-all border",
                 selectedGuestId
-                  ? "bg-party-gold/20 border-party-gold/50 text-yellow-300"
+                  ? "bg-wedding-accent/20 border-wedding-accent/50 text-wedding-accent-dark"
                   : showGuestPicker
-                  ? "bg-white/10 border-white/20 text-white"
-                  : "bg-party-surface2 border-party-border text-gray-400 hover:text-white"
+                  ? "bg-wedding-accent/10 border-wedding-accent/30 text-wedding-ink"
+                  : "wedding-card border-wedding-border text-wedding-muted hover:text-wedding-ink"
               )}
             >
               <Users className="h-3.5 w-3.5" />
@@ -181,8 +181,8 @@ export default function AdminMediaTable({
 
         {/* Guest picker dropdown */}
         {showGuestPicker && uniqueGuests.length > 1 && (
-          <div className="bg-party-surface border border-party-border rounded-2xl p-3 animate-fade-in">
-            <p className="text-xs text-gray-500 mb-2.5">בחר אורח לסינון:</p>
+          <div className="wedding-card border border-wedding-border rounded-2xl p-3 animate-fade-in">
+            <p className="text-xs text-wedding-muted mb-2.5">בחר אורח לסינון:</p>
             <div className="flex flex-wrap gap-2">
               {uniqueGuests.map((guest) => (
                 <button
@@ -194,8 +194,8 @@ export default function AdminMediaTable({
                   className={cn(
                     "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm transition-all border",
                     selectedGuestId === guest.id
-                      ? "bg-party-gold/20 border-party-gold/50 text-yellow-300"
-                      : "bg-party-surface2 border-party-border text-gray-300 hover:border-party-gold/30 hover:text-white"
+                      ? "bg-wedding-accent/20 border-wedding-accent/50 text-wedding-accent-dark"
+                      : "wedding-card border-wedding-border text-wedding-ink hover:border-wedding-accent/30"
                   )}
                 >
                   {guest.avatar && (
@@ -208,7 +208,7 @@ export default function AdminMediaTable({
                     )
                   )}
                   <span>{guest.nickname}</span>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-wedding-muted">
                     ({media.filter((m) => m.guest?.id === guest.id).length})
                   </span>
                 </button>
@@ -227,10 +227,10 @@ export default function AdminMediaTable({
           ).length;
           if (hiddenCount === 0) return null;
           return (
-            <div className="flex items-center gap-2 text-sm text-yellow-300 bg-party-gold/10 border border-party-gold/20 rounded-xl px-3 py-2">
+            <div className="flex items-center gap-2 text-sm text-wedding-accent-dark bg-wedding-accent/10 border border-wedding-accent/20 rounded-xl px-3 py-2">
               <ScanSearch className="h-3.5 w-3.5" />
               <span>מסנן תמונות מטושטשות — {hiddenCount} הוסתרו</span>
-              <button onClick={() => setHideBlurry(false)} className="mr-auto text-gray-500 hover:text-white transition-colors">
+              <button onClick={() => setHideBlurry(false)} className="mr-auto text-wedding-muted hover:text-wedding-ink transition-colors">
                 <X className="h-3.5 w-3.5" />
               </button>
             </div>
@@ -239,13 +239,13 @@ export default function AdminMediaTable({
 
         {/* Active guest filter label */}
         {selectedGuest && (
-          <div className="flex items-center gap-2 text-sm text-yellow-300 bg-party-gold/10 border border-party-gold/20 rounded-xl px-3 py-2">
+          <div className="flex items-center gap-2 text-sm text-wedding-accent-dark bg-wedding-accent/10 border border-wedding-accent/20 rounded-xl px-3 py-2">
             <Users className="h-3.5 w-3.5" />
             <span>מציג תמונות של <strong>{selectedGuest.nickname}</strong></span>
-            <span className="text-gray-500">({filtered.length} פריטים)</span>
+            <span className="text-wedding-muted">({filtered.length} פריטים)</span>
             <button
               onClick={() => setSelectedGuestId(null)}
-              className="mr-auto text-gray-500 hover:text-white transition-colors"
+              className="mr-auto text-wedding-muted hover:text-wedding-ink transition-colors"
             >
               <X className="h-3.5 w-3.5" />
             </button>
@@ -255,16 +255,16 @@ export default function AdminMediaTable({
 
       {/* Grid */}
       {filtered.length === 0 ? (
-        <p className="text-center text-gray-500 py-12">אין פריטים להצגה</p>
+        <p className="text-center text-wedding-muted py-12">אין פריטים להצגה</p>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
           {filtered.map((item) => (
             <div
               key={item.id}
-              className="bg-party-surface border border-party-border rounded-2xl overflow-hidden"
+              className="wedding-card border border-wedding-border rounded-2xl overflow-hidden"
             >
               {/* Preview */}
-              <div className="relative aspect-square bg-party-surface2">
+              <div className="relative aspect-square bg-wedding-bg">
                 {item.media_type === "video" ? (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="bg-black/50 rounded-full p-2">
@@ -302,7 +302,7 @@ export default function AdminMediaTable({
 
               {/* Info */}
               <div className="p-2">
-                <p className="text-xs text-gray-300 truncate flex items-center gap-1">
+                <p className="text-xs text-wedding-ink truncate flex items-center gap-1">
                   {item.guest?.avatar && (
                     item.guest.avatar.startsWith("http") ? (
                       <span className="w-4 h-4 rounded-full overflow-hidden flex-shrink-0 inline-block">
@@ -314,7 +314,7 @@ export default function AdminMediaTable({
                   )}
                   <span className="truncate">{item.guest?.nickname}</span>
                 </p>
-                <p className="text-xs text-gray-600">
+                <p className="text-xs text-wedding-muted">
                   {formatRelative(item.created_at)}
                 </p>
 
@@ -361,7 +361,7 @@ export default function AdminMediaTable({
                       </button>
                       <button
                         onClick={() => setConfirmDelete(null)}
-                        className="flex-1 p-1.5 rounded-lg bg-party-surface2 text-gray-400 text-xs"
+                        className="flex-1 p-1.5 rounded-lg bg-wedding-accent/10 text-wedding-muted text-xs"
                       >
                         ביטול
                       </button>
@@ -369,7 +369,7 @@ export default function AdminMediaTable({
                   ) : (
                     <button
                       onClick={() => setConfirmDelete(item.id)}
-                      className="p-1.5 rounded-lg hover:bg-red-500/20 text-gray-500 hover:text-red-400 transition-all"
+                      className="p-1.5 rounded-lg hover:bg-red-500/20 text-wedding-muted hover:text-red-400 transition-all"
                       title="מחק"
                     >
                       <Trash2 className="h-3.5 w-3.5" />

@@ -65,29 +65,29 @@ export default function AdminAnalytics({ media, stats, onlineUsers, voteCounts }
       {/* KPI row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
-          { icon: Users, label: "אורחים", value: stats.guestCount, color: "text-yellow-400", bg: "bg-party-gold/10" },
+          { icon: Users, label: "אורחים", value: stats.guestCount, color: "text-wedding-accent", bg: "bg-wedding-accent/10" },
           { icon: ImageIcon, label: "תמונות/סרטונים", value: stats.mediaCount, color: "text-amber-400", bg: "bg-amber-500/10" },
           { icon: Heart, label: "לייקים", value: totalLikes, color: "text-red-400", bg: "bg-red-500/10" },
           { icon: Crown, label: "הצבעות", value: totalVotes, color: "text-amber-400", bg: "bg-amber-500/10" },
         ].map((item) => (
-          <div key={item.label} className="bg-party-surface border border-party-border rounded-2xl p-4 flex flex-col items-center gap-2">
+          <div key={item.label} className="wedding-card border border-wedding-border rounded-2xl p-4 flex flex-col items-center gap-2">
             <div className={`${item.bg} ${item.color} p-2.5 rounded-xl`}>
               <item.icon className="h-5 w-5" />
             </div>
-            <span className="text-2xl font-bold text-white">{item.value}</span>
-            <span className="text-xs text-gray-400">{item.label}</span>
+            <span className="text-2xl font-bold text-wedding-ink">{item.value}</span>
+            <span className="text-xs text-wedding-muted">{item.label}</span>
           </div>
         ))}
       </div>
 
       {/* Online now */}
-      <div className="bg-party-surface border border-party-border rounded-2xl p-4">
+      <div className="wedding-card border border-wedding-border rounded-2xl p-4">
         <div className="flex items-center gap-2 mb-3">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
           </span>
-          <h3 className="text-sm font-semibold text-white">
+          <h3 className="text-sm font-semibold text-wedding-ink">
             {onlineUsers.length > 0 ? `${onlineUsers.length} אורחים מחוברים עכשיו` : "אין אורחים מחוברים כרגע"}
           </h3>
         </div>
@@ -104,21 +104,21 @@ export default function AdminAnalytics({ media, stats, onlineUsers, voteCounts }
       </div>
 
       {/* Uploads over time */}
-      <div className="bg-party-surface border border-party-border rounded-2xl p-4">
+      <div className="wedding-card border border-wedding-border rounded-2xl p-4">
         <div className="flex items-center gap-2 mb-4">
-          <TrendingUp className="h-4 w-4 text-yellow-400" />
-          <h3 className="text-sm font-semibold text-white">העלאות ב-7 ימים אחרונים</h3>
+          <TrendingUp className="h-4 w-4 text-wedding-accent" />
+          <h3 className="text-sm font-semibold text-wedding-ink">העלאות ב-7 ימים אחרונים</h3>
         </div>
         <div className="flex items-end gap-1.5 h-24">
           {uploadsPerDay.map((d, i) => (
             <div key={i} className="flex-1 flex flex-col items-center gap-1 group">
               <div
-                className="w-full bg-gradient-to-t from-party-gold to-amber-500 rounded-t opacity-80 hover:opacity-100 transition-all relative"
+                className="w-full bg-gradient-to-t from-wedding-accent to-amber-500 rounded-t opacity-80 hover:opacity-100 transition-all relative"
                 style={{ height: `${Math.max((d.count / maxUploads) * 100, d.count > 0 ? 8 : 4)}%` }}
                 title={`${d.label}: ${d.count} העלאות`}
               >
                 {d.count > 0 && (
-                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 text-xs text-gray-400 opacity-0 group-hover:opacity-100 whitespace-nowrap">
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 text-xs text-wedding-muted opacity-0 group-hover:opacity-100 whitespace-nowrap">
                     {d.count}
                   </div>
                 )}
@@ -126,7 +126,7 @@ export default function AdminAnalytics({ media, stats, onlineUsers, voteCounts }
             </div>
           ))}
         </div>
-        <div className="flex justify-between mt-1.5 text-xs text-gray-600">
+        <div className="flex justify-between mt-1.5 text-xs text-wedding-muted">
           {uploadsPerDay.map((d, i) => (
             <span key={i}>{d.label}</span>
           ))}
@@ -136,19 +136,19 @@ export default function AdminAnalytics({ media, stats, onlineUsers, voteCounts }
       {/* Top uploaders + winner side by side */}
       <div className="grid sm:grid-cols-2 gap-4">
         {/* Top uploaders */}
-        <div className="bg-party-surface border border-party-border rounded-2xl p-4">
-          <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-            <TrendingUp className="h-4 w-4 text-amber-400" />
+        <div className="wedding-card border border-wedding-border rounded-2xl p-4">
+          <h3 className="text-sm font-semibold text-wedding-ink mb-3 flex items-center gap-2">
+            <TrendingUp className="h-4 w-4 text-amber-500" />
             המעלים הפעילים ביותר
           </h3>
           <div className="space-y-2">
-            {topUploaders.length === 0 && <p className="text-xs text-gray-500">אין נתונים עדיין</p>}
+            {topUploaders.length === 0 && <p className="text-xs text-wedding-muted">אין נתונים עדיין</p>}
             {topUploaders.map((g, i) => (
               <div key={g.id} className="flex items-center gap-2">
-                <span className="text-xs text-gray-500 w-4">{i + 1}.</span>
+                <span className="text-xs text-wedding-muted w-4">{i + 1}.</span>
                 {g.avatar && !g.avatar.startsWith("http") && <span className="text-base">{g.avatar}</span>}
-                <span className="text-sm text-white flex-1 truncate">{g.nickname}</span>
-                <span className="text-xs text-gray-400 flex-shrink-0">{g.count} תמונות</span>
+                <span className="text-sm text-wedding-ink flex-1 truncate">{g.nickname}</span>
+                <span className="text-xs text-wedding-muted flex-shrink-0">{g.count} תמונות</span>
                 <span className="text-xs text-red-400 flex-shrink-0">❤️ {g.likes}</span>
               </div>
             ))}
@@ -156,9 +156,9 @@ export default function AdminAnalytics({ media, stats, onlineUsers, voteCounts }
         </div>
 
         {/* Winner */}
-        <div className="bg-party-surface border border-party-border rounded-2xl p-4">
-          <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-            <Crown className="h-4 w-4 text-amber-400" />
+        <div className="wedding-card border border-wedding-border rounded-2xl p-4">
+          <h3 className="text-sm font-semibold text-wedding-ink mb-3 flex items-center gap-2">
+            <Crown className="h-4 w-4 text-amber-500" />
             תמונת האירוע ({totalVotes} הצבעות)
           </h3>
           {winnerMedia ? (
@@ -168,16 +168,16 @@ export default function AdminAnalytics({ media, stats, onlineUsers, voteCounts }
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={winnerMedia.file_url} alt="" className="w-full h-full object-cover" />
                 ) : (
-                  <div className="w-full h-full bg-party-surface2 flex items-center justify-center text-2xl">🎬</div>
+                  <div className="w-full h-full bg-wedding-bg flex items-center justify-center text-2xl">🎬</div>
                 )}
               </div>
               <div className="min-w-0">
-                <p className="text-sm text-white font-medium">{winnerMedia.guest?.nickname}</p>
-                <p className="text-xs text-amber-400">{winnerVotes} הצבעות 👑</p>
+                <p className="text-sm text-wedding-ink font-medium">{winnerMedia.guest?.nickname}</p>
+                <p className="text-xs text-amber-500">{winnerVotes} הצבעות 👑</p>
               </div>
             </div>
           ) : (
-            <p className="text-xs text-gray-500">עוד לא הוצבעו תמונות</p>
+            <p className="text-xs text-wedding-muted">עוד לא הוצבעו תמונות</p>
           )}
         </div>
       </div>
