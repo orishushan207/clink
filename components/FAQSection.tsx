@@ -61,8 +61,8 @@ export default function FAQSection() {
   return (
     <section className="max-w-2xl mx-auto px-6 py-16 pb-20" dir="rtl">
       <div className="text-center mb-10">
-        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">שאלות נפוצות</h2>
-        <p className="text-gray-500 text-sm">כל מה שרציתם לדעת על Clink</p>
+        <h2 className="text-2xl sm:text-3xl font-bold text-wedding-ink mb-2">שאלות נפוצות</h2>
+        <p className="text-wedding-muted text-sm">כל מה שרציתם לדעת על Clink</p>
       </div>
 
       <div className="space-y-3">
@@ -70,26 +70,26 @@ export default function FAQSection() {
           <div
             key={i}
             className={cn(
-              "bg-party-surface border rounded-2xl overflow-hidden transition-all",
-              openIndex === i ? "border-party-gold/30" : "border-party-border"
+              "wedding-card border rounded-2xl overflow-hidden transition-all",
+              openIndex === i ? "border-wedding-accent/30" : "border-wedding-border"
             )}
           >
             <button
               onClick={() => setOpenIndex(openIndex === i ? null : i)}
               className="w-full flex items-center justify-between px-5 py-4 text-right gap-4"
             >
-              <span className="text-white font-semibold text-sm leading-snug">{faq.q}</span>
+              <span className="text-wedding-ink font-semibold text-sm leading-snug">{faq.q}</span>
               <ChevronDown
                 className={cn(
-                  "h-4 w-4 text-gray-400 flex-shrink-0 transition-transform duration-200",
-                  openIndex === i && "rotate-180 text-yellow-400"
+                  "h-4 w-4 text-wedding-muted flex-shrink-0 transition-transform duration-200",
+                  openIndex === i && "rotate-180 text-wedding-accent"
                 )}
               />
             </button>
 
             {openIndex === i && (
-              <div className="px-5 pb-5 border-t border-party-border pt-4">
-                <p className="text-gray-400 text-sm leading-relaxed">{faq.a}</p>
+              <div className="px-5 pb-5 border-t border-wedding-border pt-4">
+                <p className="text-wedding-muted text-sm leading-relaxed">{faq.a}</p>
               </div>
             )}
           </div>

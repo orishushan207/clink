@@ -83,7 +83,7 @@ export default function AppDemo() {
   return (
     <div className="relative flex items-center justify-center select-none">
       {/* Glow behind phone */}
-      <div className="absolute inset-0 bg-party-gold/20 rounded-full blur-3xl scale-75 pointer-events-none" />
+      <div className="absolute inset-0 bg-wedding-accent/20 rounded-full blur-3xl scale-75 pointer-events-none" />
 
       {/* Phone frame */}
       <div className="relative w-56 h-[460px] bg-[#0a0a18] rounded-[3rem] border-[3px] border-white/10 shadow-2xl overflow-hidden z-10">
@@ -307,14 +307,14 @@ export default function AppDemo() {
           showNotif ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
         }`}
       >
-        <div className="bg-party-surface border border-party-border rounded-2xl px-3 py-2 text-xs text-white flex items-center gap-2 shadow-2xl whitespace-nowrap">
+        <div className="wedding-card rounded-2xl px-3 py-2 text-xs text-wedding-ink flex items-center gap-2 shadow-2xl whitespace-nowrap">
           {NOTIFICATIONS[notifIndex]}
         </div>
       </div>
 
       {/* Step label */}
       <div className="absolute -bottom-8 left-0 right-0 flex justify-center">
-        <span className="text-xs text-gray-600">
+        <span className="text-xs text-wedding-muted">
           {{
             qr: "סריקת QR",
             name: "בחירת שם",
