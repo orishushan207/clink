@@ -41,11 +41,11 @@ export default function PicMeLogo({ size = 40, showText = true, dark = false }: 
 
   return (
     <Image
-      src="/clink-logo-transparent.png"
+      src={dark ? "/clink-logo-dark.png" : "/clink-logo-transparent.png"}
       alt="Clink"
       width={w}
       height={h}
-      style={{ objectFit: "contain", filter: dark ? "brightness(0) saturate(100%)" : undefined }}
+      style={{ objectFit: "contain" }}
       priority
     />
   );

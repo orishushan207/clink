@@ -167,7 +167,7 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
     <div className="space-y-6">
       {/* Cover image */}
       <div>
-        <label className="text-sm font-medium text-gray-300 block mb-2">
+        <label className="text-sm font-medium text-wedding-muted block mb-2">
           תמונת כיסוי (לא חובה)
         </label>
         <label className="cursor-pointer group">
@@ -179,8 +179,8 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
           />
           <div
             className={cn(
-              "relative w-full h-40 rounded-2xl border-2 border-dashed border-party-border flex items-center justify-center overflow-hidden transition-all hover:border-party-gold/50",
-              coverPreview && "border-solid border-party-gold/30"
+              "relative w-full h-40 rounded-2xl border-2 border-dashed border-wedding-border flex items-center justify-center overflow-hidden transition-all hover:border-wedding-accent/50",
+              coverPreview && "border-solid border-wedding-accent/30"
             )}
           >
             {coverPreview ? (
@@ -191,7 +191,7 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="flex flex-col items-center gap-2 text-gray-500 group-hover:text-gray-400 transition-colors">
+              <div className="flex flex-col items-center gap-2 text-wedding-muted group-hover:text-wedding-ink transition-colors">
                 <Camera className="h-8 w-8" />
                 <span className="text-sm">לחץ להוספת תמונת כיסוי</span>
               </div>
@@ -215,15 +215,15 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
 
       {/* Date */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-sm font-medium text-gray-300 flex items-center gap-1.5">
-          <Calendar className="h-4 w-4 text-gray-400" />
+        <label className="text-sm font-medium text-wedding-muted flex items-center gap-1.5">
+          <Calendar className="h-4 w-4 text-wedding-muted" />
           תאריך האירוע (לא חובה)
         </label>
         <input
           type="datetime-local"
           value={form.event_date}
           onChange={(e) => setForm((f) => ({ ...f, event_date: e.target.value }))}
-          className="w-full bg-party-surface2 border border-party-border rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-party-gold transition-all"
+          className="w-full bg-wedding-card border border-wedding-border rounded-xl px-4 py-3 text-wedding-ink focus:outline-none focus:ring-2 focus:ring-wedding-accent transition-all"
         />
       </div>
 
@@ -239,7 +239,7 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
 
       {/* Privacy mode */}
       <div>
-        <label className="text-sm font-medium text-gray-300 block mb-3">
+        <label className="text-sm font-medium text-wedding-muted block mb-3">
           מצב פרטיות
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -250,24 +250,24 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
               className={cn(
                 "flex flex-col gap-1.5 p-4 rounded-2xl border text-right transition-all",
                 form.privacy_mode === opt.value
-                  ? "border-party-gold bg-party-gold/10"
-                  : "border-party-border bg-party-surface2 hover:border-white/20"
+                  ? "border-wedding-accent bg-wedding-accent/10"
+                  : "border-wedding-border bg-wedding-card hover:border-wedding-accent/40"
               )}
             >
               <div className="flex items-center gap-2">
                 <span className={cn(
-                  form.privacy_mode === opt.value ? "text-yellow-400" : "text-gray-400"
+                  form.privacy_mode === opt.value ? "text-wedding-accent-dark" : "text-wedding-muted"
                 )}>
                   {opt.icon}
                 </span>
                 <span className={cn(
                   "font-medium text-sm",
-                  form.privacy_mode === opt.value ? "text-yellow-300" : "text-white"
+                  form.privacy_mode === opt.value ? "text-wedding-accent-dark" : "text-wedding-ink"
                 )}>
                   {opt.label}
                 </span>
               </div>
-              <p className="text-xs text-gray-500 leading-relaxed">{opt.desc}</p>
+              <p className="text-xs text-wedding-muted leading-relaxed">{opt.desc}</p>
             </button>
           ))}
         </div>
@@ -275,7 +275,7 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
 
       {/* Toggle options */}
       <div className="space-y-3">
-        <label className="text-sm font-medium text-gray-300 block">
+        <label className="text-sm font-medium text-wedding-muted block">
           אפשרויות נוספות
         </label>
 
@@ -286,18 +286,18 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
         ].map(({ key, label, emoji }) => (
           <label
             key={key}
-            className="flex items-center justify-between p-4 bg-party-surface2 border border-party-border rounded-2xl cursor-pointer hover:border-white/20 transition-all"
+            className="flex items-center justify-between p-4 bg-wedding-card border border-wedding-border rounded-2xl cursor-pointer hover:border-wedding-accent/40 transition-all"
           >
             <div className="flex items-center gap-3">
               <span className="text-xl">{emoji}</span>
-              <span className="text-sm text-white">{label}</span>
+              <span className="text-sm text-wedding-ink">{label}</span>
             </div>
             <div
               className={cn(
                 "relative w-11 h-6 rounded-full transition-all",
                 form[key as keyof typeof form]
                   ? "btn-gold"
-                  : "bg-gray-700"
+                  : "bg-wedding-border"
               )}
               onClick={() =>
                 setForm((f) => ({
@@ -320,19 +320,19 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
       </div>
 
       {/* Account details — required */}
-      <div className="bg-party-gold/5 border border-party-gold/20 rounded-2xl p-4 space-y-4">
+      <div className="bg-wedding-accent/5 border border-wedding-accent/20 rounded-2xl p-4 space-y-4">
         <div className="flex items-center gap-2 mb-1">
-          <Shield className="h-4 w-4 text-yellow-400" />
-          <p className="text-sm font-semibold text-yellow-300">פרטי כניסה לניהול האירוע</p>
+          <Shield className="h-4 w-4 text-wedding-accent-dark" />
+          <p className="text-sm font-semibold text-wedding-accent-dark">פרטי כניסה לניהול האירוע</p>
         </div>
-        <p className="text-xs text-gray-500 -mt-2">
+        <p className="text-xs text-wedding-muted -mt-2">
           תשתמש בפרטים אלה כדי להתחבר ולנהל את האירוע שלך בכל עת
         </p>
 
         {/* Email */}
         <div>
-          <label className="text-sm font-medium text-gray-300 flex items-center gap-1.5 mb-1.5">
-            <Mail className="h-4 w-4 text-yellow-400" />
+          <label className="text-sm font-medium text-wedding-muted flex items-center gap-1.5 mb-1.5">
+            <Mail className="h-4 w-4 text-wedding-accent-dark" />
             כתובת מייל *
           </label>
           <input
@@ -345,8 +345,8 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
             placeholder="your@email.com"
             dir="ltr"
             className={cn(
-              "w-full bg-party-surface2 border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-party-gold transition-all",
-              errors.admin_email ? "border-red-500" : "border-party-border"
+              "w-full bg-wedding-card border rounded-xl px-4 py-3 text-wedding-ink placeholder-wedding-muted focus:outline-none focus:ring-2 focus:ring-wedding-accent transition-all",
+              errors.admin_email ? "border-red-500" : "border-wedding-border"
             )}
             autoComplete="email"
           />
@@ -355,8 +355,8 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
 
         {/* Password */}
         <div>
-          <label className="text-sm font-medium text-gray-300 flex items-center gap-1.5 mb-1.5">
-            <Lock className="h-4 w-4 text-yellow-400" />
+          <label className="text-sm font-medium text-wedding-muted flex items-center gap-1.5 mb-1.5">
+            <Lock className="h-4 w-4 text-wedding-accent-dark" />
             סיסמה * (לפחות 6 תווים)
           </label>
           <div className="relative">
@@ -370,15 +370,15 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
               placeholder="בחר סיסמה חזקה"
               dir="ltr"
               className={cn(
-                "w-full bg-party-surface2 border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-party-gold transition-all pl-11",
-                errors.admin_password ? "border-red-500" : "border-party-border"
+                "w-full bg-wedding-card border rounded-xl px-4 py-3 text-wedding-ink placeholder-wedding-muted focus:outline-none focus:ring-2 focus:ring-wedding-accent transition-all pl-11",
+                errors.admin_password ? "border-red-500" : "border-wedding-border"
               )}
               autoComplete="new-password"
             />
             <button
               type="button"
               onClick={() => setShowPassword((v) => !v)}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-wedding-muted hover:text-wedding-ink transition-colors"
             >
               {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
@@ -389,8 +389,8 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
 
       {/* Vendor token */}
       <div>
-        <label className="text-sm font-medium text-gray-300 flex items-center gap-1.5 mb-1.5">
-          <Briefcase className="h-4 w-4 text-yellow-400" />
+        <label className="text-sm font-medium text-wedding-muted flex items-center gap-1.5 mb-1.5">
+          <Briefcase className="h-4 w-4 text-wedding-accent-dark" />
           טוקן ספק (לא חובה)
         </label>
         <input
@@ -399,9 +399,9 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
           onChange={(e) => setForm((f) => ({ ...f, vendor_token: e.target.value }))}
           placeholder="הכנס טוקן ספק אם אתה עובד עם ספק"
           dir="ltr"
-          className="w-full bg-party-surface2 border border-party-border rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-party-gold transition-all"
+          className="w-full bg-wedding-card border border-wedding-border rounded-xl px-4 py-3 text-wedding-ink placeholder-wedding-muted focus:outline-none focus:ring-2 focus:ring-wedding-accent transition-all"
         />
-        <p className="text-xs text-gray-600 mt-1">
+        <p className="text-xs text-wedding-muted mt-1">
           מאפשר לספק לנהל את האירוע שלך מהדשבורד שלו
         </p>
       </div>
