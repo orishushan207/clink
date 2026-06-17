@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="תמונה של סיגלית שושן">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F4ECDC"/>
+      <stop offset="1" stop-color="#E7D9BF"/>
+    </linearGradient>
+    <linearGradient id="fig" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#D8C39A"/>
+      <stop offset="1" stop-color="#C2A36B"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <circle cx="400" cy="380" r="150" fill="url(#fig)" opacity="0.9"/>
+  <path d="M150 1000c0-160 112-275 250-275s250 115 250 275z" fill="url(#fig)" opacity="0.9"/>
+  <g fill="none" stroke="#A9874E" stroke-width="2" opacity="0.5">
+    <circle cx="400" cy="300" r="34"/>
+    <path d="M400 268c0 16-6 24-6 36s6 14 6 14 6-2 6-14-6-20-6-36z"/>
+  </g>
+  <text x="400" y="930" text-anchor="middle" font-family="'Frank Ruhl Libre', serif" font-size="40" fill="#5A5044" font-weight="600">סיגלית שושן</text>
+  <text x="400" y="975" text-anchor="middle" font-family="Heebo, sans-serif" font-size="22" fill="#8C8170">החליפו בתמונה האמיתית · assets/portrait.jpg</text>
+</svg>
