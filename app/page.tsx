@@ -6,6 +6,7 @@ import {
 import AppDemo from "@/components/AppDemo";
 import PicMeLogo from "@/components/PicMeLogo";
 import FAQSection from "@/components/FAQSection";
+import ReviewsSection from "@/components/ReviewsSection";
 
 export default function LandingPage() {
   return (
@@ -414,83 +415,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─── TESTIMONIALS ─── */}
-      <section className="py-12">
-        <div className="text-center mb-8 px-6">
-          <h2 className="text-2xl font-bold text-wedding-ink mb-2">מה אומרים עלינו?</h2>
-          <p className="text-wedding-muted text-sm">אנשים שכבר חוו את Clink באירועים שלהם</p>
-        </div>
-        <div className="flex gap-4 overflow-x-auto px-6 pb-4 snap-x snap-mandatory scrollbar-hide" style={{ scrollbarWidth: "none" }}>
-          {[
-            {
-              name: "נועה ואלון",
-              role: "חתונה · 14.3.2026",
-              avatar: "👩‍❤️‍👨",
-              stars: 5,
-              text: "היה לנו חשש שהאורחים לא ישתמשו בזה, אבל תוך 10 דקות היו כבר 80 תמונות. המצגת של התמונות שנוספו בלייב על המסך בזמן האוכל הייתה בין הדברים המצחיקים בחתונה. האורחים עפו על זה.",
-            },
-            {
-              name: "תמר",
-              role: "בת מצווה · 15.12.2025",
-              avatar: "🎉",
-              stars: 5,
-              text: "ייחודי ברמות!! רוב האורחים כולל הסבתות, הצליחו לסרוק ולהעלות תמונות. בסוף האירוע קיבלנו ארכיון מלא מ-120 איש. לא האמנו שאנשים ישתפו פעולה ברמה כזאת.",
-            },
-            {
-              name: "רועי ומיכל",
-              role: "חתונה · 25.11.2025",
-              avatar: "🥂",
-              stars: 5,
-              text: "הכי אהבנו שאנשים שלא מכירים אחד את השני התחילו לתייג ולהגיב על תמונות. זה יצר חיבור ושיח בין אורחים שלא הכירו לפני ויש מצב שנוצרו איזה זוג או שניים 😉😅",
-            },
-            {
-              name: "דני",
-              role: "מסיבת יום הולדת · 2.1.2026",
-              avatar: "🎂",
-              stars: 5,
-              text: "השתמשנו ב-Clink ביום הולדת ה-40 שלי. תוך שעה היו מעל 200 תמונות מכל הכיוונים — אנשים שלא ראיתי שנים שלחו תמונות ישנות שלנו מהעבר ביחד עם חדשות. היה מטורף.",
-            },
-            {
-              name: "שירה ויובל",
-              role: "חתונה · 8.2.2026",
-              avatar: "💍",
-              stars: 5,
-              text: "הצלם שלנו אמר שזאת הייתה הפעם הראשונה שהוא רואה אורחים מצלמים בתדירות כזאת. כולם רצו להיות בגלריה. הצ׳אט בין האורחים יצר אווירה מטורפת — אנשים שלא הכירו תוך זמן קצר כבר דיברו אחד עם השני.",
-            },
-            {
-              name: "אבי",
-              role: "בר מצווה · 20.3.2026",
-              avatar: "✡️",
-              stars: 5,
-              text: "קיבלנו 340 תמונות מ-90 אורחים. הילד שלנו ישב ועבר על כל תמונה עם חיוך ענק. ההתראות בזמן אמת על לייקים ותגובות גרמו לכולם להמשיך לגלוש ולשתף כל הלילה.",
-            },
-            {
-              name: "אופיר",
-              role: "מסיבת סיום לימודים · 11.4.2026",
-              avatar: "🎓",
-              stars: 5,
-              text: "השתמשנו ב-Clink לסיום התואר. היה כיף לראות תמונות מכל הכיתה בגלריה אחת. ה-Live Wall על המסך הגדול עשה את האווירה. הורדנו את כל הזיכרונות בZIP אחד בסוף.",
-            },
-          ].map(({ name, role, avatar, stars, text }) => (
-            <div key={name} className="wedding-card rounded-2xl p-5 flex flex-col gap-3 flex-shrink-0 w-72 snap-start">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-wedding-accent/30 to-amber-500/30 border border-wedding-accent/20 flex items-center justify-center text-xl flex-shrink-0">
-                  {avatar}
-                </div>
-                <div>
-                  <p className="text-wedding-ink text-sm font-semibold">{name}</p>
-                  <p className="text-wedding-muted text-xs">{role}</p>
-                </div>
-              </div>
-              <div className="flex gap-0.5">
-                {Array.from({ length: stars }).map((_, i) => (
-                  <span key={i} className="text-wedding-accent text-sm">★</span>
-                ))}
-              </div>
-              <p className="text-wedding-muted text-xs leading-relaxed">{text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <ReviewsSection />
 
       {/* ─── FAQ ─── */}
       <FAQSection />
