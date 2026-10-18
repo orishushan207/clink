@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase/server";
 import { generateSlug, generateAdminToken, generateId, getEventUrl, getAdminUrl } from "@/lib/utils";
 import { sendEventCreatedEmail } from "@/lib/email";
+import { GUEST_LOCK_HOURS } from "@/lib/eventExpiry";
 import type { CreateEventPayload } from "@/types";
 
 export async function POST(req: NextRequest) {
@@ -34,19 +35,26 @@ export async function POST(req: NextRequest) {
     const adminToken = generateAdminToken();
 
     const extBody = body as { vendor_token?: string; license_id?: string; guest_lock_hours?: number };
-    const daysAccess = Math.max(2, Math.round((extBody.guest_lock_hours ?? 48) / 24));
-    const expiresAt = new Date(Date.now() + daysAccess * 24 * 60 * 60 * 1000).toISOString();
+
+    // How long the event stays open for guests (join / view / upload).
+    // The purchased plan is the source of truth: when a license is attached we
+    // derive the window from its days_access; otherwise fall back to the client
+    // hint, and finally to the default (7 days).
+    let lockHours = extBody.guest_lock_hours ?? GUEST_LOCK_HOURS;
 
     // Fetch license plan permissions
     let mosaic_enabled = false;
     if (extBody.license_id) {
       const { data: lic } = await supabaseAdmin
         .from("licenses")
-        .select("mosaic_enabled")
+        .select("mosaic_enabled, days_access")
         .eq("id", extBody.license_id)
         .single();
       mosaic_enabled = lic?.mosaic_enabled ?? false;
+      if (lic?.days_access) lockHours = lic.days_access * 24;
     }
+
+    const expiresAt = new Date(Date.now() + lockHours * 60 * 60 * 1000).toISOString();
 
     const { data, error } = await supabaseAdmin
       .from("events")
@@ -65,7 +73,7 @@ export async function POST(req: NextRequest) {
         admin_token: adminToken,
         admin_email: body.admin_email.trim().toLowerCase(),
         admin_password: body.admin_password.trim(),
-        guest_lock_hours: extBody.guest_lock_hours ?? 48,
+        guest_lock_hours: lockHours,
         vendor_token: extBody.vendor_token?.trim() || null,
         license_id: extBody.license_id || null,
         expires_at: expiresAt,

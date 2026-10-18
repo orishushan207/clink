@@ -184,16 +184,13 @@ export default function CheckoutPage() {
 
     await new Promise((r) => setTimeout(r, 1800));
 
-    const aiLimit = selectedPlan === "crown" ? -1 : null;
-
     const licBody: Record<string, unknown> = {
       email: form.email.trim(),
       type: mode === "onetime" ? "onetime" : "subscription",
       plan_tier: selectedPlan,
     };
-    if (mode === "onetime") licBody.days_access = 3;
-    else licBody.events_per_month = 4;
-    licBody.ai_images_limit = aiLimit;
+    // Entitlements (days_access, events_per_month, ai_images_limit) are derived
+    // server-side from plan_tier — never trust them from the client.
 
     const licRes = await fetch("/api/licenses", {
       method: "POST",
@@ -281,7 +278,7 @@ export default function CheckoutPage() {
         <div className="text-center mb-6">
           <p className="text-wedding-muted text-sm">
             {mode === "onetime"
-              ? "כל האירועים פתוחים ל-3 ימים · ניתן להאריך בפנייה לתמיכה"
+              ? "כל האירועים פתוחים לשבוע שלם (7 ימים) · ניתן להאריך בפנייה לתמיכה"
               : "עד 4 אירועים בחודש · ביטול בכל עת"}
           </p>
         </div>
@@ -371,7 +368,7 @@ export default function CheckoutPage() {
                       <span className="text-wedding-muted text-sm mb-1.5">₪{mode === "subscription" ? "/חודש" : ""}</span>
                     </div>
                     {mode === "onetime" && (
-                      <p className="text-wedding-muted text-[10px] mt-0.5">לאירוע · 3 ימי גישה</p>
+                      <p className="text-wedding-muted text-[10px] mt-0.5">לאירוע · 7 ימי גישה</p>
                     )}
                   </div>
 
@@ -465,8 +462,8 @@ export default function CheckoutPage() {
 
           <div className="flex items-center justify-center gap-4 mt-4 flex-wrap">
             {(mode === "onetime"
-              ? ["תשלום חד פעמי", "אין מנוי", "גישה ל-3 ימים"]
-              : ["עד 4 אירועים/חודש", "ביטול בכל עת", "3 ימי גישה לכל אירוע"]
+              ? ["תשלום חד פעמי", "אין מנוי", "גישה ל-7 ימים"]
+              : ["עד 4 אירועים/חודש", "ביטול בכל עת", "7 ימי גישה לכל אירוע"]
             ).map((t) => (
               <span key={t} className="flex items-center gap-1 text-xs text-wedding-muted">
                 <Check className="h-3 w-3 text-emerald-500" />

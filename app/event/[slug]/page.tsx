@@ -145,7 +145,7 @@ export default function EventEntryPage() {
         <div className="text-6xl">🔒</div>
         <h1 className="text-2xl font-bold text-wedding-ink">הגלריה נסגרה</h1>
         <p className="text-wedding-muted max-w-xs">
-          הגישה לאורחים ניתנת רק במשך {GUEST_LOCK_HOURS} שעות מתחילת האירוע.
+          הגישה לאורחים ניתנת רק במשך {Math.round((event.guest_lock_hours ?? GUEST_LOCK_HOURS) / 24)} ימים מתחילת האירוע.
           אם אתה בעל האירוע, התחבר דרך פאנל הניהול.
         </p>
       </div>
