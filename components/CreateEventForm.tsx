@@ -86,7 +86,7 @@ export default function CreateEventForm({ onSuccess, licenseId, licenseEmail, da
         }
       }
 
-      const days = daysAccess ?? 2;
+      const days = daysAccess ?? 7;
       const guestLockHours = days * 24;
 
       const payload: CreateEventPayload & { cover_image_url?: string; vendor_token?: string; license_id?: string } = {

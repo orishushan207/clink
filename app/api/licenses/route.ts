@@ -13,9 +13,9 @@ const PLAN_LIMITS: Record<
   PlanTier,
   { mosaic_enabled: boolean; ai_images_limit: number | null; days_access: number; events_per_month: number | null }
 > = {
-  lite: { mosaic_enabled: false, ai_images_limit: null, days_access: 2, events_per_month: 4 },
-  spark: { mosaic_enabled: true, ai_images_limit: null, days_access: 3, events_per_month: 4 },
-  crown: { mosaic_enabled: true, ai_images_limit: -1, days_access: 3, events_per_month: 4 },
+  lite: { mosaic_enabled: false, ai_images_limit: null, days_access: 7, events_per_month: 4 },
+  spark: { mosaic_enabled: true, ai_images_limit: null, days_access: 7, events_per_month: 4 },
+  crown: { mosaic_enabled: true, ai_images_limit: -1, days_access: 7, events_per_month: 4 },
 };
 
 export async function POST(req: NextRequest) {

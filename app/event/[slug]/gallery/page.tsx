@@ -453,7 +453,7 @@ export default function GalleryPage() {
         </div>
         <h1 className="text-2xl font-bold text-wedding-ink">הגלריה נסגרה</h1>
         <p className="text-wedding-muted max-w-xs leading-relaxed">
-          הגישה לאורחים ניתנת רק במשך {GUEST_LOCK_HOURS} שעות מתחילת האירוע.<br />
+          הגישה לאורחים ניתנת רק במשך {Math.round((event.guest_lock_hours ?? GUEST_LOCK_HOURS) / 24)} ימים מתחילת האירוע.<br />
           ניתן להוריד תמונות רק מפאנל הניהול.
         </p>
         <Link href="/" className="mt-4 px-6 py-2.5 rounded-2xl border border-wedding-border hover:bg-wedding-accent/10 text-wedding-ink text-sm transition-all">
