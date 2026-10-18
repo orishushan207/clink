@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Terminal, LogOut, Search, Calendar, Lock, Unlock, Trash2, ExternalLink } from "lucide-react";
+import { Terminal, LogOut, Search, Calendar, Lock, Unlock, Trash2, ExternalLink, MessageSquare } from "lucide-react";
 import toast from "react-hot-toast";
 
 interface LicenseSnippet {
@@ -113,9 +113,19 @@ export default function DevDashboard() {
           <span className="font-bold text-white text-sm">Developer Panel</span>
           <span className="text-xs text-gray-500 bg-party-surface px-2 py-0.5 rounded-full">{events.length} אירועים</span>
         </div>
-        <button onClick={logout} className="text-gray-500 hover:text-red-400 transition-colors">
-          <LogOut className="h-5 w-5" />
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => router.push("/dev/reviews")}
+            title="ניהול ביקורות"
+            className="text-gray-500 hover:text-yellow-400 transition-colors flex items-center gap-1 text-xs"
+          >
+            <MessageSquare className="h-4 w-4" />
+            ביקורות
+          </button>
+          <button onClick={logout} className="text-gray-500 hover:text-red-400 transition-colors">
+            <LogOut className="h-5 w-5" />
+          </button>
+        </div>
       </div>
 
       <div className="max-w-3xl mx-auto px-4 py-6">
